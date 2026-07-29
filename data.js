@@ -111,13 +111,13 @@
   // [name, role, org, photoFile, youtubeUrl], replace each youtube URL with the speaker's real clip.
   const REEL_SPEAKERS = [
     ['Eno Polo', 'CEO', 'ATP Tour', PH + 'eno-polo-reel-card-clean.png', 'https://www.youtube.com/results?search_query=Eno+Polo+ATP+Tour', true],
-    ['Romy Gai', 'Chief Business Officer', 'FIFA', PH + 'romy-gai-reel-card.png', 'https://www.youtube.com/results?search_query=Romy+Gai+FIFA', true],
+    ['Romy Gai', 'Chief Business Officer', 'FIFA', PH + 'romy-gai-reel-card.png', 'https://www.youtube.com/watch?v=qaI9dl_Og4E', true],
     ['Marc Lasry', 'Co-Founder & CEO', 'Avenue Capital', PH + 'marc-lasry-reel-card.png', 'https://www.youtube.com/results?search_query=Marc+Lasry+Avenue+Capital', true],
-    ['Doriane Pin', 'Development Driver', 'Mercedes-AMG F1', PH + 'doriane-pin-reel-card.png', 'https://www.youtube.com/results?search_query=Doriane+Pin+F1+Academy', true],
-    ['Caroline Garcia', 'Co-Founder', 'Tennis Insider Club', PH + 'caroline-garcia-reel-card.png', 'https://www.youtube.com/results?search_query=Caroline+Garcia+SportGen+Summit', true],
-    ['Patrick Mouratoglou', 'CEO & Founder', 'UTS', PH + 'patrick-mouratoglou-reel-card.png', 'https://www.youtube.com/results?search_query=Patrick+Mouratoglou+UTS', true],
-    ['Dominic Thiem', 'US Open Winner', 'ex-pro Athlete', PH + 'dominic-thiem-reel-card.png', 'https://www.youtube.com/results?search_query=Dominic+Thiem', true],
-    ['David Coulthard', 'Company Director', 'Velocity Experience', PH + 'david-coulthard-reel-card.png', 'https://www.youtube.com/results?search_query=David+Coulthard+Velocity+Experience', true],
+    ['Doriane Pin', 'Development Driver', 'Mercedes-AMG F1', PH + 'doriane-pin-reel-card.png', 'https://www.youtube.com/watch?v=5dGf75QD0-Y', true],
+    ['Caroline Garcia', 'Co-Founder', 'Tennis Insider Club', PH + 'caroline-garcia-reel-card.png', 'https://www.youtube.com/watch?v=9elD_ZXbhXM', true],
+    ['Patrick Mouratoglou', 'CEO & Founder', 'UTS', PH + 'patrick-mouratoglou-reel-card.png', 'https://www.youtube.com/watch?v=PBzpHEZXBko', true],
+    ['Dominic Thiem', 'US Open Winner', 'ex-pro Athlete', PH + 'dominic-thiem-reel-card.png', 'https://www.youtube.com/watch?v=OTeOgjTBA04', true],
+    ['David Coulthard', 'Company Director', 'Velocity Experience', PH + 'david-coulthard-reel-card.png', 'https://www.youtube.com/watch?v=A_AZ-KhhTwo', true],
     ['Teodora Ivanova', 'Chief Business Officer', 'WTA Ventures', PH + 'teodora-ivanova-reel-card.png', 'https://www.youtube.com/results?search_query=Teodora+Ivanova+WTA+Ventures', true],
   ];
   const reelSpeakers = REEL_SPEAKERS.map(([name, role, org, photoFile, youtube, staticCard]) => ({

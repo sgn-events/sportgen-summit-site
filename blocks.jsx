@@ -248,6 +248,7 @@ function SpeakersReel() {
   const [paused, setPaused] = React.useState(false);
   const stageRef = React.useRef(null);
   const activeVideoRef = React.useRef(null);
+  const fsVideoRef = React.useRef(null);
   const visibleRef = React.useRef(false);
   const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
   // Verrou anti double-saut : une action = un seul cran, le temps de la transition (0,5s).
@@ -273,6 +274,12 @@ function SpeakersReel() {
     const v = activeVideoRef.current; if (!v) return;
     if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); setPaused(false); }
     else { v.pause(); setPaused(true); }
+  }, []);
+  // Clic sur la vidéo en plein écran : pause / reprise (élément distinct de la vidéo inline).
+  const toggleFsPlay = React.useCallback(() => {
+    const v = fsVideoRef.current; if (!v) return;
+    if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+    else { v.pause(); }
   }, []);
   const toggleMute = React.useCallback(() => {
     setMuted((m) => { const nm = !m; const v = activeVideoRef.current; if (v) v.muted = nm; return nm; });
@@ -361,6 +368,9 @@ function SpeakersReel() {
   const fsReel = React.useCallback(() => { setReelFs((f) => !f); }, []);
   React.useEffect(() => {
     if (!reelFs) return;
+    // Plein écran ouvert : on met la vidéo inline en pause pour ne pas avoir deux lectures/sons en même temps.
+    const inline = activeVideoRef.current;
+    if (inline) inline.pause();
     const onKey = (e) => { if (e.key === 'Escape') setReelFs(false); };
     document.addEventListener('keydown', onKey);
     const prevOverflow = document.documentElement.style.overflow;
@@ -368,6 +378,9 @@ function SpeakersReel() {
     return () => {
       document.removeEventListener('keydown', onKey);
       document.documentElement.style.overflow = prevOverflow;
+      // Retour à la carte : on relance la vidéo inline si la section est toujours visible.
+      const v = activeVideoRef.current;
+      if (v && visibleRef.current) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
     };
   }, [reelFs]);
   const fsIcon = (
@@ -426,10 +439,10 @@ function SpeakersReel() {
                   <div className={'reelx-card__frame' + (r.staticCard ? ' reelx-card__frame--wide' : '')}>
                     {r.staticCard
                       ? ((active && playing === r.name)
-                        ? <video className="reelx-card__media reelx-card__media--playing" src={r.src} poster={r.poster} autoPlay playsInline onDoubleClick={(e) => { e.preventDefault(); fsReel(); }} ref={(el) => { activeVideoRef.current = el; }}></video>
+                        ? <video className="reelx-card__media reelx-card__media--playing" src={r.src} poster={r.poster} autoPlay playsInline muted={muted} onClick={togglePlay} onDoubleClick={(e) => { e.preventDefault(); fsReel(); }} ref={(el) => { activeVideoRef.current = el; if (el) el.muted = muted; }}></video>
                         : <img className="reelx-card__media reelx-card__media--contain" src={r.poster} alt={r.name} loading="lazy" />)
                       : (active
-                        ? <video className="reelx-card__media" src={r.src} poster={r.poster} autoPlay loop playsInline preload="auto" muted={muted} onDoubleClick={(e) => { e.preventDefault(); fsReel(); }} ref={(el) => { activeVideoRef.current = el; if (el) el.muted = muted; }}></video>
+                        ? <video className="reelx-card__media" src={r.src} poster={r.poster} autoPlay loop playsInline preload="auto" muted={muted} onClick={togglePlay} onDoubleClick={(e) => { e.preventDefault(); fsReel(); }} ref={(el) => { activeVideoRef.current = el; if (el) el.muted = muted; }}></video>
                         : <img className="reelx-card__media" src={r.poster} alt={r.name} loading="eager" />)}
                     {showInfo ? <div className="reelx-card__grad" aria-hidden="true"></div> : null}
                     {showInfo ? <div className={'reelx-card__info' + (isPlaying ? ' reelx-card__info--live' : '')}>
@@ -438,6 +451,7 @@ function SpeakersReel() {
                     </div> : null}
                     {(r.staticCard && playing !== r.name) ? <button className="reelx-card__watch" onClick={(e) => { e.stopPropagation(); if (active) { setPlaying(r.name); } else { goTo(i); } }} aria-label={'Watch ' + r.name + ' reel'}><img src="assets/watch-now.png" alt="Watch Now" /></button> : null}
                     {active ? <a className="reelx-card__yt" href={r.youtube} target="_blank" rel="noopener" aria-label={'Watch ' + r.name + ' on YouTube'}>{ytIcon}</a> : null}
+                    {active && (!r.staticCard || playing === r.name) ? <button className="reelx-card__sound" onClick={(e) => { e.stopPropagation(); toggleMute(); }} aria-label={muted ? 'Activer le son' : 'Couper le son'}>{soundIcon}</button> : null}
                     {active && (!r.staticCard || playing === r.name) ? <button className="reelx-card__fs" onClick={(e) => { e.stopPropagation(); fsReel(); }} aria-label="Full screen">{fsIcon}</button> : null}
                   </div>
                 </div>
@@ -448,7 +462,7 @@ function SpeakersReel() {
         </div>
         {reelFs && reels[idx] ? ReactDOM.createPortal(
           <div className="reelx-fs" onClick={(e) => { if (e.target === e.currentTarget) setReelFs(false); }}>
-            <video className="reelx-fs__media" src={reels[idx].src} poster={reels[idx].poster} autoPlay loop playsInline muted={muted} onDoubleClick={() => setReelFs(false)}></video>
+            <video className="reelx-fs__media" src={reels[idx].src} poster={reels[idx].poster} autoPlay loop playsInline muted={muted} onClick={toggleFsPlay} onDoubleClick={() => setReelFs(false)} ref={(el) => { fsVideoRef.current = el; }}></video>
             <button className="reelx-fs__btn reelx-fs__sound" onClick={() => setMuted((m) => !m)} aria-label={muted ? 'Unmute' : 'Mute'}>{soundIcon}</button>
             <button className="reelx-fs__btn reelx-fs__close" onClick={() => setReelFs(false)} aria-label="Exit full screen">{closeIcon}</button>
             <a className="reelx-fs__btn reelx-fs__yt" href={reels[idx].youtube} target="_blank" rel="noopener" aria-label={'Watch ' + reels[idx].name + ' on YouTube'}>{ytIcon}</a>
