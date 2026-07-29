@@ -191,9 +191,10 @@ function Nav() {
               </button>
               {openCol === col.heading && (
                 <div className="sg-nav__msub">
-                  {col.items.map(([label, href], i) => (
-                    <a key={col.heading + i} href={href} onClick={(e) => { e.preventDefault(); navTo(href); }}>{label}</a>
-                  ))}
+                  {col.items.map(([label, href], i) => {
+                    const ext = !href.startsWith('#');
+                    return <a key={col.heading + i} href={href} onClick={ext ? undefined : (e) => { e.preventDefault(); navTo(href); }}>{label}</a>;
+                  })}
                 </div>
               )}
             </div>
