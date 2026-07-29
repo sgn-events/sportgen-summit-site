@@ -316,10 +316,10 @@
       'Company Age: Must be under 5 years old.',
     ], note: 'Pass Benefits: Includes the exact same perks as a PRO ticket.' },
     { tier: 'Pro', price: '€790', intro: 'PERKS OF A PRO TICKET:', perks: [
-      'Main Stage access for both days',
-      'Networking & Corporate Lounge access for both days',
-      'Access to The Draft live pitches: startup competition',
+      'Full 2-day access to all panels, keynotes & workshop sessions',
+      'Exhibition floor access for both days',
       'All food and drinks during the event',
+      'Access to the SGN networking app & networking lounge',
     ] },
     { tier: 'VIP', price: '€2290', featured: true, intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
       'Invitation to the VIP Dinner',
