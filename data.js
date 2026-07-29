@@ -110,7 +110,7 @@
   // ── Home "Our 2026 Speakers", featured list (9) shown beside the weekly reel ──
   // [name, role, org, photoFile, youtubeUrl], replace each youtube URL with the speaker's real clip.
   const REEL_SPEAKERS = [
-    ['Eno Polo', 'CEO', 'ATP Tour', PH + 'eno-polo-reel-card-clean.png', 'https://www.youtube.com/results?search_query=Eno+Polo+ATP+Tour', true],
+    ['Eno Polo', 'CEO', 'ATP Tour', PH + 'eno-polo-reel-card-clean.png', 'https://www.youtube.com/watch?v=xUzsYbMg_XE', true],
     ['Romy Gai', 'Chief Business Officer', 'FIFA', PH + 'romy-gai-reel-card.png', 'https://www.youtube.com/watch?v=qaI9dl_Og4E', true],
     ['Marc Lasry', 'Co-Founder & CEO', 'Avenue Capital', PH + 'marc-lasry-reel-card.png', 'https://www.youtube.com/results?search_query=Marc+Lasry+Avenue+Capital', true],
     ['Doriane Pin', 'Development Driver', 'Mercedes-AMG F1', PH + 'doriane-pin-reel-card.png', 'https://www.youtube.com/watch?v=5dGf75QD0-Y', true],
@@ -118,7 +118,7 @@
     ['Patrick Mouratoglou', 'CEO & Founder', 'UTS', PH + 'patrick-mouratoglou-reel-card.png', 'https://www.youtube.com/watch?v=PBzpHEZXBko', true],
     ['Dominic Thiem', 'US Open Winner', 'ex-pro Athlete', PH + 'dominic-thiem-reel-card.png', 'https://www.youtube.com/watch?v=OTeOgjTBA04', true],
     ['David Coulthard', 'Company Director', 'Velocity Experience', PH + 'david-coulthard-reel-card.png', 'https://www.youtube.com/watch?v=A_AZ-KhhTwo', true],
-    ['Teodora Ivanova', 'Chief Business Officer', 'WTA Ventures', PH + 'teodora-ivanova-reel-card.png', 'https://www.youtube.com/results?search_query=Teodora+Ivanova+WTA+Ventures', true],
+    ['Teodora Ivanova', 'Chief Business Officer', 'WTA Ventures', PH + 'teodora-ivanova-reel-card.png', 'https://www.youtube.com/watch?v=yw_WHRvrm4I', true],
   ];
   const reelSpeakers = REEL_SPEAKERS.map(([name, role, org, photoFile, youtube, staticCard]) => ({
     name, role, org, youtube, staticCard: !!staticCard,
