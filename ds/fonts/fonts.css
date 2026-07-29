@@ -1,0 +1,11 @@
+/* ============================================================
+   SPORT[GEN] — Webfonts
+   Brand typeface: Plus Jakarta Sans (SIL OFL, Google Fonts).
+   The brochure ships as flat images with no embedded fonts;
+   Plus Jakarta Sans is the confirmed brand font and is loaded
+   here from Google Fonts. If you have the local .ttf binaries,
+   drop them in this folder and swap these @import/@font-face
+   rules for local font-src declarations.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');

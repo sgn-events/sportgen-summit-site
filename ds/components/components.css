@@ -1,0 +1,236 @@
+/* ============================================================
+   SPORT[GEN] — Component styles
+   Class-based styles for the React primitives (hover/press
+   states live here so they ship to consumers via styles.css).
+   ============================================================ */
+
+/* ---------- Button ------------------------------------------- */
+.sg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  padding: 0.7em 1.5em;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform var(--dur-fast) var(--ease-out),
+              background-color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              filter var(--dur-base) var(--ease-out);
+}
+.sg-btn:active { transform: translateY(0) scale(0.985); }
+.sg-btn:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+.sg-btn[disabled], .sg-btn[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+
+.sg-btn--sm { font-size: var(--fs-eyebrow); padding: 0.6em 1.15em; }
+.sg-btn--lg { font-size: var(--fs-body); padding: 0.85em 1.9em; }
+
+/* Primary — gold gradient fill, dark text */
+.sg-btn--primary {
+  background: var(--gradient-gold-h);
+  color: var(--text-on-gold);
+  font-weight: var(--fw-bold);
+  box-shadow: var(--glow-gold-sm);
+}
+.sg-btn--primary:hover { filter: brightness(1.06); transform: translateY(-2px); box-shadow: 0 0 28px -2px rgba(232,169,60,0.5); }
+
+/* Light — white fill, navy text */
+.sg-btn--light {
+  background: var(--white);
+  color: var(--navy-deep);
+  font-weight: var(--fw-bold);
+}
+.sg-btn--light:hover { background: #EAEEF6; transform: translateY(-2px); }
+
+/* Secondary — translucent navy fill, faint light border */
+.sg-btn--secondary {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-primary);
+  border-color: var(--border-hairline);
+  backdrop-filter: blur(6px);
+}
+.sg-btn--secondary:hover { background: rgba(255,255,255,0.09); border-color: var(--border-gold); transform: translateY(-2px); }
+
+/* Ghost — text-only with optional arrow */
+.sg-btn--ghost {
+  background: transparent;
+  color: var(--text-primary);
+  padding-inline: 0.4em;
+}
+.sg-btn--ghost:hover { color: var(--accent-bright); }
+
+/* Circular icon (arrow) button */
+.sg-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem; height: 2.75rem;
+  flex: none;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-hairline);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+.sg-iconbtn:hover { background: var(--gradient-gold-h); color: var(--text-on-gold); border-color: transparent; transform: translateY(-2px); }
+.sg-iconbtn--sm { width: 2.1rem; height: 2.1rem; }
+.sg-iconbtn svg { width: 1.05em; height: 1.05em; }
+
+/* ---------- Badge / Tag -------------------------------------- */
+.sg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  line-height: 1;
+  padding: 0.5em 0.85em;
+  border-radius: var(--radius-pill);
+}
+.sg-badge--gold { background: var(--gradient-gold-h); color: var(--text-on-gold); font-weight: var(--fw-bold); }
+.sg-badge--outline { background: rgba(255,255,255,0.04); color: var(--text-primary); border: 1px solid var(--border-hairline); }
+.sg-badge--ghost { background: rgba(232,169,60,0.12); color: var(--accent-bright); }
+.sg-badge--eyebrow { background: none; padding: 0; color: var(--accent); text-transform: uppercase; letter-spacing: var(--ls-eyebrow); }
+
+/* ---------- Glass card --------------------------------------- */
+.sg-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  border: 1px solid var(--border-faint);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  box-shadow: var(--shadow-card), var(--inner-top-light);
+  overflow: hidden;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.sg-card--pad { padding: clamp(1.25rem, 1rem + 1vw, 2rem); }
+.sg-card--glow::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--glow-gold-base);
+  pointer-events: none;
+}
+.sg-card--glow { border-color: var(--border-gold); box-shadow: var(--shadow-card), var(--glow-gold-lg); }
+.sg-card--hover:hover { transform: translateY(-6px); box-shadow: var(--shadow-raised), var(--glow-gold-lg); border-color: var(--border-gold); }
+.sg-card > * { position: relative; }
+
+/* ---------- Stat tile ---------------------------------------- */
+.sg-stat {
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border-faint);
+  padding: clamp(1.1rem, 0.8rem + 1vw, 1.75rem);
+}
+.sg-stat__num { font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5rem); font-weight: var(--fw-semibold); color: var(--text-primary); line-height: 1; letter-spacing: -0.04em; }
+.sg-stat__num .sg-gold-text { display: inline; }
+.sg-stat__label { margin-top: 0.5rem; font-size: var(--fs-small); color: var(--text-body); }
+.sg-stat__bar { margin-top: 0.9rem; height: 7px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.12); overflow: hidden; }
+.sg-stat__bar > i { display: block; height: 100%; border-radius: inherit; background: var(--gradient-gold-h); transition: width 1.2s var(--ease-out); }
+
+/* ---------- Speaker card (full-bleed photo, overlaid profile) -- */
+/* The portrait photo fills the whole card; a bottom-up scrim keeps the
+   profile (gradient-gold name, white role, semibold company) and the
+   company logo legible, overlaid on top. Photo gently zooms on hover. */
+.sg-speaker {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(180deg, #0a1228 0%, #070714 100%) padding-box,
+    transparent border-box;
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--font-sans);
+}
+a.sg-speaker { cursor: pointer; }
+/* gold gradient contour on hover — same gold as the hero logo chips */
+.sg-speaker:hover {
+  background:
+    linear-gradient(180deg, #0a1228 0%, #070714 100%) padding-box,
+    linear-gradient(150deg, #FFE4A2 0%, #FFD68B 50%, #FFC46C 100%) border-box;
+}
+/* photo area — profile (name/role/org) overlaid on it via the scrim.
+   The image itself carries an in-flow square height so the card never
+   collapses even if the __top wrapper is missing (bundle-timing safety). */
+.sg-speaker__top { position: relative; width: 100%; overflow: hidden; }
+.sg-speaker__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  height: auto;
+  object-fit: cover;
+  object-position: center top;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sg-speaker:hover .sg-speaker__img { transform: scale(1.06); }
+@media (prefers-reduced-motion: reduce) { .sg-speaker:hover .sg-speaker__img { transform: none; } }
+.sg-speaker__monogram { width: 100%; aspect-ratio: 3 / 4; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: var(--fw-extrabold); font-size: clamp(2rem, 1rem + 3vw, 3rem); letter-spacing: 0.04em; color: var(--accent); background: radial-gradient(120% 120% at 50% 0%, rgba(30,58,107,0.5), rgba(10,20,40,0.95)); }
+/* bottom-up dark scrim so the overlaid text stays readable on any photo */
+.sg-speaker__scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgba(3,4,12,0.92) 0%, rgba(3,4,12,0.78) 18%, rgba(3,4,12,0.32) 42%, rgba(3,4,12,0) 62%); }
+/* profile (name/role/org) overlaid at the bottom of the photo */
+.sg-speaker__profile { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 16px 16px 16px; text-align: left; }
+/* company logo in its OWN solid band below the photo — never on the photo */
+.sg-speaker__logobar { display: flex; align-items: center; justify-content: center; padding: 12px 14px; min-height: 54px; border-top: 1px solid var(--border-faint); }
+.sg-speaker__logo { display: block; max-height: 26px; max-width: 72%; width: auto; object-fit: contain; object-position: center; }
+.sg-speaker__name {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16.5px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background-image: radial-gradient(82.6% 118% at 29.8% 50%, var(--gold-highlight) 9%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.sg-speaker__role { margin: 2px 0 0; font-size: 12px; font-weight: var(--fw-regular, 400); line-height: 1.45; color: var(--text-primary); }
+.sg-speaker__org  { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.45; color: var(--text-primary); }
+
+/* ---------- Logo chip / wall --------------------------------- */
+.sg-logochip {
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.1rem 1.4rem;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-faint);
+  transition: background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.sg-logochip img, .sg-logochip span { max-height: 30px; opacity: 0.6; filter: grayscale(1) brightness(2); transition: opacity var(--dur-base) var(--ease-out), filter var(--dur-base) var(--ease-out); }
+.sg-logochip:hover img, .sg-logochip:hover span { opacity: 1; filter: grayscale(0) brightness(1); }
+.sg-logochip span { color: var(--text-primary); font-weight: var(--fw-bold); letter-spacing: 0.04em; font-size: var(--fs-small); white-space: nowrap; }
+
+/* ---------- Ticket card -------------------------------------- */
+.sg-ticket { display: flex; flex-direction: column; padding: clamp(1.5rem, 1rem + 1.5vw, 2.25rem); }
+.sg-ticket__tier { font-size: var(--fs-eyebrow); font-weight: var(--fw-semibold); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--text-muted); }
+.sg-ticket--featured .sg-ticket__tier { color: var(--accent); }
+.sg-ticket__price { margin-top: 0.6rem; font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem); font-weight: var(--fw-semibold); color: var(--text-primary); line-height: 1; letter-spacing: -0.04em; }
+.sg-ticket__price small { font-size: 0.4em; font-weight: var(--fw-medium); color: var(--text-muted); letter-spacing: 0.02em; }
+.sg-ticket__cta { margin-top: 1.25rem; }
+.sg-ticket__perks { list-style: none; margin: 1.5rem 0 0; padding: 1.5rem 0 0; border-top: 1px solid var(--border-faint); display: flex; flex-direction: column; gap: 0.8rem; }
+.sg-ticket__perks li { display: flex; gap: 0.7rem; font-size: var(--fs-small); color: var(--text-body); line-height: 1.45; }
+.sg-ticket__perks li::before { content: ""; flex: none; width: 1.05rem; height: 1.05rem; margin-top: 0.1rem; border-radius: var(--radius-pill); background: var(--gradient-gold-h);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round' d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/0.75rem no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round' d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/0.75rem no-repeat;
+}
+.sg-ticket__perks .sg-ticket__plus { color: var(--text-muted); font-style: italic; }
+.sg-ticket__perks .sg-ticket__plus::before { display: none; }

@@ -1,0 +1,29 @@
+/* ============================================================
+   SPORT[GEN] — Spacing & layout tokens
+   8px base rhythm; generous vertical section padding.
+   ============================================================ */
+
+:root {
+  /* ---- Spacing scale (8px base) ---- */
+  --space-0:   0;
+  --space-1:   0.25rem;  /*  4px */
+  --space-2:   0.5rem;   /*  8px */
+  --space-3:   0.75rem;  /* 12px */
+  --space-4:   1rem;     /* 16px */
+  --space-5:   1.5rem;   /* 24px */
+  --space-6:   2rem;     /* 32px */
+  --space-7:   3rem;     /* 48px */
+  --space-8:   4rem;     /* 64px */
+  --space-9:   6rem;     /* 96px */
+  --space-10:  8rem;     /* 128px */
+
+  /* ---- Section rhythm ---- */
+  --section-pad-y: clamp(3rem, 2rem + 3.5vw, 5.5rem);  /* top/bottom padding of full-bleed sections */
+  --content-gap:   clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+
+  /* ---- Layout ---- */
+  --container-max:  1240px;   /* standard content width — matches the top menu bar */
+  --container-wide: 1240px;   /* aligned to the menu bar so every section shares the same margins */
+  --gutter:         clamp(1.25rem, 0.5rem + 3vw, 3rem);  /* @kind spacing */ /* page side padding */
+  --nav-height:     60px;
+}

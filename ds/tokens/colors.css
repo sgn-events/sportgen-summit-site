@@ -1,0 +1,74 @@
+/* ============================================================
+   SPORT[GEN] — Color tokens
+   Dark blue + orange-gold art direction. Values extracted from
+   the LIVE site (sportgensummit.com, Framer export) design tokens.
+   ============================================================ */
+
+:root {
+  /* ---- Base palette: blue-black ladder (page base → glass) ---- */
+  --navy-darkest: #000519;   /* page background (live: rgb(0,5,25)) */
+  --navy-deep:    #010412;   /* deepest panel */
+  --navy-panel:   #04070d;   /* section background */
+  --navy-card:    #10131c;   /* glass card fill (used translucent) */
+  --blue-accent:  #02071c;   /* "blackish blue" accent / gradient base */
+  --blue-deep:    #16287d;   /* deep brand blue (glows / gradients) */
+  --blue-glow:    #16287d;   /* radial blue "spotlight" glow accent */
+  --blue-electric: #011eff;  /* electric blue highlight */
+
+  /* ---- Base palette: gold ladder (pale tip → orange-gold) ---- */
+  --gold-highlight: #FFE4A2; /* pale gold — emphasis text, gradient center */
+  --gold-bright:    #FFD68B; /* bright gold */
+  --gold:           #FFC46C; /* THE signature brand gold (primary accent) */
+  --amber-deep:     #F5A63C; /* warm amber (gradient edge) */
+
+  /* ---- Base palette: neutrals ---- */
+  --white:      #FFFFFF;     /* headlines */
+  --grey-body:  #D5DBE6;     /* light body copy on dark */
+  --grey-muted: #BFBFBF;     /* secondary copy */
+  --grey-ghost: #9BA1A5;     /* muted "ghost" watermark text */
+
+  /* ---- Signature gold gradients ---- */
+  /* Emphasis TEXT fill — pale-gold center to orange-gold edge (live hero) */
+  --gradient-gold: radial-gradient(50% 50% at 50% 50%, #FFE4A2 62%, #FFC46C 100%); /* @kind color */
+  /* Horizontal gold (rules, accents) */
+  --gradient-gold-h: linear-gradient(90deg, #FFE4A2 0%, #FFD68B 45%, #FFC46C 100%); /* @kind color */
+  /* radial blue spotlight, fades to transparent — layer over the page */
+  --glow-blue: radial-gradient(60% 80% at 50% 0%, rgba(22,40,125,0.55) 0%, rgba(22,40,125,0) 70%); /* @kind color */
+  /* warm gold glow rising from a card's bottom edge */
+  --glow-gold-base: radial-gradient(120% 90% at 50% 130%, rgba(255,196,108,0.30) 0%, rgba(255,196,108,0.06) 45%, rgba(255,196,108,0) 70%); /* @kind color */
+  /* gold corner orb — bleeds off a card's bottom-right corner (live speaker card) */
+  --glow-gold-corner: radial-gradient(50% 50%, #EBA640 0%, rgba(235,166,64,0) 100%); /* @kind color */
+
+  /* ============================================================
+     SEMANTIC ALIASES — prefer these in components
+     ============================================================ */
+
+  /* Backgrounds & surfaces */
+  --bg-base:        var(--navy-darkest);
+  --bg-canvas:      var(--navy-darkest);
+  --surface-panel:  var(--navy-panel);
+  --surface-card:   rgba(255, 255, 255, 0.12);  /* translucent glass fill (live) */
+  --surface-card-solid: var(--navy-card);
+  /* near-opaque deep-navy fill — speaker & people cards (live values) */
+  --surface-card-deep: linear-gradient(180deg, #00012B 0%, #070714 100%); /* @kind color */
+
+  /* Text */
+  --text-primary:  var(--white);
+  --text-body:     var(--grey-body);
+  --text-muted:    var(--grey-ghost);
+  --text-on-gold:  #02071C;                      /* dark blue for text on gold fills */
+
+  /* Accent */
+  --accent:        var(--gold);
+  --accent-bright: var(--gold-highlight);
+  --accent-deep:   var(--amber-deep);
+
+  /* Borders & hairlines */
+  --border-faint:    rgba(255, 255, 255, 0.12); /* glass card 1px border (live) */
+  --border-hairline: rgba(255, 255, 255, 0.16); /* section divider rules */
+  --border-gold:     rgba(255, 196, 108, 0.55);  /* highlighted (VIP) card border */
+  --border-card:     #262626;                   /* solid grey card border (live speaker card) */
+
+  /* Ghost / watermark text fill */
+  --ghost-text: rgba(255, 255, 255, 0.06);
+}
