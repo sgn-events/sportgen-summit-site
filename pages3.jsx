@@ -396,14 +396,6 @@ function SideEventsPage() {
   const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
 
   // 2025 recap, real photography from the live site + local event shots.
-  const mosaic = [
-    { src: 'assets/halftime-eiffel.jpg', cls: 'se-m--tall', alt: 'Half-Time Drinks with a view of the Eiffel Tower' },
-    { src: 'assets/halftime-crowd.jpg', cls: 'se-m--wide', alt: 'Guests gathering at golden hour' },
-    { src: 'assets/halftime-talk.jpg', cls: '', alt: 'A conversation between attendees' },
-    { src: CDN + 'bANilaK7upt6HZwAfunCY1YBkiw.jpeg', cls: '', alt: 'VIP Dinner in Paris' },
-    { src: CDN + 'fgOqDRsDf4r3haBleHzcp5GSE.jpg', cls: 'se-m--wide', alt: 'Conversations between leaders' },
-  ];
-
   const events = [
     {
       t: 'SGN Invest', meta: '25 May', href: 'sis.html', img: 'assets/sgn-investment-summit-concorde.jpg',
@@ -440,23 +432,6 @@ function SideEventsPage() {
         titleWhite="Where the summit" titleGold="carries on after dark." stacked
         sub="The conversations that matter rarely happen on a conference floor. Around SportGen, a curated series of dinners, breakfasts and drinks gives the room a reason to stay in Paris."
         ctaLabel="Be part of 2027" ctaHref="#/get-in-touch" />
-
-      <section className="section">
-        <div className="sg-container sg-container--wide">
-          <div className="se-intro reveal">
-            <div className="se-intro__rule" aria-hidden="true"></div>
-            <h2 className="se-intro__h2">A few <em>unforgettable nights</em>, woven through two days of business.</h2>
-            <p className="se-intro__lead">Here is what this year&rsquo;s side events looked like, and the kind of moments returning in 2027.</p>
-          </div>
-          <div className="se-mosaic reveal">
-            {mosaic.map((m, i) => (
-              <figure className={m.cls} key={i}>
-                <img src={m.src} alt={m.alt} loading="lazy" />
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="section">
         <div className="sg-container sg-container--wide">
