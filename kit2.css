@@ -311,8 +311,7 @@
   text-align: center;
   color: var(--white);
 }
-.ptiers__cta { margin-top: clamp(36px, 4vw, 60px); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
-.ptiers__cta-lead { margin: 0; font-size: clamp(16px, 14px + 0.5vw, 20px); color: rgba(255,255,255,0.72); }
+.ptiers__cta { margin-top: clamp(36px, 4vw, 60px); display: flex; justify-content: center; }
 .ptiers__heading__gold {
   background-image: radial-gradient(83% 118% at 30% 50%, var(--gold-highlight) 9%, var(--gold) 100%);
   -webkit-background-clip: text;

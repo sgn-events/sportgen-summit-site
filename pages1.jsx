@@ -70,8 +70,7 @@ function PartnerTiers() {
           </React.Fragment>
         ))}
         <div className="ptiers__cta reveal">
-          <p className="ptiers__cta-lead">Want your logo on this wall in 2027?</p>
-          <Button variant="primary" size="lg" href="#/sponsor" onClick={(e) => go(e, '#/sponsor')}>2027 Partnership Opportunities</Button>
+          <Button variant="primary" size="lg" href="#/sponsor" onClick={(e) => go(e, '#/sponsor')}>Become a 2027 Partner</Button>
         </div>
       </div>
     </section>
