@@ -2258,6 +2258,8 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .appx-appear.reveal--in { opacity: 1; transform: none; filter: blur(0); }
 .appx-h2 { margin: 0.5rem 0 0; font-size: clamp(30px, 22px + 2vw, 52px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.12; color: var(--white); text-wrap: balance; }
 .appx-h2--center { text-align: center; }
+/* Espace entre le titre FAQ de la page App et la liste de questions */
+.appx-h2 + .faqx { margin-top: clamp(30px, 4vw, 52px); }
 
 /* Hero */
 .appx-hero { text-align: center; }
