@@ -51,7 +51,7 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.sg-eyebrow--gold { color: var(--accent); }
+.sg-eyebrow--gold { color: var(--white); }
 
 /* Thin section hairline rule (sits under/beside an eyebrow) */
 .sg-rule {

@@ -24,12 +24,6 @@ function SideEventCta({ title, sub }) {
 function SideEventsMergedPage() {
   const { NativeVideo } = window;
 
-  const halfStats = [
-    { v: 'Day 1', l: '18:00 – 20:00' },
-    { v: 'Summit venue', l: 'Open-air terrace' },
-    { v: 'All pass holders', l: 'No invitation needed' },
-    { v: 'Eiffel Tower', l: 'In full view' },
-  ];
   const halfGallery = [
     { src: 'assets/halftime-eiffel.jpg', alt: 'Drinks with a view of the Eiffel Tower' },
     { src: 'assets/halftime-crowd.jpg', alt: 'Guests gathering at golden hour' },
@@ -62,13 +56,8 @@ function SideEventsMergedPage() {
         </div>
         <div className="sg-container sg-container--wide vip-excl">
           <div className="vip-excl__rule reveal" aria-hidden="true"></div>
-          <h2 className="vip-excl__title reveal">The easiest introduction you&rsquo;ll make all week.</h2>
-          <h3 className="vip-excl__desc reveal">No badge-scanning, no schedule, just a relaxed reception where the keynote you watched an hour ago becomes the person standing next to you, with the Eiffel Tower over one shoulder.</h3>
-          <div className="vip-stats reveal">
-            {halfStats.map((s) => (
-              <div className="vip-stat" key={s.l}><h3 className="vip-stat__value">{s.v}</h3><h4 className="vip-stat__label">{s.l}</h4></div>
-            ))}
-          </div>
+          <h2 className="vip-excl__title reveal">Close the first day, set up the second.</h2>
+          <h3 className="vip-excl__desc reveal">As day one winds down, drinks in hand: a relaxed moment to recharge, trade the day&rsquo;s best takeaways and line up the conversations that shape day two &mdash; with the Eiffel Tower over one shoulder and the Paris sun going down.</h3>
         </div>
         <div className="sg-container sg-container--wide">
           <div className="se-trio reveal">
@@ -85,14 +74,14 @@ function SideEventsMergedPage() {
             <h2 className="opps-head__line opps-head__line--gold">one last toast.</h2>
           </div>
         </div>
-        <div className="sg-container sg-container--wide fo-block reveal">
+        <div className="sg-container sg-container--wide fo-block fo-block--center reveal">
           <div className="fo-rule" aria-hidden="true"></div>
           <h2 className="fo-h2 fo-h2--white">Two days of business,</h2>
           <h2 className="fo-h2">raised in a single glass.</h2>
-          <h4 className="fo-text">Nobody&rsquo;s checking a schedule anymore. The Closing Drinks is where the summit exhales, on a club moored on the Seine between the Grand Palais and Pont Alexandre III, and where the relationships built over two intense days are sealed before everyone scatters back across the world.</h4>
+          <h4 className="fo-text">One last toast on a boat on the Seine, between the Grand Palais and Pont Alexandre III &mdash; where two days of connections are sealed before the room heads home.</h4>
         </div>
         <div className="sg-container sg-container--wide">
-          <div className="reveal" style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div className="reveal" style={{ maxWidth: '900px', margin: 'clamp(32px, 4vw, 60px) auto 0' }}>
             <NativeVideo src="assets/closing-aftermovie.mp4" />
           </div>
         </div>

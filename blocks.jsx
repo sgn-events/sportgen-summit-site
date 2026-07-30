@@ -194,7 +194,7 @@ function Opportunities() {
 }
 
 // Live stat band: big 62px counters + 28px labels, count-up on scroll
-function CounterBandItem({ on, number, suffix, label }) {
+function CounterBandItem({ on, number, suffix, prefix, label }) {
   const [val, setVal] = React.useState(0);
   React.useEffect(() => {
     if (!on) return;
@@ -211,7 +211,7 @@ function CounterBandItem({ on, number, suffix, label }) {
   const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u202F');
   return (
     <div className="cband__item">
-      <span className="cband__num">{fmt(val)}{suffix}</span>
+      <span className="cband__num">{prefix}{fmt(val)}{suffix}</span>
       <h4 className="cband__label">{label}</h4>
     </div>
   );

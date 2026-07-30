@@ -25,7 +25,7 @@ const MEGA_COLS = [
     ['2026 Agenda', '#/agenda'], ['2026 Speakers', '#/speakers'], ['Why Attend', '#/why-attend'], ['Tracks', '#/tracks'],
   ] },
   { heading: 'Ecosystem', items: [
-    ['Sponsors', '#/sponsor'], ['Media', '#/medias'], ['News', '#/news'],
+    ['Sponsors', '#/sponsor'], ['Media', '#/medias'], ['News', '#/news'], ['SGN App', '#/app'],
   ] },
 ];
 
