@@ -326,13 +326,16 @@ function AppPage() {
         <div className="sg-container">
           <span className="sg-eyebrow sg-eyebrow--gold appx-appear reveal">Practical details</span>
           <h2 className="appx-h2 appx-h2--center appx-appear reveal">Frequently asked questions</h2>
-          <div className="appx-faq appx-appear reveal">
+          <div className="faqx reveal">
             {faqs.map((f, i) => (
-              <div className={'appx-faq__item sg-glass' + (faqOpen === i ? ' is-open' : '')} key={f.q}
+              <div className={'faqx__item' + (faqOpen === i ? ' is-open' : '')} key={f.q}
                 role="button" tabIndex={0} onClick={() => setFaqOpen(faqOpen === i ? -1 : i)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setFaqOpen(faqOpen === i ? -1 : i); } }}>
-                <div className="appx-faq__q"><span>{f.q}</span><span className="appx-faq__icon" aria-hidden="true">{faqOpen === i ? '−' : '+'}</span></div>
-                {faqOpen === i ? <p className="appx-faq__a">{f.a}</p> : null}
+                <div className="faqx__row">
+                  <h4 className="faqx__q">{f.q}</h4>
+                  <span className="faqx__plus" aria-hidden="true"><i></i><i></i></span>
+                </div>
+                <div className="faqx__a"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

@@ -1223,16 +1223,16 @@ function FaqPage() {
             <h2 className="faqp-h2">All the important details before attending</h2>
             <h2 className="faqp-h2 faqp-h2--gold">SportGen</h2>
           </div>
-          <div className="faqp-acc reveal">
+          <div className="faqx reveal">
             {faq.map((f, i) => (
-              <div className={'faqp-acc__item' + (open === i ? ' is-open' : '')} key={f.q} role="button" tabIndex={0}
+              <div className={'faqx__item' + (open === i ? ' is-open' : '')} key={f.q} role="button" tabIndex={0}
                 onClick={() => setOpen(open === i ? -1 : i)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(open === i ? -1 : i); } }}>
-                <div className="faqp-acc__row">
-                  <h4 className="faqp-acc__q">{f.q}</h4>
-                  <span className="faqp-acc__plus" aria-hidden="true"><i></i><i></i></span>
+                <div className="faqx__row">
+                  <h4 className="faqx__q">{f.q}</h4>
+                  <span className="faqx__plus" aria-hidden="true"><i></i><i></i></span>
                 </div>
-                <div className="faqp-acc__a"><p>{f.a}</p></div>
+                <div className="faqx__a"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

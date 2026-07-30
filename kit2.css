@@ -1752,17 +1752,7 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
 .faqp-venue__fig img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .faqp-venue__text { margin: 64px 0 0; font-size: 21px; font-weight: var(--fw-regular); letter-spacing: -0.01em; line-height: 1.5; color: var(--white); }
 .faqp-venue__text strong { font-weight: var(--fw-semibold); }
-.faqp-acc { display: flex; flex-direction: column; gap: 16px; }
-.faqp-acc__item { background: #02071C; border: 1px solid rgba(216, 231, 242, 0.07); border-radius: 8px; padding: 24px; cursor: pointer; }
-.faqp-acc__row { display: flex; align-items: center; gap: 16px; }
-.faqp-acc__q { flex: 1 0 0; margin: 0; font-size: 20px; font-weight: var(--fw-regular); letter-spacing: -0.01em; line-height: 1.4; color: #EDEDED; }
-.faqp-acc__plus { position: relative; flex: none; width: 36px; height: 36px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); }
-.faqp-acc__plus i { position: absolute; top: 50%; left: 50%; width: 16px; height: 1.8px; background: #EDEDED; border-radius: 8px; transform: translate(-50%, -50%); transition: transform 0.25s ease; }
-.faqp-acc__plus i:last-child { transform: translate(-50%, -50%) rotate(90deg); }
-.faqp-acc__item.is-open .faqp-acc__plus i:last-child { transform: translate(-50%, -50%) rotate(0deg); }
-.faqp-acc__a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease, margin-top 0.3s ease; }
-.faqp-acc__item.is-open .faqp-acc__a { grid-template-rows: 1fr; margin-top: 16px; }
-.faqp-acc__a > p { overflow: hidden; margin: 0; font-size: 16px; font-weight: var(--fw-regular); line-height: 1.5; color: rgba(255, 255, 255, 0.75); }
+/* FAQ accordéon unifié : toutes les Q&A du site utilisent .faqx (style "The Draft") */
 
 /* ---------- VIP Dinner --------------------------------------- */
 .vip-hero { position: relative; overflow: hidden; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: calc(var(--nav-height) + 4.5rem); padding-bottom: clamp(2rem, 4vh, 4rem); }
@@ -2319,12 +2309,6 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .appx-shot { flex: none; width: clamp(150px, 15vw, 210px); height: auto; display: block; border-radius: 8%; box-shadow: 0 20px 44px rgba(0,0,0,0.55); }
 
 /* FAQ */
-.appx-faq { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 1.2vw, 20px); margin-top: clamp(24px, 3vw, 40px); }
-.appx-faq__item { padding: clamp(18px, 14px + 0.6vw, 26px); border-radius: 14px; cursor: pointer; transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
-.appx-faq__item:hover, .appx-faq__item.is-open { border-color: var(--border-gold); }
-.appx-faq__q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 16px; font-weight: var(--fw-semibold); color: var(--white); }
-.appx-faq__icon { flex: none; font-size: 1.4em; color: var(--gold); line-height: 1; }
-.appx-faq__a { margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); }
 
 /* Closing CTA + animated glass sheen (RAISE rsLiquidDrift / rsSheenSpin, gold-tinted) */
 .appx-cta { position: relative; overflow: hidden; text-align: center; max-width: 960px; margin: 0 auto; padding: clamp(36px, 28px + 2vw, 68px); border-radius: 22px; border-color: var(--border-gold); }
@@ -2342,5 +2326,5 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 @keyframes rsLiquidDrift { 0% { transform: translate3d(-2%,0,0) scale(1); } 50% { transform: translate3d(2%,0,0) scale(1.04); } 100% { transform: translate3d(-2%,0,0) scale(1); } }
 @keyframes rsSheenSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .wave-cta::before, .wave-cta::after { animation: none !important; } .appx-appear.reveal:not(.reveal--in) { filter: none; transform: none; opacity: 1; } }
-@media (max-width: 900px) { .appx-companion, .appx-showcase, .appx-faq { grid-template-columns: 1fr; } .appx-showcase__aside { position: static; } }
+@media (max-width: 900px) { .appx-companion, .appx-showcase { grid-template-columns: 1fr; } .appx-showcase__aside { position: static; } }
 @media (max-width: 640px) { .appx-dl { grid-template-columns: 1fr; } .appx-show { grid-template-columns: 1fr; justify-items: center; text-align: center; } }
