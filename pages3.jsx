@@ -421,7 +421,7 @@ function SideEventsPage() {
 
   const stats = [
     { v: '4', l: 'Signature evenings' },
-    { v: '200+', l: 'VIP dinner guests' },
+    { v: '500+', l: 'Attendees at side events' },
     { v: '90%', l: 'C-level & founders' },
     { v: 'Paris', l: 'Iconic private venues' },
   ];
