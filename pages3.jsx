@@ -478,9 +478,9 @@ function SideEventsPage() {
       <section className="section sgnw-cta-band">
         <div className="sg-container sgnw-cta-band__inner">
           <h2 className="sgnw-cta-band__h2 reveal">Want a seat at the <span className="sgnw-gold">table in 2027?</span></h2>
-          <p className="sgnw-cta-band__sub">Some evenings are open to all pass holders, others are strictly by invitation. Tell us about you and our team will be in touch about access.</p>
+          <p className="sgnw-cta-band__sub">Some evenings are open to all pass holders, others are strictly by invitation. Want to host your own? Tell us about it and our team will be in touch.</p>
           <div className="cta-row cta-row--center">
-            <Button variant="secondary" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Request access</Button>
+            <Button variant="secondary" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Host your own side event</Button>
             <Button variant="primary" href="#/tickets" onClick={(e) => go(e, '#/tickets')}>Buy 2027 Ticket</Button>
           </div>
         </div>
