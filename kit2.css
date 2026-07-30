@@ -2308,7 +2308,9 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .appx-show__body { margin: 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.68); }
 
 /* Real app screenshots (already framed as phones, transparent surround) */
-.appx-shot { flex: none; width: clamp(150px, 15vw, 210px); height: auto; display: block; filter: drop-shadow(0 22px 40px rgba(0,0,0,0.5)); }
+/* No `filter` here: the site's global body zoom would rasterize a filtered
+   image then upscale it (blur). box-shadow keeps the screenshot crisp. */
+.appx-shot { flex: none; width: clamp(150px, 15vw, 210px); height: auto; display: block; border-radius: 8%; box-shadow: 0 20px 44px rgba(0,0,0,0.55); }
 
 /* FAQ */
 .appx-faq { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 1.2vw, 20px); margin-top: clamp(24px, 3vw, 40px); }
