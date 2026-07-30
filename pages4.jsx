@@ -308,7 +308,7 @@ function AppPage() {
             </aside>
             <div className="appx-showcase__list">
               {showcase.map((s) => (
-                <div className="appx-show sg-glass appx-appear reveal" key={s.title}>
+                <div className="appx-show sg-glass reveal" key={s.title}>
                   <div className="appx-show__text">
                     <h3 className="appx-show__title">{s.title}</h3>
                     <p className="appx-show__body">{s.body}</p>
