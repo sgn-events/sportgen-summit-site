@@ -460,7 +460,7 @@ function SideEventsPage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" style={{ paddingTop: 0 }}>
         <div className="sg-container sg-container--wide vip-excl">
           <div className="vip-excl__rule reveal" aria-hidden="true"></div>
           <h2 className="vip-excl__title reveal">The 2026 edition, in numbers.</h2>
