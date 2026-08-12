@@ -8,6 +8,7 @@ const SIS_ROUTES = {
   '/sponsor': 'SisSponsorPage',
   '/agenda': 'SisAgendaPage',
   '/why-lp': 'SisLpPage',
+  '/get-in-touch': 'SisGetInTouchPage',
   '/tickets': 'InvestTicketsPage',
 };
 

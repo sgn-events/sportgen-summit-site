@@ -33,6 +33,7 @@ Vercel redéploie automatiquement (~30 s). Chaque branche obtient une URL de pre
 - `_standalone_full.html` — export mono-fichier autonome, non utilisé par le site (supprimable)
 - `ds/` — design system SPORT[GEN] : `styles.css` (point d'entrée, importe `tokens/`, `fonts/`, `base.css`, `components/`) + `_ds_bundle.js`
 - `kit.css`, `kit2.css`, `invest.css`, `sis.css` — styles propres au site
+- `brevo-forms.js`, `site-BrevoForm.jsx` — formulaires Brevo « Get in Touch » (variante `navy` pour le site SGN, `invest` pour SGN Invest)
 - `data.js`, `legal.js` — contenu (speakers, agenda, mentions légales)
 - `*.jsx` — composants React, transpilés dans le navigateur par Babel standalone
 - `assets/`, `assets_opt/`, `reels/` — images, vidéos, PDF

@@ -3,6 +3,7 @@
 const { useRef: useSisRef, useState: useSisState, useEffect: useSisEffect } = React;
 
 const SIS_BUY = 'https://pointenoire.swoogo.com/sportgensummit2027/Registration';
+const SIS_BOOK_CALL = 'https://meetings-eu1.hubspot.com/tom-petit-vallois/tom-meetings-scheduler';
 const SIS_CDN = 'https://framerusercontent.com/images/';
 const sisGo = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
 
@@ -381,4 +382,34 @@ function SisLpPage() {
   );
 }
 
-Object.assign(window, { SisSpeakersPage, SisMediaPage, SisSponsorPage, SisAgendaPage, SisLpPage });
+/* ─────────────────────────── GET IN TOUCH ─────────────────────────── */
+const SIS_GIT_POINTS = [
+  'Tailored access for funds, LPs, sponsors and delegations',
+  'Newsletter and early ticket release',
+  'Speak directly with the SGN Invest team',
+];
+
+function SisGetInTouchPage() {
+  const { BrevoForm } = window;
+  return (
+    <SisShell idx="[06]" kicker="Talk to us"
+      title={<>Get in<br />touch</>}
+      sub="Learn more about the event, subscribe to our newsletter and gain exclusive access. Our team will contact you today.">
+      <div className="sis-git">
+        <div className="sis-git__side inv-rv">
+          <ul className="sis-lp-break__list">
+            {SIS_GIT_POINTS.map((p) => <li key={p}>{p}</li>)}
+          </ul>
+          <a className="inv-btn inv-btn--ghost sis-git__call" href={SIS_BOOK_CALL} target="_blank" rel="noopener">
+            Book a call instead
+          </a>
+        </div>
+        <div className="sis-git__form inv-rv">
+          <BrevoForm variant="invest" />
+        </div>
+      </div>
+    </SisShell>
+  );
+}
+
+Object.assign(window, { SisSpeakersPage, SisMediaPage, SisSponsorPage, SisAgendaPage, SisLpPage, SisGetInTouchPage });

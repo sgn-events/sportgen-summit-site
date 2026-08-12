@@ -458,7 +458,7 @@ function GetInTouchPage() {
             </button>
           </div>
           <div className="git2__body">
-            {mode === 'form' ? <HubspotForm /> : <BookCall />}
+            {mode === 'form' ? <window.BrevoForm variant="navy" /> : <BookCall />}
           </div>
         </div>
       </div>

@@ -655,6 +655,37 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
 .git__hsform .hs-button:hover { transform: translateY(-2px); box-shadow: var(--glow-gold-sm); }
 .git__hsform .submitted-message { color: var(--white); font-size: 18px; }
 .git__hsform .hs_cos_wrapper, .git__hsform .legal-consent-container, .git__hsform .legal-consent-container p { color: var(--text-muted); font-size: 12px; }
+/* Brevo embed — the export carries its own inline colours, re-dress it for the glass panel */
+.git2__body .sib-form,
+.git2__body #sib-container { background: transparent !important; border-color: transparent !important; max-width: none !important; }
+.git2__body .entry__label {
+  font-family: var(--font-sans) !important; font-size: var(--fs-eyebrow, 12px) !important; font-weight: var(--fw-medium) !important;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted) !important;
+}
+.git2__body .sib-text-form-block p, .git2__body .sib-optin p { margin: 0; color: var(--text-muted); font-size: 12.5px; line-height: 1.6; }
+/* Brevo paints the field box on the wrapper, not the <input> */
+.git2__body #sib-container .entry__field,
+.git2__body #sib-container .sib-sms-select__title,
+.git2__body #sib-container .sib-sms-select__number-input {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border-faint); border-radius: 8px;
+}
+.git2__body #sib-container .entry__field:focus-within,
+.git2__body #sib-container .sib-sms-select__number-input:focus-within { border-color: var(--gold); }
+.git2__body #sib-container input.input,
+.git2__body #sib-container .sib-sms-select__calling-code,
+.git2__body #sib-container .sib-sms-select__phone-number {
+  background: transparent; border: 0; color: var(--white); font-family: var(--font-sans); font-size: 15px;
+}
+.git2__body #sib-container .sib-sms-select__title { color: var(--white); }
+/* Consent boxes: Brevo hides the tick by drawing it in the same colour as the (white) box,
+   so both the box and the tick have to be re-coloured per state. */
+.git2__body #sib-container .checkbox { background: rgba(255,255,255,0.05); border-color: var(--border-faint); }
+.git2__body #sib-container .checkbox::before { border-color: transparent; }
+.git2__body #sib-container input:checked + .checkbox { background: var(--gold); border-color: var(--gold); }
+.git2__body #sib-container input:checked + .checkbox::before { border-color: var(--navy-darkest); }
+.git2__body .sib-form-block__button { border-radius: var(--radius-pill, 999px) !important; padding: 13px 28px; }
+.brevo__note { margin: 12px 0 0; font-size: 14px; color: var(--text-muted); }
+.brevo__note a { color: var(--gold); }
 .git__stars { align-self: center; width: 226px; height: auto; }
 .git__chips { overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .git__chips-track { display: flex; gap: 12px; width: max-content; animation: sg-marquee 28s linear infinite; }

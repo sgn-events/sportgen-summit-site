@@ -190,7 +190,7 @@
 }
 .sis-nav__left { display: flex; align-items: center; gap: 0.4rem; justify-self: start; }
 .sis-nav__link {
-  display: inline-flex; align-items: center; box-sizing: border-box; cursor: pointer;
+  display: inline-flex; align-items: center; box-sizing: border-box; cursor: pointer; font-family: inherit;
   position: relative; font-size: var(--nav-fs); letter-spacing: 0.01em; line-height: 1.2; font-weight: 500; color: #0b0b0d;
   text-decoration: none; white-space: nowrap;
   padding: var(--nav-pad-y) var(--nav-pad-x); border-radius: 8px;
@@ -203,6 +203,26 @@
   transform: translateY(-1px);
 }
 .sis-nav__link.is-active { border-color: rgba(0,0,0,0.55); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.25); }
+
+/* Quick-link dropdown (Sponsor → 3 pages), same behaviour as .sg-nav__qdrop on the SGN site */
+.sis-nav__qdrop { position: relative; }
+.sis-nav__qcaret { margin-left: 7px; font-size: 9px; line-height: 1; transition: transform .2s; }
+.sis-nav__qdrop:hover .sis-nav__qcaret { transform: rotate(180deg); }
+.sis-nav__qdrop-panel {
+  position: absolute; top: calc(100% + 10px); left: 0; z-index: 60; min-width: 232px;
+  display: flex; flex-direction: column; padding: 8px; gap: 2px; border-radius: 8px;
+  background: rgba(255,255,255,0.98); border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 12px 34px -14px rgba(0,0,0,0.32);
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .2s, transform .2s, visibility .2s;
+}
+.sis-nav__qdrop:hover .sis-nav__qdrop-panel,
+.sis-nav__qdrop:focus-within .sis-nav__qdrop-panel { opacity: 1; visibility: visible; transform: translateY(0); }
+.sis-nav__qdrop-panel a {
+  padding: 10px 13px; border-radius: 6px; font-size: 13px; font-weight: 500; color: #0b0b0d;
+  text-decoration: none; white-space: nowrap; transition: background-color .2s;
+}
+.sis-nav__qdrop-panel a:hover { background: rgba(0,0,0,0.06); }
 
 .sis-nav__brand { justify-self: center; display: inline-flex; align-items: center; text-decoration: none; }
 .sis-nav__brand img { height: var(--nav-logo-h); width: auto; display: block; }
@@ -250,6 +270,14 @@
   }
   .sis-mobile.is-open { transform: translateY(0); opacity: 1; visibility: visible; }
   .sis-mobile a { font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #0b0b0d; text-decoration: none; padding: 13px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .sis-mobile__group { display: flex; flex-direction: column; }
+  .sis-mobile__trigger {
+    display: flex; align-items: center; justify-content: space-between; width: 100%;
+    font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #0b0b0d; text-align: left;
+    padding: 13px 0; border: 0; border-bottom: 1px solid rgba(0,0,0,0.08); background: none; cursor: pointer;
+  }
+  .sis-mobile__sub { display: flex; flex-direction: column; padding-left: 14px; }
+  .sis-mobile__sub a { font-size: 14.5px; color: #55555b; padding: 11px 0; }
   .sis-mobile__btns { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
   .sis-mobile__btns .sis-nav__btn { justify-content: center; }
 }
@@ -345,6 +373,57 @@
 .sis-spk__name { font-family: var(--inv-disp); font-weight: 700; font-size: 16px; letter-spacing: -0.01em; color: var(--inv-fg); }
 .sis-spk__role { margin-top: 4px; font-family: var(--inv-mono); font-size: 11.5px; line-height: 1.45; color: var(--inv-dim); }
 .sis-spk__org { margin-top: 2px; font-family: var(--inv-mono); font-size: 11.5px; color: var(--inv-mute); }
+
+/* ---------- GET IN TOUCH page (Brevo embed) ---------- */
+.sis-git {
+  display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(28px, 4vw, 64px);
+  align-items: start; margin-top: clamp(36px, 5vw, 60px);
+}
+@media (max-width: 900px) { .sis-git { grid-template-columns: 1fr; } }
+.sis-git__side { border: 1px solid var(--inv-line); background: var(--inv-bg-2); padding: clamp(26px, 3vw, 40px); }
+.sis-git__side .sis-lp-break__list li:first-child { border-top: 0; padding-top: 0; }
+.sis-git__call { margin-top: clamp(22px, 3vw, 30px); }
+.sis-git__form { border: 1px solid var(--inv-line); background: var(--inv-bg-2); padding: clamp(18px, 2.4vw, 30px); }
+
+/* Brevo exports the form with its own inline colours; re-dress it in the Invest DA. */
+.sis-git .sib-form,
+.sis-git #sib-container { background: transparent !important; border-color: transparent !important; max-width: none !important; }
+.sis-git .entry__label {
+  font-family: var(--inv-mono) !important; font-size: 11.5px !important; font-weight: 500 !important;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--inv-mute) !important;
+}
+.sis-git .sib-text-form-block p,
+.sis-git .sib-optin p { margin: 0; font-family: var(--inv-mono); font-size: 12.5px; line-height: 1.65; color: var(--inv-dim); }
+.sis-git .sib-optin p { color: var(--inv-fg); }
+/* Brevo paints the field box on the wrapper, not the <input> */
+.sis-git #sib-container .entry__field,
+.sis-git #sib-container .sib-sms-select__title,
+.sis-git #sib-container .sib-sms-select__number-input {
+  background: #ffffff; border: 1px solid var(--inv-line); border-radius: 0;
+}
+.sis-git #sib-container .entry__field:focus-within,
+.sis-git #sib-container .sib-sms-select__number-input:focus-within { border-color: var(--sis-gold); }
+.sis-git #sib-container input.input,
+.sis-git #sib-container .sib-sms-select__calling-code,
+.sis-git #sib-container .sib-sms-select__phone-number {
+  background: transparent; border: 0; border-radius: 0;
+  font-family: var(--inv-mono); font-size: 13.5px; color: var(--inv-fg);
+}
+/* Consent boxes: Brevo hides the tick by drawing it in the box colour, so re-colour both. */
+.sis-git #sib-container .checkbox { background: #ffffff; border-color: var(--inv-line); }
+.sis-git #sib-container .checkbox::before { border-color: transparent; }
+.sis-git #sib-container input:checked + .checkbox { background: var(--sis-gold); border-color: var(--sis-gold); }
+.sis-git #sib-container input:checked + .checkbox::before { border-color: var(--sis-gold-ink); }
+.sis-git #sib-container a { color: var(--sis-blue); }
+.sis-git .sib-form-block__button {
+  font-family: var(--inv-mono) !important; font-size: 13px !important; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 16px 26px; border-radius: 0 !important;
+  background: var(--sis-grad) !important; color: var(--sis-gold-ink) !important; border: 1px solid transparent;
+  transition: filter .25s, transform .25s;
+}
+.sis-git .sib-form-block__button:hover { filter: brightness(0.96); transform: translateY(-2px); }
+.sis-git .brevo__note { margin: 12px 0 0; font-family: var(--inv-mono); font-size: 12.5px; color: var(--inv-dim); }
+.sis-git .brevo__note a { color: var(--sis-blue); }
 
 /* ---------- footer ---------- */
 .sis-foot { background: #0b0b0d; color: #f3f3f1; padding: clamp(48px,6vw,80px) 0 36px; }

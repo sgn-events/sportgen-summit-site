@@ -2,11 +2,19 @@
 const { useState: useSisNavState, useEffect: useSisNavEffect } = React;
 
 const SIS_BUY_URL = 'https://pointenoire.swoogo.com/sportgensummit2027/Registration';
+const SIS_CALL_URL = 'https://meetings-eu1.hubspot.com/tom-petit-vallois/tom-meetings-scheduler';
 
+/* Left-of-logo quick links. A third tuple element = dropdown sub-items (same shape as the
+   SPORT[GEN] nav, see NAV_LEFT in site-Nav.jsx). */
 const SIS_LINKS = [
   ['Speakers', '#/speakers'],
   ['Media', '#/media'],
-  ['Sponsor', '#/sponsor'],
+  ['Sponsor', '#/sponsor', [
+    ['Sponsor with SGN Invest', '#/sponsor'],
+    ['Book a call', SIS_CALL_URL],
+    ['Download our brochure', 'index.html#/download-brochure'],
+  ]],
+  ['Get in Touch', '#/get-in-touch'],
 ];
 
 const SIS_TICKETS_HREF = '#/tickets';
@@ -14,22 +22,39 @@ const SIS_TICKETS_HREF = '#/tickets';
 function SisNav() {
   const [route, setRoute] = useSisNavState(window.location.hash.replace('#', '') || '/');
   const [open, setOpen] = useSisNavState(false);
+  const [openGroup, setOpenGroup] = useSisNavState(null); // mobile accordion
   useSisNavEffect(() => {
-    const onHash = () => { setRoute(window.location.hash.replace('#', '') || '/'); setOpen(false); };
+    const onHash = () => { setRoute(window.location.hash.replace('#', '') || '/'); setOpen(false); setOpenGroup(null); };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
   const nav = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
   const isActive = (href) => route === href.replace('#', '');
+  /* Anything that is not an in-page hash route leaves the SIS app (other site or external). */
+  const isExternal = (href) => !href.startsWith('#');
+  const subLink = ([label, href]) => (
+    isExternal(href)
+      ? <a key={href + label} href={href} target={href.startsWith('index.html') ? undefined : '_blank'} rel="noopener">{label}</a>
+      : <a key={href + label} href={href} onClick={(e) => nav(e, href)}>{label}</a>
+  );
 
   return (
     <React.Fragment>
       <nav className="sis-nav">
         <div className="sis-nav__inner">
           <div className="sis-nav__left">
-            {SIS_LINKS.map(([label, href]) => (
-              <a key={href} className={'sis-nav__link' + (isActive(href) ? ' is-active' : '')}
-                 href={href} onClick={(e) => nav(e, href)}>{label}</a>
+            {SIS_LINKS.map(([label, href, sub]) => (
+              sub ? (
+                <div className="sis-nav__qdrop" key={label}>
+                  <button className="sis-nav__link" type="button" aria-haspopup="true">
+                    {label}<span className="sis-nav__qcaret" aria-hidden="true">▾</span>
+                  </button>
+                  <div className="sis-nav__qdrop-panel">{sub.map(subLink)}</div>
+                </div>
+              ) : (
+                <a key={href} className={'sis-nav__link' + (isActive(href) ? ' is-active' : '')}
+                   href={href} onClick={(e) => nav(e, href)}>{label}</a>
+              )
             ))}
           </div>
 
@@ -56,8 +81,18 @@ function SisNav() {
       </nav>
 
       <div className={'sis-mobile' + (open ? ' is-open' : '')}>
-        {SIS_LINKS.map(([label, href]) => (
-          <a key={href} href={href} onClick={(e) => nav(e, href)}>{label}</a>
+        {SIS_LINKS.map(([label, href, sub]) => (
+          sub ? (
+            <div className="sis-mobile__group" key={label}>
+              <button className="sis-mobile__trigger" type="button"
+                      onClick={() => setOpenGroup(openGroup === label ? null : label)}>
+                {label}<span aria-hidden="true">{openGroup === label ? '−' : '+'}</span>
+              </button>
+              {openGroup === label ? <div className="sis-mobile__sub">{sub.map(subLink)}</div> : null}
+            </div>
+          ) : (
+            <a key={href} href={href} onClick={(e) => nav(e, href)}>{label}</a>
+          )
         ))}
         <div className="sis-mobile__btns">
           <a className="sis-nav__btn sis-nav__btn--outline" href="index.html">Explore SGN</a>
