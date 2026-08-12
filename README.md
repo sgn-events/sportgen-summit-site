@@ -26,6 +26,19 @@ git add . && git commit -m "..." && git push
 
 Vercel redéploie automatiquement (~30 s). Chaque branche obtient une URL de preview ; `main` va en production.
 
+### Ce qui casse le déploiement auto
+
+Le repo vit sous l'organisation `sgn-events` et le team Vercel `sportgen` est en plan **Hobby**. Hobby refuse les repos **privés appartenant à une organisation** : le lien git est alors impossible à créer et les push ne déclenchent plus rien, silencieusement. C'est arrivé au transfert du repo depuis le compte `Tom-sgn` (13 jours sans déploiement).
+
+Donc, tant qu'on reste en Hobby : **garder ce repo public**. Le passer en privé recasse le pipeline. L'autre issue est de passer le team en Pro.
+
+Vérifier que le lien tient :
+
+```bash
+vercel project inspect sportgen-summit-site --scope sportgen
+vercel ls sportgen-summit-site --scope sportgen   # la colonne Username doit montrer github, pas un pseudo
+```
+
 ## Structure
 
 - `index.html` — site principal (21 routes, routage côté client par hash)
