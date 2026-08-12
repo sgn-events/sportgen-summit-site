@@ -25,9 +25,31 @@ function brevoEnsureHead() {
   }
 }
 
-function BrevoForm({ variant }) {
+function BrevoForm({ variant, onSuccess }) {
   const hostRef = useBrevoRef(null);
   const [failed, setFailed] = useBrevoState(false);
+  const doneRef = useBrevoRef(false);
+
+  /* Brevo signals the outcome by toggling `sib-form-message-panel--active` on its two panels.
+     Those panels sit at the TOP of the form: after clicking Submit at the bottom of a long
+     form the confirmation lands off-screen, so bring it into view. Brevo's own scrollTo only
+     moves the window, which does nothing when the form lives in a scrollable panel. */
+  useBrevoEffect(() => {
+    const host = hostRef.current;
+    if (!host || !window.MutationObserver) return undefined;
+    const mo = new MutationObserver(() => {
+      const ok = host.querySelector('#success-message.sib-form-message-panel--active');
+      const ko = host.querySelector('#error-message.sib-form-message-panel--active');
+      const panel = ok || ko;
+      if (panel) panel.scrollIntoView({ block: 'nearest' });
+      if (ok && !doneRef.current) {
+        doneRef.current = true;
+        if (onSuccess) onSuccess();
+      }
+    });
+    mo.observe(host, { attributes: true, attributeFilter: ['class'], subtree: true });
+    return () => mo.disconnect();
+  }, [variant, onSuccess]);
 
   useBrevoEffect(() => {
     brevoEnsureHead();
