@@ -110,7 +110,7 @@ function SisMediaPage() {
           <p className="sis-phead__sub" style={{ marginTop: '18px' }}>
             A non-exhaustive picture of the outlets we host. Media passes are complimentary for credentialed journalists; we review every request individually.
           </p>
-          <a className="inv-btn" href="index.html#/get-in-touch" style={{ marginTop: '28px' }}>
+          <a className="inv-btn" href="#/get-in-touch" style={{ marginTop: '28px' }}>
             Apply for media accreditation <span className="inv-btn__arrow">→</span>
           </a>
         </div>
@@ -131,8 +131,8 @@ const SIS_FIG = [
   ['70', '%', 'Director-level & up'],
 ];
 
-const SIS_SPON_DECK = 'index.html#/get-in-touch';
-const SIS_SPON_CALL = 'index.html#/get-in-touch';
+const SIS_SPON_DECK = '#/get-in-touch';
+const SIS_SPON_CALL = '#/get-in-touch';
 
 function SisSponIcon({ name }) {
   const p = {
@@ -249,7 +249,7 @@ function SisSponsorPage() {
 
       <div className="inv-voices__foot inv-rv" style={{ marginTop: 'clamp(36px,5vw,56px)' }}>
         <span className="inv-voices__note">Custom packages available, we build partnerships around your objectives.</span>
-        <a className="inv-btn" href="index.html#/get-in-touch">Talk to the team <span className="inv-btn__arrow">→</span></a>
+        <a className="inv-btn" href="#/get-in-touch">Talk to the team <span className="inv-btn__arrow">→</span></a>
       </div>
     </SisShell>
   );
@@ -332,7 +332,7 @@ function SisLpPage() {
       title={<>LPs at<br />SGN Invest</>}
       sub="The one room in Europe where the people allocating capital into sport meet the managers, operators and rights holders deploying it. Complimentary access for verified Limited Partners.">
       <div className="sis-spon-cta inv-rv">
-        <a className="inv-btn" href="index.html#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
+        <a className="inv-btn" href="#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
         <a className="inv-btn inv-btn--ghost" href="#/agenda" onClick={(e) => sisGo(e, '#/agenda')}>See the programme</a>
       </div>
 
@@ -358,7 +358,7 @@ function SisLpPage() {
           <p className="sis-phead__sub inv-rv" style={{ marginTop: '18px' }}>
             A closed-door breakfast reserved for Limited Partners, held before the main programme opens. A smaller, senior room to compare notes on allocation, manager selection and where sport sits in the portfolio, before the floor fills up.
           </p>
-          <a className="inv-btn inv-rv" href="index.html#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')} style={{ marginTop: '28px' }}>
+          <a className="inv-btn inv-rv" href="#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')} style={{ marginTop: '28px' }}>
             Request an invitation <span className="inv-btn__arrow">→</span>
           </a>
         </div>
@@ -376,7 +376,7 @@ function SisLpPage() {
 
       <div className="inv-voices__foot inv-rv" style={{ marginTop: 'clamp(36px,5vw,56px)' }}>
         <span className="inv-voices__note">LP passes are complimentary for verified Limited Partners.</span>
-        <a className="inv-btn" href="index.html#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
+        <a className="inv-btn" href="#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
       </div>
     </SisShell>
   );
