@@ -12,9 +12,8 @@ const SIS_LINKS = [
   ['Sponsor', '#/sponsor', [
     ['Sponsor with SGN Invest', '#/sponsor'],
     ['Book a call', SIS_CALL_URL],
-    ['Download our brochure', 'index.html#/download-brochure'],
+    ['Download our brochure', '#/get-in-touch'],
   ]],
-  ['Get in Touch', '#/get-in-touch'],
 ];
 
 const SIS_TICKETS_HREF = '#/tickets';
@@ -46,9 +45,7 @@ function SisNav() {
             {SIS_LINKS.map(([label, href, sub]) => (
               sub ? (
                 <div className="sis-nav__qdrop" key={label}>
-                  <button className="sis-nav__link" type="button" aria-haspopup="true">
-                    {label}<span className="sis-nav__qcaret" aria-hidden="true">▾</span>
-                  </button>
+                  <button className="sis-nav__link" type="button" aria-haspopup="true">{label}</button>
                   <div className="sis-nav__qdrop-panel">{sub.map(subLink)}</div>
                 </div>
               ) : (
