@@ -61,9 +61,23 @@ function NotFoundPage() {
   );
 }
 
+/* Deck servi en telechargement une fois le formulaire Brevo soumis. Meme fichier pour les deux
+   pages tant qu'il n'y a pas de brochure startup distincte. */
+const BROCHURE_PDF = 'assets/sgn-summit-2027-brochure.pdf';
+
+function downloadBrochure() {
+  const a = document.createElement('a');
+  a.href = BROCHURE_PDF;
+  a.download = BROCHURE_PDF.split('/').pop();
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
 function BrochurePage({ startup }) {
   const { interests } = window.SGData;
   const loop = interests.concat(interests);
+  const [sent, setSent] = React.useState(false);
   return (
     <section className="git-wrap">
       <div className="sg-container sg-container--wide git">
@@ -78,7 +92,13 @@ function BrochurePage({ startup }) {
         </div>
         <div className="git__right reveal">
           <div className="git__form-panel">
-            <HubspotForm />
+            <window.BrevoForm variant="navy" onSuccess={() => { setSent(true); downloadBrochure(); }} />
+            {sent ? (
+              <p className="git__form-note">
+                Your download should start automatically. If it doesn&#39;t,{' '}
+                <a href={BROCHURE_PDF} download>download the brochure here</a>.
+              </p>
+            ) : null}
           </div>
           <div className="git__chips" aria-hidden="true">
             <div className="git__chips-track">
