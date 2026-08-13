@@ -51,6 +51,12 @@ function BrevoForm({ variant, onSuccess }) {
     return () => mo.disconnect();
   }, [variant, onSuccess]);
 
+  /* Le bloc telephone (indicatif + drapeau) est le notre, pas celui de Brevo: il faut le
+     cabler a chaque montage pour qu'il alimente l'input cache PHONE. Voir brevo-forms.js. */
+  useBrevoEffect(() => {
+    if (hostRef.current) window.brevoBindPhone(hostRef.current);
+  }, [variant]);
+
   useBrevoEffect(() => {
     brevoEnsureHead();
     window.brevoSetGlobals();

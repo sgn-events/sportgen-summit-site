@@ -58,6 +58,20 @@ const BREVO_BASE_CSS = [
   '#sib-container input::placeholder, #sib-container textarea::placeholder {'
     + ' font-family: Helvetica, sans-serif; text-align: left; color: #c0ccda; }',
   '#sib-container a { text-decoration: underline; color: #ffb049; }',
+  /* Structure du bloc telephone maison. Commun aux deux DA: seules les couleurs sont
+     dans kit2.css / sis.css. Le <select> couvre toute la pastille en opacite 0, de sorte
+     que le clic ouvre la liste native du systeme mais que l'affichage reste le notre. */
+  '.brevo-phone { display: flex; align-items: stretch; gap: 8px; }',
+  '.brevo-phone__country { position: relative; display: flex; align-items: center; gap: 8px;'
+    + ' padding: 0 26px 0 10px; flex: 0 0 auto; }',
+  '.brevo-phone__select { position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
+    + ' opacity: 0; cursor: pointer; border: 0; padding: 0; }',
+  '.brevo-phone__country::after { content: ""; position: absolute; right: 10px; pointer-events: none;'
+    + ' border: 4px solid transparent; border-top-color: currentColor; transform: translateY(2px);'
+    + ' opacity: 0.6; }',
+  '.brevo-phone__code { font-variant-numeric: tabular-nums; white-space: nowrap; }',
+  '.brevo-phone__number { flex: 1 1 auto; min-width: 0; }',
+  '.brevo-phone__number .input { width: 100%; }',
 ].join('\n');
 
 /* NE PAS RETIRER. Le handler de soumission de Brevo fait `button.querySelector("svg").removeClass(...)`
@@ -112,70 +126,133 @@ function brevoOptIn(name, label, color) {
     + '</div></div></div>';
 }
 
-/* Le telephone est stocke dans LANDLINE_NUMBER, rendu par le widget telephone de Brevo:
-   d'ou le selecteur d'indicatif ci-dessous et les classes `sib-sms-*`, qui sont celles de
-   Brevo et n'impliquent rien d'un envoi SMS.
-   ATTENTION: tout champ passe par ce widget (SMS, LANDLINE_NUMBER, WHATSAPP) est unique au
-   niveau du compte -- deux contacts ne peuvent pas partager un numero, la 2e soumission
-   repond 400 "Phone number is already linked to an existing account." Un attribut texte
-   rendu en input simple (PHONE) n'a pas cette contrainte, mais perd le drapeau. On ne peut
-   pas avoir les deux; verifie le 2026-08-13, meme numero + deux emails.
-   Ce bloc doit rester le miroir exact de ce que le formulaire Brevo attend: toute modif du
-   champ cote Brevo (nom d'attribut compris) casse la soumission ici. */
+/* Le telephone est stocke dans l'attribut texte PHONE, et le selecteur de pays ci-dessous est
+   le notre, pas celui de Brevo. C'est volontaire, et c'est la seule facon d'avoir les deux:
+   tout champ passe par le widget telephone de Brevo (SMS, LANDLINE_NUMBER, WHATSAPP) est unique
+   au niveau du compte -- la 2e soumission du meme numero repond 400 "Phone number is already
+   linked to an existing account." (verifie le 2026-08-13, numero neuf + deux emails). Un attribut
+   texte n'a pas cette contrainte, mais Brevo le rend alors en input nu, sans indicatif.
+   Donc: on garde PHONE cote Brevo, et on reconstruit ici l'indicatif + le drapeau. Le drapeau
+   reutilise le sprite `.sib-flag` de la feuille de style Brevo, deja chargee.
+   Le <select> et le champ numero ne portent pas de `name`: ils ne sont pas envoyes. C'est
+   l'input cache PHONE qui l'est, recompose a chaque frappe par brevoBindPhone(). Aucune
+   dependance a l'ordre des handlers de Brevo au moment de la soumission. */
 
-/* Indicatifs pays, dans l'ordre de Brevo. Format "<indicatif> <ISO>". */
-const BREVO_PHONE_COUNTRIES = ('93 AF,358 AX,355 AL,213 DZ,1684 AS,376 AD,244 AO,1264 AI,672 AQ,1268 AG,54 AR,374 AM,'
-  + '297 AW,61 AU,43 AT,994 AZ,1242 BS,973 BH,880 BD,1246 BB,375 BY,32 BE,501 BZ,229 BJ,1441 BM,975 BT,591 BO,'
-  + '599 BQ,387 BA,267 BW,47 BV,55 BR,246 IO,673 BN,359 BG,226 BF,257 BI,855 KH,237 CM,1 CA,34 IC,238 CV,1345 KY,'
-  + '236 CF,34 EA,235 TD,56 CL,86 CN,61 CX,61 CC,57 CO,269 KM,242 CG,243 CD,682 CK,506 CR,225 CI,385 HR,53 CU,'
-  + '599 CW,357 CY,420 CZ,45 DK,253 DJ,1767 DM,1809 DO,1829 DO,1849 DO,593 EC,20 EG,503 SV,240 GQ,291 ER,372 EE,'
-  + '251 ET,500 FK,298 FO,679 FJ,358 FI,33 FR,594 GF,689 PF,262 TF,241 GA,220 GM,995 GE,49 DE,233 GH,350 GI,30 GR,'
-  + '299 GL,1473 GD,590 GP,1671 GU,502 GT,44 GG,224 GN,245 GW,592 GY,509 HT,672 HM,379 VA,504 HN,852 HK,36 HU,'
-  + '354 IS,91 IN,62 ID,98 IR,964 IQ,353 IE,44 IM,972 IL,39 IT,1876 JM,81 JP,44 JE,962 JO,7 KZ,254 KE,686 KI,'
-  + '850 KP,82 KR,965 KW,996 KG,856 LA,371 LV,961 LB,266 LS,231 LR,218 LY,423 LI,370 LT,352 LU,853 MO,389 MK,'
-  + '261 MG,265 MW,60 MY,960 MV,223 ML,356 MT,692 MH,596 MQ,222 MR,230 MU,262 YT,52 MX,691 FM,373 MD,377 MC,'
-  + '976 MN,382 ME,1664 MS,212 MA,258 MZ,95 MM,264 NA,674 NR,977 NP,31 NL,687 NC,64 NZ,505 NI,227 NE,234 NG,'
-  + '683 NU,672 NF,1670 MP,47 NO,968 OM,92 PK,680 PW,970 PS,507 PA,675 PG,595 PY,51 PE,63 PH,64 PN,48 PL,351 PT,'
-  + '1787 PR,974 QA,383 XK,262 RE,40 RO,7 RU,250 RW,590 BL,290 SH,1869 KN,1758 LC,590 MF,508 PM,1784 VC,685 WS,'
-  + '378 SM,239 ST,966 SA,221 SN,381 RS,248 SC,232 SL,65 SG,1721 SX,421 SK,386 SI,677 SB,252 SO,27 ZA,500 GS,'
-  + '211 SS,34 ES,94 LK,249 SD,597 SR,47 SJ,268 SZ,46 SE,41 CH,963 SY,886 TW,992 TJ,255 TZ,66 TH,670 TL,228 TG,'
-  + '690 TK,676 TO,1868 TT,216 TN,90 TR,993 TM,1649 TC,688 TV,256 UG,380 UA,971 AE,44 GB,1 US,246 UM,598 UY,'
-  + '998 UZ,678 VU,58 VE,84 VN,1284 VG,1340 VI,681 WF,212 EH,967 YE,260 ZM,263 ZW').split(',');
+/* Pays: "<ISO>;<indicatif>;<nom>", dans l'ordre de Brevo (source: static.brevo.com/js/countries.json).
+   L'ISO sert a la pastille drapeau (sprite .sib-flag de la CSS Brevo), l'indicatif est ce qu'on
+   prefixe au numero avant de l'envoyer dans PHONE. */
+const BREVO_PHONE_COUNTRIES = ('AF|+93|Afghanistan;AX|+358|Aland Islands;AL|+355|Albania;DZ|+213|Algeria;AS|+1684|American Samoa;'
+  + 'AD|+376|Andorra;AO|+244|Angola;AI|+1264|Anguilla;AQ|+672|Antarctica;AG|+1268|Antigua and Barbuda;'
+  + 'AR|+54|Argentina;AM|+374|Armenia;AW|+297|Aruba;AU|+61|Australia;AT|+43|Austria;AZ|+994|Azerbaijan;'
+  + 'BS|+1242|Bahamas;BH|+973|Bahrain;BD|+880|Bangladesh;BB|+1246|Barbados;BY|+375|Belarus;BE|+32|Belgium;'
+  + 'BZ|+501|Belize;BJ|+229|Benin;BM|+1441|Bermuda;BT|+975|Bhutan;BO|+591|Bolivia, Plurinational State of;'
+  + 'BQ|+599|Bonaire, Sint Eustatius and Saba;BA|+387|Bosnia and Herzegovina;BW|+267|Botswana;'
+  + 'BV|+47|Bouvet Island;BR|+55|Brazil;IO|+246|British Indian Ocean Territory;BN|+673|Brunei Darussalam;'
+  + 'BG|+359|Bulgaria;BF|+226|Burkina Faso;BI|+257|Burundi;KH|+855|Cambodia;CM|+237|Cameroon;CA|+1|Canada;'
+  + 'IC|+34|Canary Islands;CV|+238|Cape Verde;KY|+1345|Cayman Islands;CF|+236|Central African Republic;'
+  + 'EA|+34|Ceuta and Melila;TD|+235|Chad;CL|+56|Chile;CN|+86|China;CX|+61|Christmas Island;'
+  + 'CC|+61|Cocos (Keeling) Islands;CO|+57|Colombia;KM|+269|Comoros;CG|+242|Congo;'
+  + 'CD|+243|Democratic Republic of the Congo;CK|+682|Cook Islands;CR|+506|Costa Rica;CI|+225|Cote d\'Ivoire;'
+  + 'HR|+385|Croatia;CU|+53|Cuba;CW|+599|Curacao;CY|+357|Cyprus;CZ|+420|Czech Republic;DK|+45|Denmark;'
+  + 'DJ|+253|Djibouti;DM|+1767|Dominica;DO|+1809|Dominican Republic;DO|+1829|Dominican Republic;'
+  + 'DO|+1849|Dominican Republic;EC|+593|Ecuador;EG|+20|Egypt;SV|+503|El Salvador;GQ|+240|Equatorial Guinea;'
+  + 'ER|+291|Eritrea;EE|+372|Estonia;ET|+251|Ethiopia;FK|+500|Falkland Islands (Malvinas);'
+  + 'FO|+298|Faroe Islands;FJ|+679|Fiji;FI|+358|Finland;FR|+33|France;GF|+594|French Guiana;'
+  + 'PF|+689|French Polynesia;TF|+262|French Southern Territories;GA|+241|Gabon;GM|+220|Gambia;'
+  + 'GE|+995|Georgia;DE|+49|Germany;GH|+233|Ghana;GI|+350|Gibraltar;GR|+30|Greece;GL|+299|Greenland;'
+  + 'GD|+1473|Grenada;GP|+590|Guadeloupe;GU|+1671|Guam;GT|+502|Guatemala;GG|+44|Guernsey;GN|+224|Guinea;'
+  + 'GW|+245|Guinea-Bissau;GY|+592|Guyana;HT|+509|Haiti;HM|+672|Heard Island and McDonald Islands;'
+  + 'VA|+379|Holy See (Vatican City State);HN|+504|Honduras;HK|+852|Hong Kong;HU|+36|Hungary;IS|+354|Iceland;'
+  + 'IN|+91|India;ID|+62|Indonesia;IR|+98|Iran, Islamic Republic of;IQ|+964|Iraq;IE|+353|Ireland;'
+  + 'IM|+44|Isle of Man;IL|+972|Israel;IT|+39|Italy;JM|+1876|Jamaica;JP|+81|Japan;JE|+44|Jersey;'
+  + 'JO|+962|Jordan;KZ|+7|Kazakhstan;KE|+254|Kenya;KI|+686|Kiribati;'
+  + 'KP|+850|Democratic People’s Republic of Korea;KR|+82|Republic of Korea;KW|+965|Kuwait;KG|+996|Kyrgyzstan;'
+  + 'LA|+856|Lao People\'s Democratic Republic;LV|+371|Latvia;LB|+961|Lebanon;LS|+266|Lesotho;LR|+231|Liberia;'
+  + 'LY|+218|Libya;LI|+423|Liechtenstein;LT|+370|Lithuania;LU|+352|Luxembourg;MO|+853|Macao;'
+  + 'MK|+389|North Macedonia;MG|+261|Madagascar;MW|+265|Malawi;MY|+60|Malaysia;MV|+960|Maldives;ML|+223|Mali;'
+  + 'MT|+356|Malta;MH|+692|Marshall Islands;MQ|+596|Martinique;MR|+222|Mauritania;MU|+230|Mauritius;'
+  + 'YT|+262|Mayotte;MX|+52|Mexico;FM|+691|Micronesia, Federated States of;MD|+373|Republic of Moldova;'
+  + 'MC|+377|Monaco;MN|+976|Mongolia;ME|+382|Montenegro;MS|+1664|Montserrat;MA|+212|Morocco;'
+  + 'MZ|+258|Mozambique;MM|+95|Myanmar;NA|+264|Namibia;NR|+674|Nauru;NP|+977|Nepal;NL|+31|Netherlands;'
+  + 'NC|+687|New Caledonia;NZ|+64|New Zealand;NI|+505|Nicaragua;NE|+227|Niger;NG|+234|Nigeria;NU|+683|Niue;'
+  + 'NF|+672|Norfolk Island;MP|+1670|Northern Mariana Islands;NO|+47|Norway;OM|+968|Oman;PK|+92|Pakistan;'
+  + 'PW|+680|Palau;PS|+970|State of Palestine;PA|+507|Panama;PG|+675|Papua New Guinea;PY|+595|Paraguay;'
+  + 'PE|+51|Peru;PH|+63|Philippines;PN|+64|Pitcairn;PL|+48|Poland;PT|+351|Portugal;PR|+1787|Puerto Rico;'
+  + 'QA|+974|Qatar;XK|+383|Republic of Kosovo;RE|+262|Reunion;RO|+40|Romania;RU|+7|Russian Federation;'
+  + 'RW|+250|Rwanda;BL|+590|Saint Barthelemy;SH|+290|Saint Helena, Ascension and Tristan da Cunha;'
+  + 'KN|+1869|Saint Kitts and Nevis;LC|+1758|Saint Lucia;MF|+590|Saint Martin (French part);'
+  + 'PM|+508|Saint Pierre and Miquelon;VC|+1784|Saint Vincent and the Grenadines;WS|+685|Samoa;'
+  + 'SM|+378|San Marino;ST|+239|Sao Tome and Principe;SA|+966|Saudi Arabia;SN|+221|Senegal;RS|+381|Serbia;'
+  + 'SC|+248|Seychelles;SL|+232|Sierra Leone;SG|+65|Singapore;SX|+1721|Sint Maarten (Dutch part);'
+  + 'SK|+421|Slovakia;SI|+386|Slovenia;SB|+677|Solomon Islands;SO|+252|Somalia;ZA|+27|South Africa;'
+  + 'GS|+500|South Georgia and the South Sandwich Islands;SS|+211|South Sudan;ES|+34|Spain;LK|+94|Sri Lanka;'
+  + 'SD|+249|Sudan;SR|+597|Suriname;SJ|+47|Svalbard and Jan Mayen;SZ|+268|Swaziland;SE|+46|Sweden;'
+  + 'CH|+41|Switzerland;SY|+963|Syrian Arab Republic;TW|+886|Taiwan, Province of China;TJ|+992|Tajikistan;'
+  + 'TZ|+255|Tanzania, United Republic of;TH|+66|Thailand;TL|+670|Timor-Leste;TG|+228|Togo;TK|+690|Tokelau;'
+  + 'TO|+676|Tonga;TT|+1868|Trinidad and Tobago;TN|+216|Tunisia;TR|+90|Turkey;TM|+993|Turkmenistan;'
+  + 'TC|+1649|Turks and Caicos Islands;TV|+688|Tuvalu;UG|+256|Uganda;UA|+380|Ukraine;'
+  + 'AE|+971|United Arab Emirates;GB|+44|United Kingdom;US|+1|United States;'
+  + 'UM|+246|United States Minor Outlying Islands;UY|+598|Uruguay;UZ|+998|Uzbekistan;VU|+678|Vanuatu;'
+  + 'VE|+58|Venezuela, Bolivarian Republic of;VN|+84|Viet Nam;VG|+1284|Virgin Islands, British;'
+  + 'VI|+1340|Virgin Islands, U.S.;WF|+681|Wallis and Futuna;EH|+212|Western Sahara;YE|+967|Yemen;'
+  + 'ZM|+260|Zambia;ZW|+263|Zimbabwe').split(';');
 
-/* Pays par defaut. C'est `data-country-code` sur `.sib-sms-input` qui le pilote: au chargement,
-   main.js vide le wrapper, va chercher sa propre liste sur static.brevo.com/js/countries.json
-   et selectionne l'entree dont le code ISO correspond. Le <select> ci-dessous ne sert donc que
-   de repli si main.js ne se charge pas -- c'est ce que fait l'export Brevo, on le garde. */
 const BREVO_PHONE_DEFAULT_ISO = 'FR';
 
 function brevoPhoneField(v) {
   const options = BREVO_PHONE_COUNTRIES.map(function (c) {
-    const parts = c.split(' ');
-    const sel = parts[1] === BREVO_PHONE_DEFAULT_ISO ? ' selected' : '';
-    return '<option value="+' + parts[0] + '"' + sel + '>+' + parts[0] + ' ' + parts[1] + '</option>';
+    const p = c.split('|');
+    const sel = p[0] === BREVO_PHONE_DEFAULT_ISO ? ' selected' : '';
+    return '<option value="' + p[0] + '" data-code="' + p[1] + '"' + sel + '>'
+      + p[2] + ' (' + p[1] + ')</option>';
   }).join('');
   return ''
     + '<div style="padding: 8px 0;">'
-    + '<div class="sib-sms-field sib-form-block"><div class="form__entry entry_block"><div class="form__label-row ">'
+    + '<div class="sib-input sib-form-block"><div class="form__entry entry_block"><div class="form__label-row ">'
     + '<label class="entry__label" style="font-weight: 700; text-align: left; font-family:Helvetica, sans-serif;'
-    + ' font-size:16px; font-weight:700; text-align:left; color:' + v.labelColor + ';" for="LANDLINE_NUMBER"'
+    + ' font-size:16px; font-weight:700; text-align:left; color:' + v.labelColor + ';" for="brevo-phone-number"'
     + ' data-required="*">Mobile Phone Number</label>'
-    + '<div class="sib-sms-input-wrapper" style="direction:ltr">'
-    + '<div class="sib-sms-input" data-placeholder="" data-required="true" data-country-code="FR" data-value=""'
-    + ' data-attributename="LANDLINE_NUMBER">'
-    + '<div class="entry__field"><select class="input" name="LANDLINE_NUMBER__COUNTRY_CODE" data-required="true">'
-    + options + '</select></div>'
-    + '<div class="entry__field" style="width: 100%">'
-    + '<input type="tel" class="input" id="LANDLINE_NUMBER" name="LANDLINE_NUMBER" autocomplete="off"'
-    + ' placeholder="6 12 34 56 78" data-required="true" required /></div>'
+    + '<div class="brevo-phone">'
+    + '<div class="entry__field brevo-phone__country">'
+    + '<span class="sib-flag sib-flag-fr brevo-phone__flag" aria-hidden="true"></span>'
+    + '<select class="brevo-phone__select" id="brevo-phone-country" aria-label="Country calling code">'
+    + options + '</select>'
+    + '<span class="brevo-phone__code" aria-hidden="true">+33</span>'
     + '</div>'
-    + '<div class="sib-sms-tooltip"><div class="sib-sms-tooltip__box">Enter your number without the leading 0:'
-    + ' pick your country code on the left, then 6 to 19 digits.</div>'
-    + '<span class="sib-sms-tooltip__icon">?</span></div>'
-    + '</div></div>'
+    + '<div class="entry__field brevo-phone__number">'
+    + '<input type="tel" class="input" id="brevo-phone-number" autocomplete="tel-national"'
+    + ' inputmode="tel" maxlength="20" placeholder="6 12 34 56 78" data-required="true" required /></div>'
+    + '</div>'
+    + '<input type="hidden" name="PHONE" id="PHONE" value="" />'
+    + '</div>'
     + '<label class="entry__error entry__error--primary" style="' + brevoErrorStyle() + '"></label>'
-    + '<label class="entry__error entry__error--secondary" style="' + brevoErrorStyle() + '"></label>'
     + '</div></div></div>';
+}
+
+/* Recompose la valeur envoyee: "<indicatif> <numero>", par ex "+33 612345678".
+   Appele a chaque frappe et a chaque changement de pays, donc la valeur est toujours a jour
+   quel que soit le moment ou Brevo serialise le formulaire. */
+function brevoBindPhone(host) {
+  const sel = host.querySelector('.brevo-phone__select');
+  const num = host.querySelector('#brevo-phone-number');
+  const out = host.querySelector('input[name="PHONE"]');
+  const flag = host.querySelector('.brevo-phone__flag');
+  const code = host.querySelector('.brevo-phone__code');
+  if (!sel || !num || !out) return;
+  const sync = function () {
+    const opt = sel.options[sel.selectedIndex];
+    const dial = opt ? opt.getAttribute('data-code') : '';
+    flag.className = 'sib-flag sib-flag-' + sel.value.toLowerCase() + ' brevo-phone__flag';
+    code.textContent = dial;
+    const digits = num.value.trim();
+    /* Un champ rempli d'espaces passerait la validation "non vide" de Brevo tout en laissant
+       PHONE vide -> 400 sur un champ invisible, donc message generique. On le vide. */
+    if (!digits && num.value) num.value = '';
+    out.value = digits ? dial + ' ' + digits : '';
+  };
+  sel.addEventListener('change', sync);
+  num.addEventListener('input', sync);
+  sync();
 }
 
 function brevoMessagePanel(id, text, colors) {
@@ -243,4 +320,4 @@ function brevoSetGlobals() {
   window.AUTOHIDE = Boolean(0);
 }
 
-Object.assign(window, { BREVO_FORMS, BREVO_BASE_CSS, brevoFormHTML, brevoSetGlobals });
+Object.assign(window, { BREVO_FORMS, BREVO_BASE_CSS, brevoFormHTML, brevoSetGlobals, brevoBindPhone });
