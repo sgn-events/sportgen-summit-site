@@ -61,18 +61,9 @@ function NotFoundPage() {
   );
 }
 
-/* Deck servi en telechargement une fois le formulaire Brevo soumis. Meme fichier pour les deux
-   pages tant qu'il n'y a pas de brochure startup distincte. */
-const BROCHURE_PDF = 'assets/sgn-summit-2027-brochure.pdf';
-
-function downloadBrochure() {
-  const a = document.createElement('a');
-  a.href = BROCHURE_PDF;
-  a.download = BROCHURE_PDF.split('/').pop();
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
+/* Le PDF est ouvert dans un nouvel onglet par <BrevoForm>, qui lit le chemin dans
+   BREVO_FORMS['brochure-sgn'].pdf. On le relit ici pour le lien de secours. */
+const BROCHURE_PDF = window.BREVO_FORMS['brochure-sgn'].pdf;
 
 function BrochurePage({ startup }) {
   const { interests } = window.SGData;
@@ -92,11 +83,11 @@ function BrochurePage({ startup }) {
         </div>
         <div className="git__right reveal">
           <div className="git__form-panel">
-            <window.BrevoForm variant="navy" onSuccess={() => { setSent(true); downloadBrochure(); }} />
+            <window.BrevoForm form="brochure-sgn" onSuccess={() => setSent(true)} />
             {sent ? (
               <p className="git__form-note">
-                Your download should start automatically. If it doesn&#39;t,{' '}
-                <a href={BROCHURE_PDF} download>download the brochure here</a>.
+                The brochure opened in a new tab. If your browser blocked it,{' '}
+                <a href={BROCHURE_PDF} target="_blank" rel="noopener noreferrer">open it here</a>.
               </p>
             ) : null}
           </div>

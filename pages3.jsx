@@ -105,7 +105,10 @@ function StartupPage() {
   const { Button } = window.SPORTGENDesignSystem_882f1e;
   const [draftIdx, setDraftIdx] = useP3State(0);
   const [juryIdx, setJuryIdx] = useP3State(0);
-  const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
+  const go = (e, href) => {
+    if (/^https?:/i.test(href || '')) return; // external links navigate normally
+    e.preventDefault(); window.location.hash = href.replace('#', '');
+  };
   const [faqOpen, setFaqOpen] = React.useState(0);
   const [actOpen, setActOpen] = React.useState(0);
   const chev = (
@@ -165,7 +168,7 @@ function StartupPage() {
                     <div className="acc__body">
                       <div className="acc__body-inner">
                         <p className="acc__text">{a.body}</p>
-                        {a.cta ? <div className="cta-row"><Button variant="primary" href={a.href} onClick={(e) => go(e, a.href)}>{a.cta}</Button></div> : null}
+                        {a.cta ? <div className="cta-row"><Button variant="primary" href={a.href} onClick={(e) => go(e, a.href)} {...(/^https?:/i.test(a.href) ? { target: '_blank', rel: 'noopener' } : {})}>{a.cta}</Button></div> : null}
                       </div>
                     </div>
                   </div>

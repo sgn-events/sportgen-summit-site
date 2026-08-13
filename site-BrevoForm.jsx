@@ -1,4 +1,6 @@
-/* <BrevoForm variant="navy" | "invest" /> — mounts a Brevo embedded sign-up form.
+/* <BrevoForm form="get-in-touch" | "brochure-sgn" | "deck-invest" | "attendee-snapshot" />
+   Monte un formulaire Brevo embarque. La cle choisit l'URL de soumission (donc la liste
+   Brevo), la palette, et le PDF a ouvrir apres envoi s'il y en a un.
 
    Brevo ships its embed as static HTML + a script that binds itself on load. In this SPA
    the form appears on a route change, long after that script would have run, so the markup
@@ -25,7 +27,30 @@ function brevoEnsureHead() {
   }
 }
 
-function BrevoForm({ variant, onSuccess }) {
+/* Ouvre le PDF dans un nouvel onglet. Il est d'abord recupere en blob: un lien direct est
+   refuse dans les previews en bac a sable, et le blob permet aussi de retomber proprement sur
+   une navigation declenchee par un clic si la popup est bloquee. */
+function brevoOpenPdf(url) {
+  const open = (href) => {
+    const w = window.open(href, '_blank', 'noopener');
+    if (w) return;
+    const a = document.createElement('a');
+    a.href = href; a.target = '_blank'; a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+  fetch(url)
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+    .then((b) => {
+      const blobUrl = URL.createObjectURL(b.slice(0, b.size, 'application/pdf'));
+      open(blobUrl);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 120000);
+    })
+    .catch(() => open(url));
+}
+
+function BrevoForm({ form, onSuccess }) {
+  const config = window.BREVO_FORMS[form];
+  const variant = config.theme;
   const hostRef = useBrevoRef(null);
   const [failed, setFailed] = useBrevoState(false);
   const doneRef = useBrevoRef(false);
@@ -44,18 +69,19 @@ function BrevoForm({ variant, onSuccess }) {
       if (panel) panel.scrollIntoView({ block: 'nearest' });
       if (ok && !doneRef.current) {
         doneRef.current = true;
+        if (config.pdf) brevoOpenPdf(config.pdf);
         if (onSuccess) onSuccess();
       }
     });
     mo.observe(host, { attributes: true, attributeFilter: ['class'], subtree: true });
     return () => mo.disconnect();
-  }, [variant, onSuccess]);
+  }, [form, config, onSuccess]);
 
   /* Le bloc telephone (indicatif + drapeau) est le notre, pas celui de Brevo: il faut le
      cabler a chaque montage pour qu'il alimente l'input cache PHONE. Voir brevo-forms.js. */
   useBrevoEffect(() => {
     if (hostRef.current) window.brevoBindPhone(hostRef.current);
-  }, [variant]);
+  }, [form]);
 
   useBrevoEffect(() => {
     brevoEnsureHead();
@@ -69,18 +95,18 @@ function BrevoForm({ variant, onSuccess }) {
     s.onerror = () => setFailed(true);
     document.body.appendChild(s);
     return () => { s.remove(); };
-  }, [variant]);
+  }, [form]);
 
   return (
     <div className={'brevo brevo--' + variant} ref={hostRef}>
-      <div dangerouslySetInnerHTML={{ __html: window.brevoFormHTML(variant) }} />
+      <div dangerouslySetInnerHTML={{ __html: window.brevoFormHTML(form) }} />
       {failed ? (
         <p className="brevo__note">
-          Form not loading? <a href={window.BREVO_FORMS[variant].action} target="_blank" rel="noopener noreferrer">Open it in a new tab →</a>
+          Form not loading? <a href={config.action} target="_blank" rel="noopener noreferrer">Open it in a new tab →</a>
         </p>
       ) : null}
     </div>
   );
 }
 
-Object.assign(window, { BrevoForm });
+Object.assign(window, { BrevoForm, brevoOpenPdf });

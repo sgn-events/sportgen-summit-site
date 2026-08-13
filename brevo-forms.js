@@ -1,10 +1,12 @@
 /* Brevo embedded sign-up forms — shared markup builder.
-   The two SGN "Get in Touch" forms are byte-identical apart from their POST action and
-   their colours, so the markup is written once here and each variant supplies its palette.
+   Les quatre formulaires ont exactement les memes champs: seuls changent l'URL de soumission
+   (donc la liste et les stats cote Brevo), la palette, et le PDF eventuellement delivre. Le
+   markup est donc ecrit une fois ici, et chaque entree de BREVO_FORMS fournit le reste.
    Loaded as plain JS (no Babel): keep this file free of JSX.
    Rendered by site-BrevoForm.jsx, which also loads Brevo's stylesheet and main.js. */
 
-/* Copy shared by both forms — kept in one place so the two stay in sync. */
+/* Copy shared by all four forms — kept in one place so they stay in sync. Le message de
+   succes ci-dessous n'est qu'un a-plat: Brevo renvoie le sien, propre a chaque formulaire. */
 const BREVO_COPY = {
   consentIntro: 'SGN is committed to protecting and respecting your privacy, and we&#39;ll only use your personal '
     + 'information to administer your account and to provide the products and services you requested from us. From '
@@ -23,11 +25,10 @@ const BREVO_COPY = {
   error: 'Your subscription could not be saved. Please try again.',
 };
 
-/* One entry per Brevo form. `action` is the form's own serve URL — do not swap them. */
-const BREVO_FORMS = {
-  /* SPORT[GEN] Summit — navy DA (index.html #/get-in-touch) */
+/* Palettes. Deux DA seulement, partagees par les quatre formulaires. */
+const BREVO_THEMES = {
+  /* SPORT[GEN] Summit — DA sombre */
   navy: {
-    action: 'https://a3e44c04.sibforms.com/serve/MUIFAPgjI0xrGR3UlCDPkwXPowdyxzZ0GPd1Y5dsR33WdIsqlc-slV5cooVExoo1F8GBEiJIhY-vhuMEtVa4BBVu7WNHQT5nBfuOyMFmRymyJaj3ki8lScZe83zyD-_HPri4INbj68ZeWLTZ86_XRRfpsjDOccOXgtA5VPa9X6OywhZzO-VHDuw5frpIZpiE05s4gedX3q7S7_2iLw==',
     formBg: '#000519',
     containerBg: 'rgba(0,5,25,1)',
     borderColor: '#000519',
@@ -37,9 +38,8 @@ const BREVO_FORMS = {
     buttonBg: '#ffffff',
     buttonColor: '#000519',
   },
-  /* [SGN] Invest — light graphite DA (sis.html #/get-in-touch) */
+  /* [SGN] Invest — DA claire */
   invest: {
-    action: 'https://a3e44c04.sibforms.com/serve/MUIFAMCpQown3MmzAelTKXyWGpuLk8t0BgflILobhF-GnbNkWfs_8OXeWfpB4IMdyvQ0Oh9WLxkH8Gm8q0L7lN48-HdkWsgXQj1WNcwwl_m7-Zzlr1butZ_PLmatv9JRItc5ZcYIJiRfHSXuV00KJlNNT0LNE_gMqsAXEJ0zMg4AQ9jA4THKSlBhQ7ZUrXZyPobVVFEekZmO_ARf4w==',
     formBg: '#ffffff',
     containerBg: 'rgba(255,255,255,1)',
     borderColor: '#ffffff',
@@ -50,6 +50,43 @@ const BREVO_FORMS = {
     buttonColor: '#ffffff',
   },
 };
+
+/* Un formulaire Brevo par usage: chacun a sa propre liste, donc ses propres stats, et son
+   propre message de succes (defini cote Brevo). `action` est l'URL de soumission du
+   formulaire — ne jamais les intervertir, elles encodent l'identite du formulaire.
+   `theme` choisit la palette et la classe CSS `.brevo--<theme>` posee sur l'hote. */
+const BREVO_FORMS = {
+  /* index.html #/get-in-touch — liste "Get In Touch - Website" */
+  'get-in-touch': {
+    theme: 'navy',
+    action: 'https://a3e44c04.sibforms.com/serve/MUIFAPgjI0xrGR3UlCDPkwXPowdyxzZ0GPd1Y5dsR33WdIsqlc-slV5cooVExoo1F8GBEiJIhY-vhuMEtVa4BBVu7WNHQT5nBfuOyMFmRymyJaj3ki8lScZe83zyD-_HPri4INbj68ZeWLTZ86_XRRfpsjDOccOXgtA5VPa9X6OywhZzO-VHDuw5frpIZpiE05s4gedX3q7S7_2iLw==',
+  },
+  /* index.html #/download-brochure — liste "Brochure SGN - Website" */
+  'brochure-sgn': {
+    theme: 'navy',
+    action: 'https://a3e44c04.sibforms.com/serve/MUIFAOPMJR2FHXJVGQIZQwTkPaWXi3pB393xfZX6R_Uv6BRZw7KCOBPRj8eg7N58-jYvXFy0fi2u3IU662RrR4MKXb7EigN84zu54UYtEePCIkMEhK_PRkVFngfi1Qlt1AZ_KRaK0n6ilR96S97keqaKXmKr1u2vbBKjmBc6cm6MoL9tjsbmzVU4IqyYuvZ9kcFbIlT6vWOp5re-NQ==',
+    pdf: 'assets/sgn-summit-2027-brochure.pdf',
+  },
+  /* sis.html #/get-in-touch — liste "Deck SGN Invest - Website" */
+  'deck-invest': {
+    theme: 'invest',
+    action: 'https://a3e44c04.sibforms.com/serve/MUIFAMCpQown3MmzAelTKXyWGpuLk8t0BgflILobhF-GnbNkWfs_8OXeWfpB4IMdyvQ0Oh9WLxkH8Gm8q0L7lN48-HdkWsgXQj1WNcwwl_m7-Zzlr1butZ_PLmatv9JRItc5ZcYIJiRfHSXuV00KJlNNT0LNE_gMqsAXEJ0zMg4AQ9jA4THKSlBhQ7ZUrXZyPobVVFEekZmO_ARf4w==',
+    pdf: 'assets/sgn-invest-2027-deck.pdf',
+  },
+  /* modale "2026 Attendee Snapshot" (page d'accueil) — liste "Attendee Snapshot - Website" */
+  'attendee-snapshot': {
+    theme: 'navy',
+    action: 'https://a3e44c04.sibforms.com/serve/MUIFAOG03DtkyQWq7CripDVROBc8pg5CoKLa6khc5tbYOsU8e6XjczRYdZ46OTdmRwvtQ3X4XdBuboBvTL_s50p9IJhrWrTFQ5f-qDP81M2GIO8MTOMuIO_rxOAlCSWswQwBkHd0rIFvmi9k9vdpfPK93UheTUGPJPd8tEbsJujZPRiTXA15mqOISMn2lnlaPL5d8nVEee5dRCYxYA==',
+    pdf: 'assets/sgn-2026-attendee-snapshot.pdf',
+  },
+};
+
+/* Palette effective d'un formulaire: son theme, plus son `action`. */
+function brevoVariant(key) {
+  const form = BREVO_FORMS[key];
+  if (!form) throw new Error('Formulaire Brevo inconnu: ' + key);
+  return Object.assign({}, BREVO_THEMES[form.theme], form);
+}
 
 /* The <style> block Brevo asks you to put in <head>. Injected once by site-BrevoForm.jsx. */
 const BREVO_BASE_CSS = [
@@ -264,10 +301,9 @@ function brevoMessagePanel(id, text, colors) {
     + '<span class="sib-form-message-panel__inner-text">' + text + '</span></div></div>';
 }
 
-/* Build the full markup for one variant ("navy" | "invest"). */
-function brevoFormHTML(variant) {
-  const v = BREVO_FORMS[variant];
-  if (!v) throw new Error('Unknown Brevo form variant: ' + variant);
+/* Build the full markup for one form (cle de BREVO_FORMS). */
+function brevoFormHTML(formKey) {
+  const v = brevoVariant(formKey);
   return ''
     + '<div class="sib-form" style="text-align: center; background-color: ' + v.formBg + ';">'
     + '<div id="sib-form-container" class="sib-form-container">'
@@ -320,4 +356,6 @@ function brevoSetGlobals() {
   window.AUTOHIDE = Boolean(0);
 }
 
-Object.assign(window, { BREVO_FORMS, BREVO_BASE_CSS, brevoFormHTML, brevoSetGlobals, brevoBindPhone });
+Object.assign(window, {
+  BREVO_FORMS, BREVO_THEMES, BREVO_BASE_CSS, brevoFormHTML, brevoSetGlobals, brevoBindPhone, brevoVariant,
+});

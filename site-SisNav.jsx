@@ -2,7 +2,7 @@
 const { useState: useSisNavState, useEffect: useSisNavEffect } = React;
 
 const SIS_BUY_URL = 'https://pointenoire.swoogo.com/sportgensummit2027/Registration';
-const SIS_CALL_URL = 'https://meetings-eu1.hubspot.com/tom-petit-vallois/tom-meetings-scheduler';
+const SIS_CALL_URL = 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b';
 
 /* Left-of-logo quick links. A third tuple element = dropdown sub-items (same shape as the
    SPORT[GEN] nav, see NAV_LEFT in site-Nav.jsx). */

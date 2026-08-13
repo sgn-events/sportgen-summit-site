@@ -3,7 +3,7 @@
 const { useRef: useSisRef, useState: useSisState, useEffect: useSisEffect } = React;
 
 const SIS_BUY = 'https://pointenoire.swoogo.com/sportgensummit2027/Registration';
-const SIS_BOOK_CALL = 'https://meetings-eu1.hubspot.com/tom-petit-vallois/tom-meetings-scheduler';
+const SIS_BOOK_CALL = 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b';
 const SIS_CDN = 'https://framerusercontent.com/images/';
 const sisGo = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
 
@@ -132,7 +132,7 @@ const SIS_FIG = [
 ];
 
 const SIS_SPON_DECK = '#/get-in-touch';
-const SIS_SPON_CALL = '#/get-in-touch';
+const SIS_SPON_CALL = SIS_BOOK_CALL;
 
 function SisSponIcon({ name }) {
   const p = {
@@ -210,7 +210,7 @@ function SisSponsorPage() {
         <p className="sis-spon-build__lead inv-rv">Sponsoring SGN does not put your logo on a banner. It puts your brand inside that conversation, in front of the people actively building, buying and funding sport at scale.<br />The room is being filled. Make sure your brand is in it.</p>
         <div className="sis-spon-cta sis-spon-cta--center inv-rv">
           <a className="inv-btn" href={SIS_SPON_DECK} onClick={(e) => sisGo(e, '#/get-in-touch')}>Request the Sponsorship Deck <span className="inv-btn__arrow">→</span></a>
-          <a className="inv-btn inv-btn--ghost" href={SIS_SPON_CALL} onClick={(e) => sisGo(e, '#/get-in-touch')}>Book a Call</a>
+          <a className="inv-btn inv-btn--ghost" href={SIS_SPON_CALL} target="_blank" rel="noopener">Book a Call</a>
         </div>
       </section>
 
@@ -384,6 +384,7 @@ function SisLpPage() {
 
 /* ─────────────────────────── GET IN TOUCH ─────────────────────────── */
 const SIS_GIT_POINTS = [
+  'Instant access to the SGN Invest 2027 deck',
   'Tailored access for funds, LPs, sponsors and delegations',
   'Newsletter and early ticket release',
   'Speak directly with the SGN Invest team',
@@ -391,6 +392,8 @@ const SIS_GIT_POINTS = [
 
 function SisGetInTouchPage() {
   const { BrevoForm } = window;
+  const [sent, setSent] = React.useState(false);
+  const deckPdf = window.BREVO_FORMS['deck-invest'].pdf;
   return (
     <SisShell idx="[06]" kicker="Talk to us"
       title={<>Get in<br />touch</>}
@@ -405,7 +408,13 @@ function SisGetInTouchPage() {
           </a>
         </div>
         <div className="sis-git__form inv-rv">
-          <BrevoForm variant="invest" />
+          <BrevoForm form="deck-invest" onSuccess={() => setSent(true)} />
+          {sent ? (
+            <p className="sis-git__note">
+              The deck opened in a new tab. If your browser blocked it,{' '}
+              <a href={deckPdf} target="_blank" rel="noopener noreferrer">open it here</a>.
+            </p>
+          ) : null}
         </div>
       </div>
     </SisShell>

@@ -6,7 +6,7 @@ const NAV_LEFT = [
   ['Get in Touch', '#/get-in-touch'],
   ['Sponsor', '#/sponsor', [
     ['Sponsor with SGN', '#/sponsor'],
-    ['Book a call', 'https://meetings-eu1.hubspot.com/tom-petit-vallois/tom-meetings-scheduler'],
+    ['Book a call', 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b'],
     ['Download our brochure', '#/download-brochure'],
   ]],
 ];

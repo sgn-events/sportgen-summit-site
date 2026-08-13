@@ -139,31 +139,14 @@ function HomeFeatures() {
 }
 
 /* Gated "attendee snapshot" section: stats + scrolling attendee wall + lead-capture modal.
-   The modal embeds the SAME HubSpot form as Get in Touch, then opens the PDF on submit.
-   The PDF is fetched as a blob first, so it also works in sandboxed previews where a
-   direct file URL in a new tab is rejected. */
+   La modale embarque le formulaire Brevo "Download the 2026 Attendee Snapshot", qui a sa
+   propre liste. <BrevoForm> ouvre le PDF dans un nouvel onglet a la soumission; on garde
+   `deliverSnapshot` pour le bouton de secours quand la popup a ete bloquee. */
 function deliverSnapshot() {
-  const { snapshotPdf } = window.SGData;
-  const open = (url) => {
-    const w = window.open(url, '_blank', 'noopener');
-    if (!w) { // popup blocked, fall back to a click-driven navigation
-      const a = document.createElement('a');
-      a.href = url; a.target = '_blank'; a.rel = 'noopener';
-      document.body.appendChild(a); a.click(); a.remove();
-    }
-  };
-  fetch(snapshotPdf)
-    .then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
-    .then((b) => {
-      const url = URL.createObjectURL(b.slice(0, b.size, 'application/pdf'));
-      open(url);
-      setTimeout(() => URL.revokeObjectURL(url), 120000);
-    })
-    .catch(() => open(snapshotPdf));
+  window.brevoOpenPdf(window.SGData.snapshotPdf);
 }
 
 function SnapshotGate({ open, onClose }) {
-  const { snapshotPdf } = window.SGData;
   const { Button } = window.SPORTGENDesignSystem_882f1e;
   const [done, setDone] = React.useState(false);
   const fired = React.useRef(false);
@@ -194,13 +177,12 @@ function SnapshotGate({ open, onClose }) {
             <h3 className="snapgate__title">Tell us who you are, <span className="home-h2__gold">and it's yours.</span></h3>
             <p className="snapgate__lede">A curated extract of who was in the room: roles and organizations across teams, leagues, brands, media, investors and tech.</p>
             <div className="snapgate__hs">
-              {/* HubspotForm lives in pages2.jsx (separate Babel scope), read off window at render time */}
-              <window.HubspotForm targetId="hs-form-snapshot" onSubmitted={() => {
+              {/* BrevoForm lives in site-BrevoForm.jsx (separate Babel scope), read off window at render time */}
+              <window.BrevoForm form="attendee-snapshot" onSuccess={() => {
                 if (fired.current) return;
                 fired.current = true;
                 try { window.localStorage.setItem('sgn_snapshot_access', '1'); } catch (err) { /* no storage */ }
                 setDone(true);
-                deliverSnapshot();
               }} />
             </div>
           </React.Fragment>

@@ -472,7 +472,7 @@
     activitiesBg: CDN + 'nJpxwFSp4i2lTdIZvNHirUBaU.jpg',
     activities: [
       { label: 'Meet your Next Customer', body: 'Exhibit your solution, engage with industry decision-makers, and turn visibility into new customer opportunities.' },
-      { label: 'Exhibition Booths', body: 'Showcase your solution in our Startup Area and meet decision-makers. Increase your visibility with an Official Partner package.', cta: 'Book a Call', href: '#/get-in-touch' },
+      { label: 'Exhibition Booths', body: 'Showcase your solution in our Startup Area and meet decision-makers. Increase your visibility with an Official Partner package.', cta: 'Book a Call', href: 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b' },
       { label: 'Apply to The Draft and Pitch on the Main Stage', body: 'If your project is among the most promising in sport tech, health, or wellness, secure your spot among the 10 finalists and get ready to gain unmatched industry visibility.', cta: 'Apply to The Draft', href: '#/get-in-touch' },
       { label: 'Side Events', body: 'Join innovation and startup-focused side events to grow faster and smarter. Connect with industry professionals and meet your next clients.', cta: 'SGN Week', href: '#/side-events' },
       { label: 'Investor Meetings', body: 'Meet international investors through scheduled meetings and dedicated time slots focused on fundraising discussions.' },

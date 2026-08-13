@@ -398,8 +398,8 @@ function FallbackForm({ onSubmitted }) {
   );
 }
 
-// HubSpot meetings scheduler (Tom), embedded with a clean fallback link
-const MEETING_URL = 'https://meetings-eu1.hubspot.com/tom-petit-vallois/tom-meetings-scheduler';
+// HubSpot meetings scheduler (discovery call), embedded with a clean fallback link
+const MEETING_URL = 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b';
 
 function BookCall() {
   const [loaded, setLoaded] = usePageState(false);
@@ -408,7 +408,7 @@ function BookCall() {
       {!loaded ? <p className="git2__form-note">Loading calendar…</p> : null}
       <iframe
         className="git2__cal"
-        src={MEETING_URL + '?embed=true'}
+        src={MEETING_URL + (MEETING_URL.includes('?') ? '&' : '?') + 'embed=true'}
         title="Book a call with the SPORT[GEN] team"
         loading="lazy"
         onLoad={() => setLoaded(true)}
@@ -458,7 +458,7 @@ function GetInTouchPage() {
             </button>
           </div>
           <div className="git2__body">
-            {mode === 'form' ? <window.BrevoForm variant="navy" /> : <BookCall />}
+            {mode === 'form' ? <window.BrevoForm form="get-in-touch" /> : <BookCall />}
           </div>
         </div>
       </div>
