@@ -394,11 +394,17 @@
 .brevo--invest .sib-optin p { margin: 0; font-family: var(--inv-mono); font-size: 12.5px; line-height: 1.65; color: var(--inv-dim); }
 .brevo--invest .sib-optin p { color: var(--inv-fg); }
 /* Brevo paints the field box on the wrapper, not the <input> */
-.brevo--invest #sib-container .entry__field {
+.brevo--invest #sib-container .entry__field,
+.brevo--invest #sib-container .sib-sms-select__title,
+.brevo--invest #sib-container .sib-sms-select__number-input {
   background: #ffffff; border: 1px solid var(--inv-line); border-radius: 0;
 }
-.brevo--invest #sib-container .entry__field:focus-within { border-color: var(--sis-gold); }
-.brevo--invest #sib-container input.input {
+.brevo--invest #sib-container .entry__field:focus-within,
+.brevo--invest #sib-container .sib-sms-select__number-input:focus-within { border-color: var(--sis-gold); }
+.brevo--invest #sib-container input.input,
+.brevo--invest #sib-container select.input,
+.brevo--invest #sib-container .sib-sms-select__calling-code,
+.brevo--invest #sib-container .sib-sms-select__phone-number {
   background: transparent; border: 0; border-radius: 0;
   font-family: var(--inv-mono); font-size: 13.5px; color: var(--inv-fg);
 }

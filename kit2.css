@@ -664,13 +664,20 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
 }
 .brevo--navy .sib-text-form-block p, .brevo--navy .sib-optin p { margin: 0; color: var(--text-muted); font-size: 12.5px; line-height: 1.6; }
 /* Brevo paints the field box on the wrapper, not the <input> */
-.brevo--navy #sib-container .entry__field {
+.brevo--navy #sib-container .entry__field,
+.brevo--navy #sib-container .sib-sms-select__title,
+.brevo--navy #sib-container .sib-sms-select__number-input {
   background: rgba(255,255,255,0.05); border: 1px solid var(--border-faint); border-radius: 8px;
 }
-.brevo--navy #sib-container .entry__field:focus-within { border-color: var(--gold); }
-.brevo--navy #sib-container input.input {
+.brevo--navy #sib-container .entry__field:focus-within,
+.brevo--navy #sib-container .sib-sms-select__number-input:focus-within { border-color: var(--gold); }
+.brevo--navy #sib-container input.input,
+.brevo--navy #sib-container select.input,
+.brevo--navy #sib-container .sib-sms-select__calling-code,
+.brevo--navy #sib-container .sib-sms-select__phone-number {
   background: transparent; border: 0; color: var(--white); font-family: var(--font-sans); font-size: 15px;
 }
+.brevo--navy #sib-container .sib-sms-select__title { color: var(--white); }
 /* Consent boxes: Brevo hides the tick by drawing it in the same colour as the (white) box,
    so both the box and the tick have to be re-coloured per state. */
 .brevo--navy #sib-container .checkbox { background: rgba(255,255,255,0.05); border-color: var(--border-faint); }
