@@ -2169,6 +2169,15 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .snapgate__lede { position: relative; z-index: 1; margin: 0 0 28px; max-width: 52ch; font-size: 16px; line-height: 1.55; color: var(--text-body); }
 .snapgate__hs { position: relative; z-index: 1; }
 .snapgate__hs .contact__form { grid-template-columns: 1fr 1fr; }
+/* Deux colonnes pour que le formulaire tienne dans les 90vh du panneau sans scroll
+   interne : empile en une colonne, il debordait de ~137px sur un grand ecran.
+   Le markup vient de brevo-forms.js et chaque bloc est un <div style="padding:8px 0">
+   sans classe, d'ou le ciblage par :has() sur le bloc interne. Seuls les champs de
+   saisie se mettent cote a cote; texte de consentement, cases et Submit restent pleine
+   largeur. */
+.snapgate__hs form { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; }
+.snapgate__hs form > * { grid-column: 1 / -1; }
+.snapgate__hs form > div:has(> .sib-input) { grid-column: auto; }
 .snapgate__form { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .snapgate__form .field--full { grid-column: span 2; }
 .snapgate__opt { text-transform: none; letter-spacing: 0; color: var(--text-muted); }
