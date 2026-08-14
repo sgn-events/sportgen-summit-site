@@ -2105,6 +2105,10 @@ body.route-why-attend .section--cband-streaks { background-color: transparent; b
    ne demarrait visuellement qu'apres. Ici elle court du haut de page jusqu'au footer. */
 body.route-why-attend .page-hero__bg { background-color: transparent; background-image: none; }
 body.route-why-attend .page-hero__bg::after { background: none; }
+/* Idem pour "They were at Sport Gen Summit in 2026": .section--partners porte sa
+   propre plaque (bg-orbit-arc) dans kit.css. Ciblage sur la route parce que la page
+   Media utilise la meme section et garde la sienne. */
+body.route-why-attend .section--partners { background-color: transparent; background-image: none; }
 body.route-agenda::before        { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-orbit-arc.jpg'); }
 body.route-startup-competition::before { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-stage-rings.jpg'); }
 body.route-medias::before        { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-floor-rings.jpg'); }
