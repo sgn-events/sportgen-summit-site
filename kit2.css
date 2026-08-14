@@ -1510,23 +1510,14 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
    dimensionnent sur leur libelle, d'ou une rangee centree qui passe a la ligne
    plutot qu'une grille a colonnes fixes. */
 .persona-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(0.6rem, 0.35rem + 0.8vw, 1rem); }
-/* Persona choisi : bague doree. Dans le DA navy/periwinkle ci-dessus, primary et
-   secondary se ressemblent trop pour porter un etat "selectionne" — l'or est
-   l'accent du site, et suit le reglage Accent (les tokens sont reecrits par applyTweaks).
-   !important : le DA unifie des .sg-btn-- l'utilise aussi. */
-.persona-grid .sg-btn[aria-checked="true"] {
-  background: rgba(255,255,255,0.05) !important;
-  border-color: var(--gold) !important;
-  box-shadow: 0 0 0 1px var(--gold), var(--glow-gold-sm) !important;
-}
 
 .persona-result { padding-top: clamp(1rem, 0.5rem + 1vw, 1.75rem); }
 .persona-result__head { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; max-width: 760px; margin-bottom: clamp(2rem, 1.25rem + 2vw, 3rem); }
 .persona-result__title { margin: 0; font-size: clamp(30px, 24px + 1.4vw, 46px); font-weight: 500; letter-spacing: -0.04em; line-height: 1.14; color: var(--white); }
 .persona-result__lead { margin: 0; font-size: var(--fs-h4); line-height: 1.55; color: var(--text-body); }
-.persona-result__cta { margin-top: clamp(1.75rem, 1rem + 1.5vw, 2.5rem); display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
-.persona-result__link { font-size: var(--fs-small); font-weight: var(--fw-semibold); color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; transition: border-color 0.2s ease; }
-.persona-result__link:hover { border-color: var(--gold); }
+/* Deux pills cote a cote : "Get your ticket" en primary, le CTA du persona en
+   secondary. Gap resserre depuis 1.75rem, qui espaçait un bouton et un lien texte. */
+.persona-result__cta { margin-top: clamp(1.75rem, 1rem + 1.5vw, 2.5rem); display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
 
 @media (max-width: 600px) {
   /* En dessous, les libelles longs ("Investment & Advisory") depassent en nowrap :

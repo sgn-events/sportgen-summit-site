@@ -33,7 +33,7 @@ function PersonaPicker({ personas, selected, onPick }) {
           {personas.map((p) => {
             const active = selected === p.key;
             return (
-              <Button key={p.key} variant="secondary" size="lg"
+              <Button key={p.key} variant={active ? 'primary' : 'secondary'} size="lg"
                 type="button" role="radio" aria-checked={active}
                 onClick={() => onPick(active ? null : p.key)}>
                 {p.label}
@@ -74,7 +74,7 @@ function PersonaResult({ persona }) {
         </div>
         <div className="persona-result__cta reveal">
           <Button variant="primary" size="lg" href="#/tickets" onClick={(e) => go(e, '#/tickets')}>Get your ticket</Button>
-          <a className="persona-result__link" href={cta.href} onClick={(e) => go(e, cta.href)}>{cta.label}</a>
+          <Button variant="secondary" size="lg" href={cta.href} onClick={(e) => go(e, cta.href)}>{cta.label}</Button>
         </div>
       </div>
     </section>
