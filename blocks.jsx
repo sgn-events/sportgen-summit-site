@@ -104,7 +104,7 @@ function LogoWalls({ groups }) {
 
 /* `items` / `heading` / `id` permettent de rejouer la meme grille pour SGN Invest sur la
    page Tickets; sans eux on retombe sur la grille principale, telle qu'appelee ailleurs. */
-function TicketsBlock({ first, items, heading, id, plain }) {
+function TicketsBlock({ first, items, heading, id, plain, wide }) {
   const { tickets } = window.SGData;
   const list = items || tickets;
   const BUY_URL = 'https://pointenoire.swoogo.com/sportgensummit2027/Registration';
@@ -113,7 +113,7 @@ function TicketsBlock({ first, items, heading, id, plain }) {
       {plain ? null : <div className="section--tickets__bg" aria-hidden="true" />}
       <div className="sg-container sg-container--wide">
         {heading || <h2 className="tkx-head reveal">Secure your 2027 <span className="tkx-head__gold">Super Early Birds</span></h2>}
-        <div className="tkx-grid">
+        <div className={'tkx-grid' + (wide ? ' tkx-grid--4' : '')}>
           {list.map((t, i) => (
             <div className={'tkx-card reveal tkx-card--' + t.tier.toLowerCase() + (t.featured ? ' tkx-card--vip' : '')} style={{ transitionDelay: i * 70 + 'ms' }} key={t.tier}
               onMouseEnter={t.featured ? (e) => { const v = e.currentTarget.querySelector('.tkx-vid'); if (v) { try { v.currentTime = 0; } catch (_) {} const p = v.play(); if (p && p.catch) p.catch(() => {}); } e.currentTarget.classList.add('tkx-card--playing'); } : undefined}
@@ -123,12 +123,6 @@ function TicketsBlock({ first, items, heading, id, plain }) {
                   <video className="tkx-vid" src="assets/vip-aftermovie.mp4" muted loop playsInline preload="none"></video>
                   <span className="tkx-vidscrim"></span>
                 </div>
-              ) : null}
-              {t.brand ? (
-                <span className="tkx-card__brand">
-                  <span className="tkx-card__brand-label">With</span>
-                  <img src={t.brand.logo} alt={t.brand.name} loading="lazy" />
-                </span>
               ) : null}
               <h3 className="tkx-card__tier">{t.tier}</h3>
               <div className="tkx-card__price">
@@ -158,7 +152,16 @@ function TicketsBlock({ first, items, heading, id, plain }) {
               {t.highlight ? (
                 <div className="tkx-card__hl">
                   <span className="tkx-card__hl-label">{t.highlight.label}</span>
+                  {t.highlight.logo ? <img className="tkx-card__hl-logo" src={t.highlight.logo} alt={t.highlight.logoAlt || ''} loading="lazy" /> : null}
                   <span className="tkx-card__hl-text">{t.highlight.text}</span>
+                  {t.highlight.footnote ? <span className="tkx-card__hl-note">{t.highlight.footnote}</span> : null}
+                </div>
+              ) : null}
+              {/* Marque partenaire en pied de carte (Startup x PSG Labs). */}
+              {t.brand ? (
+                <div className="tkx-card__brand">
+                  <span className="tkx-card__brand-label">{t.brand.label || 'Powered by'}</span>
+                  <img src={t.brand.logo} alt={t.brand.name} loading="lazy" />
                 </div>
               ) : null}
             </div>

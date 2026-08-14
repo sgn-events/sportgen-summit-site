@@ -311,17 +311,19 @@
 
   const tickets = [
     { tier: 'Startup', price: '€390',
-      brand: { name: 'PSG Labs', logo: 'assets/jury/psg-labs-logo.png' },
       intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
       'Sport Innovation evening with PSG Labs at the Parc des Princes, Thursday 27 May',
       'Startup rate on the exhibition floor',
-    ], note: 'Eligibility: under $3 million raised in total funding, and under 5 years old.' },
+    ], note: 'Eligibility: under $3 million raised in total funding, and under 5 years old.',
+      brand: { label: 'Powered by', name: 'PSG Labs', logo: 'assets/jury/psg-labs-logo.png' } },
     { tier: 'Pro', price: '€790', intro: 'PERKS OF A PRO TICKET:', perks: [
       'Full 2-day access to all panels, keynotes & workshop sessions',
       'Exhibition floor access for both days',
       'All food and drinks during the event',
       'Access to the SGN networking app & networking lounge',
-    ], highlight: { label: 'Also included', text: 'A SportBusiness subscription' } },
+    ], highlight: { label: 'Also included', text: 'A SportBusiness subscription*',
+      logo: CDN + 'B2mDXyEk5zSAbiKFYNLvipEKaE.png', logoAlt: 'SportBusiness',
+      footnote: '* Pro tickets only.' } },
     { tier: 'VIP', price: '€2290', featured: true, intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
       'Invitation to the VIP Dinner',
       'Access to the VIP Lounge on both days',
@@ -333,6 +335,11 @@
   // SGN Invest, second grid on the tickets page. Les tarifs Investor et LP viennent
   // de INV_TIX_PASSES (site-InvestmentSummit.jsx), a garder alignes.
   const investTickets = [
+    { tier: 'LP', price: 'Free', freePass: true, cta: 'Apply for an LP pass', intro: 'COMPLIMENTARY FOR VERIFIED LPs:', perks: [
+      'Full access to both summit days + the SGN Invest programme',
+      'Access to the LP & investor networking lounge',
+      'Curated introductions to GPs and funds raising',
+    ], note: 'Subject to verification. Applications reviewed on a rolling basis.' },
     { tier: 'Delegate', price: '€790', intro: 'STANDARD ACCESS:', perks: [
       'Full access to both summit days + the SGN Invest programme',
       'Exhibition floor access for both days',
@@ -341,15 +348,25 @@
     { tier: 'Investor', price: '€1290', intro: 'FOR ACTIVE INVESTORS & FUNDS:', perks: [
       'Full access to both summit days + the SGN Invest programme',
       'Access to the investor networking lounge',
+      'Curated introductions to LPs',
       'Curated deal-flow & startup access',
       'Investor-only roundtables',
     ], note: 'For GPs and funds actively deploying into sport.' },
-    { tier: 'LP', price: 'Free', freePass: true, cta: 'Apply for an LP pass', intro: 'COMPLIMENTARY FOR VERIFIED LPs:', perks: [
-      'Full access to both summit days + the SGN Invest programme',
-      'Access to the LP & investor networking lounge',
-      'Curated introductions to GPs and funds raising',
-      'Invitation to the LP-only investor breakfast',
-    ], note: 'Subject to verification. Applications reviewed on a rolling basis.' },
+    { tier: 'VIP Investor', price: '€2490', intro: 'PERKS OF AN INVESTOR PASS PLUS:', perks: [
+      'Invitation to the exclusive VIP Dinner',
+      'Access to the VIP Lounge on both days',
+      'Private meeting rooms for deal-making',
+      'Concierge introductions to LPs & founders',
+    ] },
+  ];
+
+  // SGN Week, cartes photo reprises du modele "pick your activation" de la page Sponsor,
+  // retournees cote billetterie : ce que le pass donne, pas ce qu'on peut sponsoriser.
+  const weekAccess = [
+    { photo: 'assets/photos/side-events-hero.png', title: 'SPORT[GEN] Summit', body: 'Two days in the heart of Paris: mainstage keynotes, deep-dive sessions and the exhibition floor. Your pass covers both days.', cta: 'See the agenda', href: '#/agenda' },
+    { photo: 'assets/sgn-investment-summit-concorde.jpg', logoOverlay: 'assets/brand/sgn-investment-summit-white.png', title: 'SGN Invest', body: 'The capital-focused programme. Delegate, Investor and LP passes open the investor lounge, roundtables and curated introductions.', cta: 'About SGN Invest', href: 'sis.html' },
+    { photo: 'assets/photos/the-draft-stage.jpg', title: 'The Draft', body: 'The startup competition inside SGN. Included with every pass, and free to enter if you qualify for a Startup ticket.', cta: 'About The Draft', href: '#/startup-competition' },
+    { photo: 'assets/closing-talk.jpg', title: 'Side Events & VIP Dinners', body: 'Investor breakfast, half-time drinks, closing drinks and the Gala. Some are open to all passes, others come with VIP.', cta: 'Explore SGN Week', href: '#/side-events' },
   ];
 
   // SGN Week, les deux voies d'acces qui ne passent pas par la billetterie.
@@ -797,7 +814,7 @@
 
   window.SGData = {
     heroVideo, foundingLogo: CDN + 'c2mRXIJQpZi8ck3KGrvcjObcIoE.png',
-    speakersHome, speakersAll, reelSpeakers, weeklyReel, reels, marquee, walls, partnerTiers, stats, tickets, investTickets, accessPathways, socials,
+    speakersHome, speakersAll, reelSpeakers, weeklyReel, reels, marquee, walls, partnerTiers, stats, tickets, investTickets, accessPathways, weekAccess, socials,
     snapshotStats, snapshotAttendees, snapshotPdf,
     opportunities, oppStar, personas, homeFeatures, startupSteps, startupWinners, startupJury, startupFaq, startup, interests, agendaLive,
   };

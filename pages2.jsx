@@ -157,25 +157,59 @@ function TicketsPage() {
       if (s.name === 'Richard Heaselgrave') return { ...s, role: 'CRO' };
       return s;
     });
-  const { investTickets } = window.SGData;
+  const { investTickets, weekAccess } = window.SGData;
+  const go = (e, href) => {
+    if (!href || href.charAt(0) !== '#') return;
+    e.preventDefault(); window.location.hash = href.replace('#', '');
+  };
+  const arrowUR = <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12 L12 4 M6 4 h6 v6"></path></svg>;
+  /* En-tete de la grille SGN Invest dans la DA du site Invest : marque, mono capitale,
+     bouton carre. .tkx-invda ne reprend que les variables utiles de invest.css, pour ne
+     pas embarquer le theme complet de .inv sur une page navy. */
   const investHeading = (
-    <div className="tkx-sechead reveal">
-      <span className="sg-eyebrow sg-eyebrow--gold">SGN Invest</span>
-      <h2 className="tkx-head tkx-head--sub">Where sport <span className="tkx-head__gold">capital gathers</span></h2>
+    <div className="tkx-sechead tkx-invda reveal">
+      <img className="tkx-invda__logo" src="assets/brand/sgn-investment-summit-white.png" alt="SGN Invest" />
+      <p className="tkx-invda__sub">One ticket, full access to both summit days and the SGN Invest programme.</p>
+      <a className="inv-btn tkx-invda__cta" href="sis.html">SGN Invest <span className="inv-btn__arrow">→</span></a>
     </div>
   );
   return (
     <React.Fragment>
       <TicketsBlock first />
-      <TicketsBlock items={investTickets} heading={investHeading} id="sgn-invest-tickets" plain />
+      <TicketsBlock items={investTickets} heading={investHeading} id="sgn-invest-tickets" plain wide />
       <AccessPathways />
       <section className="section">
         <div className="sg-container sg-container--wide">
           <h2 className="home-h2 reveal">Hear from our <span className="home-h2__gold">leaders and visionaries</span></h2>
           <SpeakerGrid speakers={list} />
+          <div className="cta-row cta-row--center reveal tkx-spk__cta">
+            <a className="ptn-btn-light" href="#/speakers" onClick={(e) => go(e, '#/speakers')}>See 2026 Speakers</a>
+            <a className="ptn-btn-dark" href="#/why-attend" onClick={(e) => go(e, '#/why-attend')}>Why attend SGN 2027?</a>
+          </div>
         </div>
       </section>
-      <Opportunities />
+      <section className="section">
+        <div className="sg-container sg-container--wide">
+          <div className="opps-head reveal">
+            <h2 className="opps-head__line">One pass, a full week of <span className="opps-head__gold">sport in Paris</span></h2>
+            <h4 className="ptn-sub">Your ticket is the way in to everything SGN runs that week &ndash; the two summit days, the investment programme, the startup competition and the evenings around them.</h4>
+          </div>
+          <div className="ptn-act__grid reveal">
+            {weekAccess.map((a) => (
+              <article className="ptn-act__card" key={a.title}>
+                <div className="ptn-act__media">
+                  <img src={a.photo} alt={a.title} loading="lazy" />
+                  {a.logoOverlay ? <div className="hf-pcard__grid-veil" aria-hidden="true"></div> : null}
+                  {a.logoOverlay ? <img className="ptn-act__logo" src={a.logoOverlay} alt={a.title} /> : null}
+                </div>
+                <h3 className="ptn-act__ttl">{a.title}</h3>
+                <p className="ptn-act__p">{a.body}</p>
+                <a className="ptn-act__btn" href={a.href} onClick={(e) => go(e, a.href)}>{a.cta} {arrowUR}</a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </React.Fragment>
   );
 }

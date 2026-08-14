@@ -2321,19 +2321,42 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
    Voir `tickets`, `investTickets` et `accessPathways` dans data.js. La grille
    .tkx-grid est rejouee telle quelle pour SGN Invest, seul l'habillage change. */
 
-/* Bandeau de marque en tete de carte (Startup x PSG Labs) */
-/* Le logo PSG Labs est un lockup vertical (122x218) : cale sur la hauteur, il reste
-   etroit, d'ou une pastille plus haute que large en padding. */
-.tkx-card__brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 6px 13px 6px 11px;
-  border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); }
+/* Marque partenaire en pied de carte (Startup x PSG Labs). Le logo est un lockup
+   vertical (122x218), d'ou une hauteur genereuse pour qu'il reste lisible. */
+.tkx-card__brand { margin-top: auto; padding-top: 18px; width: 100%; display: flex; align-items: center; gap: 12px;
+  border-top: 1px solid rgba(255,255,255,0.12); }
 .tkx-card__brand-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
-.tkx-card__brand img { display: block; height: 32px; width: auto; }
+.tkx-card__brand img { display: block; height: 34px; width: auto; }
 
-/* Bloc "Also included" en pied de carte (abonnement SportBusiness sur le Pro) */
-.tkx-card__hl { margin-top: auto; padding-top: 18px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
-.tkx-card__hl::before { content: ""; display: block; height: 1px; margin-bottom: 16px; background: rgba(255,255,255,0.12); }
+/* Bloc "Also included" en pied de carte (abonnement SportBusiness sur le Pro).
+   Encadre plutot que simple filet : c'est l'argument qui distingue le Pro. */
+.tkx-card__hl { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  padding: 16px 18px; border-radius: 8px;
+  border: 1px solid rgba(124,140,255,0.35); background: rgba(64,108,235,0.10); }
+/* margin-top:auto colle le bloc en bas mais tombe a 0 quand la carte est pleine :
+   l'ecart minimum vient de la liste au-dessus. */
+.tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 20px; }
 .tkx-card__hl-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+.tkx-card__hl-logo { display: block; height: 26px; width: auto; max-width: 100%; }
 .tkx-card__hl-text { font-size: 15px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
+.tkx-card__hl-note { font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.55); }
+/* La carte Pro porte l'argument differenciant : liseré un cran plus present. */
+.tkx-card--pro { border-color: rgba(124,140,255,0.62); }
+
+/* Grille a 4 passes (SGN Invest) */
+.tkx-grid--4 { grid-template-columns: repeat(4, 1fr); max-width: 1320px; }
+@media (max-width: 1180px) { .tkx-grid--4 { grid-template-columns: repeat(2, 1fr); max-width: 760px; } }
+@media (max-width: 700px) { .tkx-grid--4 { grid-template-columns: 1fr; } }
+
+/* DA SGN Invest reprise pour l'en-tete de sa grille : on n'importe que les variables
+   utiles de invest.css, .inv embarquerait tout le theme sur une page navy. */
+.tkx-invda {
+  --inv-fg: #f3f3f1; --inv-ink: #0b0b0d; --inv-line: rgba(255,255,255,0.12);
+  --inv-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+.tkx-invda__logo { display: block; height: clamp(38px, 30px + 1.2vw, 54px); width: auto; }
+.tkx-invda__sub { margin: 0; max-width: 56ch; font-family: var(--inv-mono); font-size: 13px; letter-spacing: 0.04em; line-height: 1.6; color: rgba(255,255,255,0.62); }
+.tkx-invda__cta { margin-top: 4px; }
 
 /* En-tete des sections secondaires : plus discret que le titre principal */
 .tkx-sechead { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-bottom: clamp(28px, 1.5rem + 2vw, 48px); text-align: center; }
