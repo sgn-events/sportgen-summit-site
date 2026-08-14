@@ -22,7 +22,7 @@ const MEGA_COLS = [
     ['Side Events', '#/half-time-drinks', 'assets/halftime-crowd.jpg', false, 'Golden-hour drinks to the final toast'],
   ] },
   { heading: 'Program', sub: '2026 Edition', items: [
-    ['2026 Agenda', '#/agenda'], ['2026 Speakers', '#/speakers'], ['Why Attend', '#/why-attend'], ['Tracks', '#/tracks'],
+    ['2026 Agenda', '#/agenda'], ['2026 Speakers', '#/speakers'], ['Why Attend', '#/why-attend'],
   ] },
   { heading: 'Ecosystem', items: [
     ['Sponsors', '#/sponsor'], ['Media', '#/medias'], ['News', '#/news'], ['SGN App', '#/app'],

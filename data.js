@@ -345,6 +345,7 @@
       label: 'Right Holders', short: 'Teams · Leagues · Federations',
       titleWhite: 'Capital, partners & growth for', titleGold: 'rights holders.',
       intro: 'Meet the investors, brands and platforms actively looking to back the next era of teams, leagues and federations.',
+      cta: { label: 'See the 2026 speaker lineup', href: '#/speakers' },
       reasons: [
         ['Meet capital that is deploying', 'Sit down with private equity, sovereign funds and family offices actively allocating to sport.'],
         ['Find your next sponsor', 'Curated introductions to brands and agencies looking for rights to activate against.'],
@@ -356,6 +357,7 @@
       label: 'Brands', short: 'Sponsors · Marketers',
       titleWhite: 'The right rights, and partners to activate them, ', titleGold: 'for brands.',
       intro: 'Find the properties, agencies and technology that turn sponsorship spend into measurable fan engagement.',
+      cta: { label: 'See the 2026 speaker lineup', href: '#/speakers' },
       reasons: [
         ['Scout sponsorship inventory', 'Meet rights holders across leagues, teams and federations under one roof.'],
         ['Prove the ROI', 'Sessions and case studies on attribution, attention and what actually moves the needle.'],
@@ -367,6 +369,7 @@
       label: 'Investment & Advisory', short: 'Investors · Advisors',
       titleWhite: 'Deal flow and the next wave of value', titleGold: 'for investors.',
       intro: 'Source opportunities, pressure-test theses and meet the operators shaping valuations across the sports economy.',
+      cta: { label: 'Join SGN Invest', href: 'sis.html' },
       reasons: [
         ['Source proprietary deal flow', 'Rights holders, startups and operators raising and open to capital.'],
         ['Sharpen your thesis', 'Five forward-looking themes on where value is migrating next in sport.'],
@@ -378,6 +381,7 @@
       label: 'Agencies', short: 'Creative · Media · Sponsorship',
       titleWhite: 'Win mandates and partners', titleGold: 'for agencies.',
       intro: 'Meet the brands and rights holders commissioning the partnerships and campaigns that move the industry.',
+      cta: { label: 'See the 2026 speaker lineup', href: '#/speakers' },
       reasons: [
         ['Meet brands with budgets', 'Decision-makers looking for partners to design and run their programs.'],
         ['Land new rights-holder clients', 'Teams and leagues seeking commercial and creative expertise.'],
@@ -389,6 +393,7 @@
       label: 'Startups', short: 'Tech · Data · Platforms',
       titleWhite: 'Buyers, partners and capital', titleGold: 'for tech.',
       intro: 'Get in front of the rights holders, brands and investors deciding which platforms define the next era of sport.',
+      cta: { label: 'Apply to pitch at The Draft', href: '#/startup-competition' },
       reasons: [
         ['Reach real buyers', 'Leagues, teams and brands actively evaluating new platforms and data products.'],
         ['Pitch on the main stage', 'The Draft, compete with 200+ startups for visibility and capital.'],
@@ -400,6 +405,7 @@
       label: 'Media', short: 'Broadcast · Streaming · Content',
       titleWhite: 'Rights, audiences and the story', titleGold: 'for media.',
       intro: 'Connect with the rights holders, platforms and brands defining how sport gets distributed and told.',
+      cta: { label: 'Apply for a media pass', href: '#/medias' },
       reasons: [
         ['Secure the next rights', 'Meet leagues and federations rethinking distribution and direct-to-fan.'],
         ['Build models that hold', 'Sessions on margins, retention and winning the second screen.'],

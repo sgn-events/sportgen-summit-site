@@ -1506,25 +1506,19 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
 .persona-pick__title { margin: 0; font-size: clamp(30px, 24px + 1.4vw, 46px); font-weight: 500; letter-spacing: -0.04em; line-height: 1.12; color: var(--white); }
 .persona-pick__lead { margin: 0; font-size: var(--fs-h4); line-height: 1.5; color: var(--text-body); max-width: 56ch; }
 
-.persona-grid { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.75rem, 0.4rem + 1vw, 1.1rem); }
-.persona-chip {
-  position: relative; display: flex; align-items: center; gap: 0.9rem; text-align: left; cursor: pointer;
-  padding: 1.15rem 1.35rem; border-radius: var(--radius-lg); color: var(--white);
-  background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.12);
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+/* Rangee de .sg-btn (secondary, et primary pour le persona choisi) : les pills se
+   dimensionnent sur leur libelle, d'ou une rangee centree qui passe a la ligne
+   plutot qu'une grille a colonnes fixes. */
+.persona-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(0.6rem, 0.35rem + 0.8vw, 1rem); }
+/* Persona choisi : bague doree. Dans le DA navy/periwinkle ci-dessus, primary et
+   secondary se ressemblent trop pour porter un etat "selectionne" — l'or est
+   l'accent du site, et suit le reglage Accent (les tokens sont reecrits par applyTweaks).
+   !important : le DA unifie des .sg-btn-- l'utilise aussi. */
+.persona-grid .sg-btn[aria-checked="true"] {
+  background: rgba(255,255,255,0.05) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 1px var(--gold), var(--glow-gold-sm) !important;
 }
-.persona-chip:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.06); }
-.persona-chip__dot { display: none; }
-.persona-chip__text { flex: 1 0 0; display: flex; flex-direction: column; gap: 3px; }
-.persona-chip__label { font-size: 17px; font-weight: var(--fw-bold); line-height: 1.2; letter-spacing: -0.01em; }
-.persona-chip__sub { font-size: 12px; font-weight: var(--fw-semibold); letter-spacing: 0.04em; color: rgba(255,255,255,0.5); }
-.persona-chip__check { flex: none; width: 22px; height: 22px; color: var(--navy-darkest); opacity: 0; transform: scale(0.6); transition: opacity 0.2s ease, transform 0.2s ease; }
-.persona-chip--active {
-  border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.14); color: var(--white);
-  box-shadow: none;
-}
-.persona-chip--active .persona-chip__sub { color: rgba(255,255,255,0.55); }
-.persona-chip--active .persona-chip__check { opacity: 1; transform: scale(1); color: var(--white); }
 
 .persona-result { padding-top: clamp(1rem, 0.5rem + 1vw, 1.75rem); }
 .persona-result__head { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; max-width: 760px; margin-bottom: clamp(2rem, 1.25rem + 2vw, 3rem); }
@@ -1534,11 +1528,10 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
 .persona-result__link { font-size: var(--fs-small); font-weight: var(--fw-semibold); color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; transition: border-color 0.2s ease; }
 .persona-result__link:hover { border-color: var(--gold); }
 
-@media (max-width: 1000px) {
-  .persona-grid { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 600px) {
-  .persona-grid { grid-template-columns: 1fr; }
+  /* En dessous, les libelles longs ("Investment & Advisory") depassent en nowrap :
+     une pill par ligne, pleine largeur. */
+  .persona-grid { flex-direction: column; align-items: stretch; }
 }
 
 /* ---------- Startup: Activities (bordered photo container) --- */
@@ -2213,9 +2206,29 @@ body:not(.route-home)::before {
 body.route-app { position: relative; zoom: 1; }
 body.route-app::before           { position: absolute; background-attachment: scroll; background-position: center top; background-size: cover; background-image: linear-gradient(180deg, rgba(0,5,25,0.56) 0%, rgba(0,5,25,0.78) 55%, #000519 100%), url('assets_opt/bg-app.jpg'); }
 body.route-speakers::before      { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-network-glow.jpg'); }
-body.route-why-attend::before    { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-blue-gold-curve.jpg'); }
+/* Why Attend : la plaque defile avec la page au lieu d'etre epinglee au viewport
+   (absolute sur toute la hauteur du document, comme route-app), et l'image se deroule
+   jusqu'en bas. `cover` sur une plaque de plusieurs milliers de px zoomerait dans un fin
+   bandeau vertical : on la pose donc pleine largeur a son ratio naturel et on la repete.
+   L'asset -tile est l'image suivie de sa copie retournee : la repetition est continue,
+   sans ligne de raccord. Ne pas y substituer l'image simple. */
+body.route-why-attend { position: relative; }
+body.route-why-attend::before {
+  position: absolute; background-attachment: scroll;
+  background-size: cover, 100% auto; background-position: center, center top;
+  background-repeat: no-repeat, repeat-y;
+  background-image:
+    linear-gradient(180deg, rgba(0,5,25,0.42) 0%, rgba(0,5,25,0.74) 22%, rgba(0,5,25,0.74) 100%),
+    url('assets_opt/bg-why-attend-tile.jpg');
+}
+/* Le bandeau "2026 Figures" garde son rythme vertical mais laisse passer le fond de page. */
+body.route-why-attend .section--cband-streaks { background-color: transparent; background-image: none; }
+/* Le hero laisse lui aussi passer la plaque. Sinon son art propre (opaque, plus son
+   voile ::after) occupe le premier ecran et coupe le fond net en bas de hero : l'image
+   ne demarrait visuellement qu'apres. Ici elle court du haut de page jusqu'au footer. */
+body.route-why-attend .page-hero__bg { background-color: transparent; background-image: none; }
+body.route-why-attend .page-hero__bg::after { background: none; }
 body.route-agenda::before        { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-orbit-arc.jpg'); }
-body.route-tracks::before        { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-frame-curves.jpg'); }
 body.route-startup-competition::before { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-stage-rings.jpg'); }
 body.route-medias::before        { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-floor-rings.jpg'); }
 body.route-news::before          { background-image: linear-gradient(180deg, rgba(0,5,25,0.74) 0%, rgba(0,5,25,0.88) 52%, #000519 100%), url('assets_opt/bg-floor-rings.jpg'); }

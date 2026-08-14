@@ -20,6 +20,7 @@ function SpeakersPage() {
 }
 
 function PersonaPicker({ personas, selected, onPick }) {
+  const { Button } = window.SPORTGENDesignSystem_882f1e;
   return (
     <section className="section persona-pick">
       <div className="sg-container persona-pick__inner">
@@ -32,16 +33,11 @@ function PersonaPicker({ personas, selected, onPick }) {
           {personas.map((p) => {
             const active = selected === p.key;
             return (
-              <button key={p.key} type="button" role="radio" aria-checked={active}
-                className={'persona-chip' + (active ? ' persona-chip--active' : '')}
+              <Button key={p.key} variant="secondary" size="lg"
+                type="button" role="radio" aria-checked={active}
                 onClick={() => onPick(active ? null : p.key)}>
-                <span className="persona-chip__dot" aria-hidden="true" />
-                <span className="persona-chip__text">
-                  <span className="persona-chip__label">{p.label}</span>
-                  <span className="persona-chip__sub">{p.short}</span>
-                </span>
-                <svg className="persona-chip__check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"></path></svg>
-              </button>
+                {p.label}
+              </Button>
             );
           })}
         </div>
@@ -52,7 +48,13 @@ function PersonaPicker({ personas, selected, onPick }) {
 
 function PersonaResult({ persona }) {
   const { Button } = window.SPORTGENDesignSystem_882f1e;
-  const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
+  // Le CTA secondaire depend du persona (data.js). Certains pointent hors du routeur
+  // par hash (sis.html) : on ne prend la main que sur les liens en "#".
+  const go = (e, href) => {
+    if (!href || href.charAt(0) !== '#') return;
+    e.preventDefault(); window.location.hash = href.replace('#', '');
+  };
+  const cta = persona.cta || { label: 'See the full agenda', href: '#/agenda' };
   return (
     <section className="section persona-result" key={persona.key}>
       <div className="sg-container sg-container--wide">
@@ -72,7 +74,7 @@ function PersonaResult({ persona }) {
         </div>
         <div className="persona-result__cta reveal">
           <Button variant="primary" size="lg" href="#/tickets" onClick={(e) => go(e, '#/tickets')}>Get your ticket</Button>
-          <a className="persona-result__link" href="#/agenda" onClick={(e) => go(e, '#/agenda')}>See the full agenda</a>
+          <a className="persona-result__link" href={cta.href} onClick={(e) => go(e, cta.href)}>{cta.label}</a>
         </div>
       </div>
     </section>
@@ -143,108 +145,6 @@ function WhyAttendPage() {
       <section className="section section--partners">
         <div className="sg-container sg-container--wide">
           <LogoWalls groups={walls} />
-        </div>
-      </section>
-    </React.Fragment>
-  );
-}
-
-function ThemeTopics({ items }) {
-  const [open, setOpen] = usePageState(-1);
-  return (
-    <div className="tg-acc">
-      {items.map((it, i) => (
-        <div className={'tg-acc__item' + (open === i ? ' is-open' : '')} key={it.q}>
-          <button className="tg-acc__q" onClick={() => setOpen(open === i ? -1 : i)} aria-expanded={open === i}>
-            <span>{it.q}</span>
-            <span className="tg-acc__icon" aria-hidden="true"><span className="tg-acc__bar tg-acc__bar--h" /><span className="tg-acc__bar tg-acc__bar--v" /></span>
-          </button>
-          <div className="tg-acc__panel"><p className="tg-acc__a">{it.a}</p></div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function TracksPage() {
-  const { tracks } = window.SGData;
-  const { Button } = window.SPORTGENDesignSystem_882f1e;
-  const [active, setActive] = usePageState(0);
-  const num = (i) => String(i + 1).padStart(2, '0');
-  const total = num(tracks.length - 1);
-
-  // Scroll-spy: highlight the filter pill for the theme currently in view.
-  React.useEffect(() => {
-    const els = tracks.map((_, i) => document.getElementById('theme-' + num(i))).filter(Boolean);
-    if (!els.length || !('IntersectionObserver' in window)) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          const idx = els.indexOf(e.target);
-          if (idx >= 0) setActive(idx);
-        }
-      });
-    }, { rootMargin: '-46% 0px -46% 0px', threshold: 0 });
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-
-  const jump = (e, i) => {
-    e.preventDefault();
-    const el = document.getElementById('theme-' + num(i));
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
-  };
-  const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
-
-  return (
-    <React.Fragment>
-      <PageHero eyebrow="Content Themes" art="orbit" titleWhite="Powering the" titleGold="Next Era of Sport."
-        sub="A curated program of themes exploring leadership, innovation, investment, and the evolving global sports economy." />
-
-      <div className="tg-filter">
-        <div className="sg-container tg-filter__inner">
-          <span className="tg-filter__label">Themes</span>
-          <nav className="tg-filter__list" aria-label="Jump to a theme">
-            {tracks.map((t, i) => (
-              <a key={t.name} href={'#theme-' + num(i)} onClick={(e) => jump(e, i)}
-                className={'tg-filter__pill' + (active === i ? ' is-active' : '')} aria-current={active === i ? 'true' : undefined}>
-                <span className="tg-filter__num">[{num(i)}]</span>{t.name}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </div>
-
-      <section className="section tg-section">
-        <div className="sg-container">
-          {tracks.map((t, i) => (
-            <article id={'theme-' + num(i)} key={t.name} className={'tg-card reveal' + (i % 2 ? ' tg-card--alt' : '')}>
-              <div className="tg-card__media" style={t.img ? { backgroundImage: 'linear-gradient(160deg, rgba(4,8,26,0.18), rgba(4,8,26,0.78)), url(' + t.img + ')' } : undefined}>
-                <span className="tg-card__tag" aria-hidden="true">[{num(i)}]</span>
-                <div className="tg-card__overlay">
-                  <h2 className="tg-card__name">{t.name}</h2>
-                  {t.topics ? <span className="tg-card__count">{t.topics.length} sub-topics</span> : null}
-                </div>
-              </div>
-              <div className="tg-card__copy">
-                <span className="tg-card__index">Theme {num(i)} <span aria-hidden="true">/ {total}</span></span>
-                <h3 className="tg-card__tagline sg-gold-text">{t.tagline}</h3>
-                <p className="tg-card__body">{t.body}</p>
-                {t.topics ? (
-                  <React.Fragment>
-                    <div className="tg-card__inside">
-                      <span className="tg-card__inside-label">Inside this theme</span>
-                      <span className="tg-card__inside-rule" aria-hidden="true" />
-                    </div>
-                    <ThemeTopics items={t.topics} />
-                  </React.Fragment>
-                ) : null}
-                <div className="tg-card__cta">
-                  <Button variant="secondary" href="#/agenda" onClick={(e) => go(e, '#/agenda')}>See related sessions</Button>
-                </div>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
     </React.Fragment>
@@ -466,4 +366,4 @@ function GetInTouchPage() {
   );
 }
 
-Object.assign(window, { SpeakersPage, WhyAttendPage, TracksPage, TicketsPage, GetInTouchPage, HubspotForm, FallbackForm });
+Object.assign(window, { SpeakersPage, WhyAttendPage, TicketsPage, GetInTouchPage, HubspotForm, FallbackForm });

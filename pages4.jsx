@@ -121,7 +121,6 @@ const SITEMAP_GROUPS = [
       ['Why Attend', '#/why-attend', 'The case for joining'],
       ['Speakers', '#/speakers', '71 leaders shaping sport'],
       ['Startup Competition', '#/startup-competition', 'The Draft, pitch on the main stage'],
-      ['Content Themes', '#/tracks', 'The tracks structuring the agenda'],
       ['Media', '#/medias', 'Press, coverage and assets'],
     ],
   },
