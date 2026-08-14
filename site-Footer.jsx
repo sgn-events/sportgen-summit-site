@@ -43,7 +43,8 @@ function Footer() {
           <a href="#/speakers" onClick={(e) => go(e, '#/speakers')}>2026 Speakers</a>
           <a href="#/partner" onClick={(e) => go(e, '#/partner')}>Partner</a>
           <a href="#/faq" onClick={(e) => go(e, '#/faq')}>FAQ</a>
-          <a href="#/sitemap" onClick={(e) => go(e, '#/sitemap')}>Sitemap</a>
+          {/* Pas de lien vers #/sitemap : la route reste servie, mais on n'y accede
+              qu'avec l'URL. La retirer de ROUTES la casserait. */}
         </nav>
 
         <div className="footer__bar">

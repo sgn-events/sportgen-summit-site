@@ -43,7 +43,6 @@ vercel ls sportgen-summit-site --scope sportgen   # la colonne Username doit mon
 
 - `index.html` — site principal (21 routes, routage côté client par hash)
 - `sis.html` — SPORT[GEN] Investment Summit (site secondaire)
-- `_standalone_full.html` — export mono-fichier autonome, non utilisé par le site (supprimable)
 - `ds/` — design system SPORT[GEN] : `styles.css` (point d'entrée, importe `tokens/`, `fonts/`, `base.css`, `components/`) + `_ds_bundle.js`
 - `kit.css`, `kit2.css`, `invest.css`, `sis.css` — styles propres au site
 - `brevo-forms.js`, `site-BrevoForm.jsx` — formulaires Brevo « Get in Touch » (variante `navy` pour le site SGN, `invest` pour SGN Invest)

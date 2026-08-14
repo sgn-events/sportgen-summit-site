@@ -427,38 +427,6 @@
     { photo: 'assets/photos/the-draft-stage.jpg', title: 'The Draft', body: 'Where 200+ startups compete to pitch the future of sport.', cta: 'About the start up competition', href: '#/startup-competition' },
   ];
 
-  const tracks = [
-    { name: 'Capital & Influence', img: CDN + 'BdvImhqqpS5xKMewIaIVQTRFy0.jpg', tagline: "Who's Really Running Sports Now", body: 'Sport has never attracted more capital, and capital has never demanded more in return. Institutional investors, private equity firms, sovereign funds, and a new generation of athletes are reshaping governance, strategy, and long-term value creation. The levers of power are shifting, the question is who is pulling them.', topics: [
-      { q: 'Private Equity in Sport', a: 'How PE and institutional capital are reshaping ownership, governance, and the way clubs and leagues are run.' },
-      { q: 'Sovereign & State Investment', a: 'The geopolitics of sport and the new wave of state-backed funding redrawing the global map.' },
-      { q: 'Athletes as Investors', a: 'A new generation of athletes turning influence into equity, ownership stakes, and operating power.' },
-      { q: 'Valuations & Exits', a: "What franchises, leagues, and media rights are really worth, and who's buying at the top of the cycle." },
-    ] },
-    { name: 'The Attention Stack', img: CDN + 'F7FzrbBTjcQ6YqN7dzTW4ZBX24.jpg', tagline: 'Navigating Media, Technology, and What Actually Moves the Needle', body: 'AI, streaming, direct-to-fan platforms: the tools available to sport have never been more powerful or more overwhelming. Technology is reshaping every part of the media value chain, but not every innovation delivers. The real conversation is about what to invest in, what to ignore, and how to build for an audience with more choices than ever.', topics: [
-      { q: 'AI in Production & Personalization', a: 'Where artificial intelligence genuinely moves the needle across production, personalization, and operations.' },
-      { q: 'Streaming & Media Rights', a: 'Building direct-to-fan and streaming models that actually hold an audience and a margin.' },
-      { q: 'Creators & the Second Screen', a: 'Capturing attention where fans really spend their time, beyond the broadcast window.' },
-      { q: 'Measuring What Matters', a: 'Cutting through the hype to the metrics that should drive investment decisions.' },
-    ] },
-    { name: "Women's Sport: Building the Future Now", img: CDN + 'kRXx3Wp2Vc6PrS52quVwaCChZU.jpg', tagline: 'Why Women\u2019s Sport Is the Play Nobody Can Afford to Miss', body: 'The window is open, but not forever. Audiences are growing. Media rights are still catching up. The commercial infrastructure around women\u2019s sport is still being built. Who builds it, and how fast, will define the next decade.', topics: [
-      { q: 'Building the Commercial Infrastructure', a: 'Standing up the sponsorship, media, and operating models from the ground up.' },
-      { q: 'Media Rights & Visibility', a: 'Closing the gap between fast-growing audiences and the rights value that should follow.' },
-      { q: 'Investing Early', a: 'Why the next decade of returns is being decided by who moves now.' },
-      { q: 'Building Lasting Fandom', a: 'Turning momentum into durable, monetizable communities rather than a passing moment.' },
-    ] },
-    { name: 'From Visibility to Value', img: CDN + '6BGdavZd7RRphp5LkXDSCgZXds.jpg', tagline: 'How Sports Sponsorship is Being Redefined', body: 'The rules of partnership are being rewritten. Brands want measurable impact. Rights holders want long-term relevance. Creators want creative control. When everyone wants more from a deal, the old models start to crack, and the most interesting partnerships are being built on entirely new terms.', topics: [
-      { q: 'From Logos to Measurable Impact', a: 'Moving partnerships from exposure and placement to proven, accountable ROI.' },
-      { q: 'Creator-Led Partnerships', a: 'What changes when creative control shifts to the talent and the audience they own.' },
-      { q: 'Long-Term Relevance', a: 'What rights holders owe partners beyond reach, and how relationships are kept alive.' },
-      { q: 'New Deal Structures', a: 'The models quietly replacing the traditional sponsorship playbook.' },
-    ] },
-    { name: 'Rewriting The Game', img: CDN + '5e1BhyCxqGtKrBP0BqthxARQ8.jpg', tagline: 'Leagues, Fans, and the Pressure to Evolve', body: 'New formats are finding audiences that traditional competitions struggle to retain. Emerging leagues are moving fast, while established sports face growing pressure to rethink their rules, media strategies, and what fans actually want in a fragmented digital world. Evolution is no longer optional.', topics: [
-      { q: 'New Formats, New Audiences', a: 'How emerging competitions win the fans that incumbent formats struggle to keep.' },
-      { q: 'Reinventing the Fan Experience', a: 'Rethinking what fans actually want in a fragmented, on-demand world.' },
-      { q: 'Pressure on the Incumbents', a: 'Why established sports must rethink their rules, calendars, and media strategies.' },
-      { q: 'Speed as Strategy', a: 'Moving fast and experimenting when evolution is no longer optional.' },
-    ] },
-  ];
 
   const startupSteps = [    { label: 'Applications Open', desc: 'Over 100 promising startups apply to compete', date: 'FEB 18TH', short: 'Feb 18', line: 271 },
     { label: 'Submissions Closed', desc: 'The application window shuts. No more entries after this date', date: 'APRIL 24TH', short: 'Apr 24', line: 199 },
@@ -790,6 +758,6 @@
     heroVideo, foundingLogo: CDN + 'c2mRXIJQpZi8ck3KGrvcjObcIoE.png',
     speakersHome, speakersAll, reelSpeakers, weeklyReel, reels, marquee, walls, partnerTiers, stats, tickets, socials,
     snapshotStats, snapshotAttendees, snapshotPdf,
-    opportunities, oppStar, personas, homeFeatures, tracks, startupSteps, startupWinners, startupJury, startupFaq, startup, interests, agendaLive,
+    opportunities, oppStar, personas, homeFeatures, startupSteps, startupWinners, startupJury, startupFaq, startup, interests, agendaLive,
   };
 })();
