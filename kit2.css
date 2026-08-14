@@ -73,19 +73,9 @@
   box-shadow: 0 0 0 1px rgba(150,175,255,0.55), 0 10px 32px -6px rgba(95,130,255,0.75) !important;
   transform: translateY(-1px);
 }
-/* Buy 2027 Ticket — gold pill, deep-navy text, warm gold glow */
-.sg-btn--nav-navy {
-  background: linear-gradient(180deg, var(--gold-highlight) 0%, var(--gold-bright) 42%, var(--gold) 100%) !important;
-  color: var(--navy-darkest) !important;
-  border-color: rgba(255,176,73,0.7) !important;
-  box-shadow: 0 0 0 1px rgba(255,176,73,0.25), 0 8px 26px -10px rgba(255,176,73,0.55) !important;
-}
-.sg-btn--nav-navy:hover {
-  background: linear-gradient(180deg, var(--gold-highlight) 0%, var(--gold) 60%, var(--amber-deep) 100%) !important;
-  border-color: rgba(255,208,137,0.9) !important;
-  box-shadow: 0 0 0 1px rgba(255,208,137,0.4), 0 10px 32px -8px rgba(255,176,73,0.7) !important;
-  transform: translateY(-1px);
-}
+/* Le pill dore qui vivait ici etait mort : le DA unifie des boutons, plus bas dans ce
+   fichier, ecrase .sg-btn--secondary en !important et arrive apres. L'etat reel du
+   bouton "2027 Tickets" est donc defini avec le DA, section "Nav CTA principal". */
 .sg-nav__panel { position: absolute; top: calc(100% + 10px); left: 0; min-width: 220px; display: flex; flex-direction: column; gap: 2px;
   padding: 8px; border-radius: 8px; background: linear-gradient(180deg, #060B33 0%, #02051C 100%); border: 1px solid rgba(255,255,255,0.08);
   box-shadow: var(--shadow-card); opacity: 0; visibility: hidden; transform: translateY(6px);
@@ -687,6 +677,37 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
   box-shadow: 0 0 0 1px rgba(150,175,255,0.3), 0 10px 28px -10px rgba(95,130,255,0.55) !important;
   transform: translateY(-2px) !important;
 }
+
+/* ---------- Nav CTA principal : "2027 Tickets" ---------------
+   Doit passer APRES le DA ci-dessus, qui ecrase .sg-btn--secondary en !important.
+   Meme famille que Get in Touch / Sponsor (.sg-nav__quick) mais un cran plus marque :
+   liseré et halo plus francs, plus un reflet qui balaie l'interieur. */
+.sg-btn--nav-navy {
+  position: relative; overflow: hidden;
+  background: var(--navy-darkest) !important;
+  border-color: rgba(180,200,255,0.85) !important;
+  box-shadow: 0 0 0 1px rgba(150,175,255,0.45), 0 8px 30px -8px rgba(95,130,255,0.75) !important;
+}
+.sg-btn--nav-navy:hover {
+  background: #060c1e !important;
+  border-color: rgba(215,228,255,1) !important;
+  box-shadow: 0 0 0 1px rgba(180,200,255,0.7), 0 12px 36px -6px rgba(95,130,255,0.95) !important;
+  transform: translateY(-1px) !important;
+}
+/* Le libelle passe au-dessus du reflet (Button rend ses enfants dans un <span>). */
+.sg-btn--nav-navy > span { position: relative; z-index: 1; }
+/* Reflet diagonal : traverse vite, puis attend, pour attirer l'oeil sans clignoter. */
+.sg-btn--nav-navy::before {
+  content: ''; position: absolute; top: -60%; bottom: -60%; left: -60%; width: 42%;
+  pointer-events: none; transform: skewX(-18deg);
+  background: linear-gradient(100deg, transparent 0%, rgba(190,212,255,0.45) 50%, transparent 100%);
+  animation: sg-nav-shine 4.5s cubic-bezier(.4,0,.2,1) infinite;
+}
+@keyframes sg-nav-shine {
+  0%, 64% { left: -60%; }
+  90%, 100% { left: 135%; }
+}
+@media (prefers-reduced-motion: reduce) { .sg-btn--nav-navy::before { animation: none; opacity: 0; } }
 
 /* Partner-page buttons → same DA */
 .ptn-btn-light {
