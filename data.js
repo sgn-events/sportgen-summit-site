@@ -310,22 +310,63 @@
   ];
 
   const tickets = [
-    { tier: 'Startup', price: '€390', intro: 'Eligibility Requirements',
-      lede: 'To qualify for the discounted pass and unlock full PRO-level perks, your startup must meet the following criteria:', perks: [
-      'Funding Stage: Must have raised less than $3 million in total funding.',
-      'Company Age: Must be under 5 years old.',
-    ], note: 'Pass Benefits: Includes the exact same perks as a PRO ticket.' },
+    { tier: 'Startup', price: '€390',
+      brand: { name: 'PSG Labs', logo: 'assets/jury/psg-labs-logo.png' },
+      intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
+      'Sport Innovation evening with PSG Labs at the Parc des Princes, Thursday 27 May',
+      'Startup rate on the exhibition floor',
+    ], note: 'Eligibility: under $3 million raised in total funding, and under 5 years old.' },
     { tier: 'Pro', price: '€790', intro: 'PERKS OF A PRO TICKET:', perks: [
       'Full 2-day access to all panels, keynotes & workshop sessions',
       'Exhibition floor access for both days',
       'All food and drinks during the event',
       'Access to the SGN networking app & networking lounge',
-    ] },
+    ], highlight: { label: 'Also included', text: 'A SportBusiness subscription' } },
     { tier: 'VIP', price: '€2290', featured: true, intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
       'Invitation to the VIP Dinner',
       'Access to the VIP Lounge on both days',
       'Access to private meeting rooms',
       'VIP Welcome Bag',
+    ] },
+  ];
+
+  // SGN Invest, second grid on the tickets page. Les tarifs Investor et LP viennent
+  // de INV_TIX_PASSES (site-InvestmentSummit.jsx), a garder alignes.
+  const investTickets = [
+    { tier: 'Delegate', price: '€790', intro: 'STANDARD ACCESS:', perks: [
+      'Full access to both summit days + the SGN Invest programme',
+      'Exhibition floor access for both days',
+      'Access to the SGN networking app & networking lounge',
+    ], note: 'Open to anyone: operators, advisors, service providers and teams.' },
+    { tier: 'Investor', price: '€1290', intro: 'FOR ACTIVE INVESTORS & FUNDS:', perks: [
+      'Full access to both summit days + the SGN Invest programme',
+      'Access to the investor networking lounge',
+      'Curated deal-flow & startup access',
+      'Investor-only roundtables',
+    ], note: 'For GPs and funds actively deploying into sport.' },
+    { tier: 'LP', price: 'Free', freePass: true, cta: 'Apply for an LP pass', intro: 'COMPLIMENTARY FOR VERIFIED LPs:', perks: [
+      'Full access to both summit days + the SGN Invest programme',
+      'Access to the LP & investor networking lounge',
+      'Curated introductions to GPs and funds raising',
+      'Invitation to the LP-only investor breakfast',
+    ], note: 'Subject to verification. Applications reviewed on a rolling basis.' },
+  ];
+
+  // SGN Week, les deux voies d'acces qui ne passent pas par la billetterie.
+  const accessPathways = [
+    { tier: 'Group Ticket Discounts',
+      note: 'Attending as a team? Groups of 3 or more from the same organisation receive a reduced rate across all passes. Get in touch for a tailored quote.',
+      cta: 'Request a group rate', href: '#/get-in-touch', perks: [
+      'Discounted rate from 3 passes',
+      'Single invoice & coordinated registration',
+      'Ideal for teams, funds and portfolio companies',
+    ] },
+    { tier: 'Press Accreditation',
+      note: 'Apply for press accreditation to cover the summit on-site. Approved applicants receive media access, assets and coordination support ahead of the event.',
+      cta: 'Apply for a media pass', href: '#/medias', perks: [
+      'Access to press updates, assets and on-site support',
+      'Interview opportunities with speakers, partners and investors',
+      'Applications reviewed on a rolling basis',
     ] },
   ];
 
@@ -756,7 +797,7 @@
 
   window.SGData = {
     heroVideo, foundingLogo: CDN + 'c2mRXIJQpZi8ck3KGrvcjObcIoE.png',
-    speakersHome, speakersAll, reelSpeakers, weeklyReel, reels, marquee, walls, partnerTiers, stats, tickets, socials,
+    speakersHome, speakersAll, reelSpeakers, weeklyReel, reels, marquee, walls, partnerTiers, stats, tickets, investTickets, accessPathways, socials,
     snapshotStats, snapshotAttendees, snapshotPdf,
     opportunities, oppStar, personas, homeFeatures, startupSteps, startupWinners, startupJury, startupFaq, startup, interests, agendaLive,
   };

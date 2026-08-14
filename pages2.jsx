@@ -157,9 +157,18 @@ function TicketsPage() {
       if (s.name === 'Richard Heaselgrave') return { ...s, role: 'CRO' };
       return s;
     });
+  const { investTickets } = window.SGData;
+  const investHeading = (
+    <div className="tkx-sechead reveal">
+      <span className="sg-eyebrow sg-eyebrow--gold">SGN Invest</span>
+      <h2 className="tkx-head tkx-head--sub">Where sport <span className="tkx-head__gold">capital gathers</span></h2>
+    </div>
+  );
   return (
     <React.Fragment>
       <TicketsBlock first />
+      <TicketsBlock items={investTickets} heading={investHeading} id="sgn-invest-tickets" plain />
+      <AccessPathways />
       <section className="section">
         <div className="sg-container sg-container--wide">
           <h2 className="home-h2 reveal">Hear from our <span className="home-h2__gold">leaders and visionaries</span></h2>

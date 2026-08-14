@@ -2316,3 +2316,42 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 @media (prefers-reduced-motion: reduce) { .wave-cta::before, .wave-cta::after { animation: none !important; } .appx-appear.reveal:not(.reveal--in) { filter: none; transform: none; opacity: 1; } }
 @media (max-width: 900px) { .appx-companion, .appx-showcase { grid-template-columns: 1fr; } .appx-showcase__aside { position: static; } }
 @media (max-width: 640px) { .appx-dl { grid-template-columns: 1fr; } .appx-show { grid-template-columns: 1fr; justify-items: center; text-align: center; } }
+
+/* ---------- Tickets : marque partenaire, mise en avant, sections ----------
+   Voir `tickets`, `investTickets` et `accessPathways` dans data.js. La grille
+   .tkx-grid est rejouee telle quelle pour SGN Invest, seul l'habillage change. */
+
+/* Bandeau de marque en tete de carte (Startup x PSG Labs) */
+/* Le logo PSG Labs est un lockup vertical (122x218) : cale sur la hauteur, il reste
+   etroit, d'ou une pastille plus haute que large en padding. */
+.tkx-card__brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 6px 13px 6px 11px;
+  border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); }
+.tkx-card__brand-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.tkx-card__brand img { display: block; height: 32px; width: auto; }
+
+/* Bloc "Also included" en pied de carte (abonnement SportBusiness sur le Pro) */
+.tkx-card__hl { margin-top: auto; padding-top: 18px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.tkx-card__hl::before { content: ""; display: block; height: 1px; margin-bottom: 16px; background: rgba(255,255,255,0.12); }
+.tkx-card__hl-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+.tkx-card__hl-text { font-size: 15px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
+
+/* En-tete des sections secondaires : plus discret que le titre principal */
+.tkx-sechead { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-bottom: clamp(28px, 1.5rem + 2vw, 48px); text-align: center; }
+.tkx-head--sub { margin: 0; font-size: clamp(28px, 22px + 1.4vw, 42px); }
+.section--tickets-plain { padding-top: clamp(1.5rem, 1rem + 1.5vw, 2.5rem); }
+
+/* SGN Week : deux voies d'acces, cote a cote */
+.tkx-duo { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 12px + 1.5vw, 40px); max-width: 1020px; margin: 0 auto; }
+.tkx-path { display: flex; flex-direction: column; align-items: flex-start;
+  background: linear-gradient(180deg, rgba(13,18,48,0.72) 0%, rgba(4,7,24,0.85) 100%);
+  border: 1px solid rgba(255,255,255,0.10); border-radius: 8px;
+  padding: clamp(20px, 17px + 0.7vw, 34px) clamp(20px, 15px + 0.8vw, 32px);
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.tkx-path:hover { border-color: rgba(150,165,255,0.95); box-shadow: 0 0 26px rgba(95,115,255,0.42); }
+.tkx-path__tier { margin-bottom: 12px; }
+.tkx-path__note { margin: 0 0 18px; font-size: 15px; line-height: 1.55; color: var(--text-body); }
+.tkx-path__cta { margin-top: auto; }
+.tkx-path .tkx-list { margin-bottom: 22px; }
+.tkx-path:hover .tkx-btn { border-color: rgba(150,165,255,0.95); box-shadow: 0 0 16px rgba(95,115,255,0.42); }
+
+@media (max-width: 860px) { .tkx-duo { grid-template-columns: 1fr; } }

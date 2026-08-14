@@ -102,16 +102,19 @@ function LogoWalls({ groups }) {
   );
 }
 
-function TicketsBlock({ first }) {
+/* `items` / `heading` / `id` permettent de rejouer la meme grille pour SGN Invest sur la
+   page Tickets; sans eux on retombe sur la grille principale, telle qu'appelee ailleurs. */
+function TicketsBlock({ first, items, heading, id, plain }) {
   const { tickets } = window.SGData;
+  const list = items || tickets;
   const BUY_URL = 'https://pointenoire.swoogo.com/sportgensummit2027/Registration';
   return (
-    <section className={'section section--tickets' + (first ? ' section--first' : '')} id="tickets">
-      <div className="section--tickets__bg" aria-hidden="true" />
+    <section className={'section section--tickets' + (first ? ' section--first' : '') + (plain ? ' section--tickets-plain' : '')} id={id || 'tickets'}>
+      {plain ? null : <div className="section--tickets__bg" aria-hidden="true" />}
       <div className="sg-container sg-container--wide">
-        <h2 className="tkx-head reveal">Secure your 2027 <span className="tkx-head__gold">Super Early Birds</span></h2>
+        {heading || <h2 className="tkx-head reveal">Secure your 2027 <span className="tkx-head__gold">Super Early Birds</span></h2>}
         <div className="tkx-grid">
-          {tickets.map((t, i) => (
+          {list.map((t, i) => (
             <div className={'tkx-card reveal tkx-card--' + t.tier.toLowerCase() + (t.featured ? ' tkx-card--vip' : '')} style={{ transitionDelay: i * 70 + 'ms' }} key={t.tier}
               onMouseEnter={t.featured ? (e) => { const v = e.currentTarget.querySelector('.tkx-vid'); if (v) { try { v.currentTime = 0; } catch (_) {} const p = v.play(); if (p && p.catch) p.catch(() => {}); } e.currentTarget.classList.add('tkx-card--playing'); } : undefined}
               onMouseLeave={t.featured ? (e) => { const v = e.currentTarget.querySelector('.tkx-vid'); if (v) { v.pause(); try { v.currentTime = 0; } catch (_) {} } e.currentTarget.classList.remove('tkx-card--playing'); } : undefined}>
@@ -121,12 +124,18 @@ function TicketsBlock({ first }) {
                   <span className="tkx-vidscrim"></span>
                 </div>
               ) : null}
+              {t.brand ? (
+                <span className="tkx-card__brand">
+                  <span className="tkx-card__brand-label">With</span>
+                  <img src={t.brand.logo} alt={t.brand.name} loading="lazy" />
+                </span>
+              ) : null}
               <h3 className="tkx-card__tier">{t.tier}</h3>
               <div className="tkx-card__price">
                 <span className="tkx-card__amount">{t.price}</span>
-                <span className="tkx-card__vat">+VAT</span>
+                {t.freePass ? null : <span className="tkx-card__vat">+VAT</span>}
               </div>
-              <a className="tkx-btn" href={BUY_URL} target="_blank" rel="noopener">Buy Ticket</a>
+              <a className="tkx-btn" href={BUY_URL} target="_blank" rel="noopener">{t.cta || 'Buy Ticket'}</a>
               <div className="tkx-card__rule" aria-hidden="true"></div>
               <p className="tkx-card__intro">{t.intro}</p>
               {t.lede ? <p className="tkx-card__lede">{t.lede}</p> : null}
@@ -146,6 +155,48 @@ function TicketsBlock({ first }) {
                 const ci = t.note.indexOf(': ');
                 return <p className="tkx-card__note">{ci > 0 ? <React.Fragment><strong className="tkx-list__label">{t.note.slice(0, ci)}</strong>{t.note.slice(ci + 1)}</React.Fragment> : t.note}</p>;
               })() : null}
+              {t.highlight ? (
+                <div className="tkx-card__hl">
+                  <span className="tkx-card__hl-label">{t.highlight.label}</span>
+                  <span className="tkx-card__hl-text">{t.highlight.text}</span>
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* SGN Week : les deux voies d'acces qui ne passent pas par la billetterie. */
+function AccessPathways() {
+  const { accessPathways } = window.SGData;
+  const go = (e, href) => {
+    if (!href || href.charAt(0) !== '#') return;
+    e.preventDefault(); window.location.hash = href.replace('#', '');
+  };
+  return (
+    <section className="section section--pathways" id="access-pathways">
+      <div className="sg-container sg-container--wide">
+        <div className="tkx-sechead reveal">
+          <span className="sg-eyebrow sg-eyebrow--gold">SGN Week</span>
+          <h2 className="tkx-head tkx-head--sub">Access <span className="tkx-head__gold">pathways</span></h2>
+        </div>
+        <div className="tkx-duo">
+          {accessPathways.map((p, i) => (
+            <div className="tkx-path reveal" style={{ transitionDelay: i * 70 + 'ms' }} key={p.tier}>
+              <h3 className="tkx-card__tier tkx-path__tier">{p.tier}</h3>
+              <p className="tkx-path__note">{p.note}</p>
+              <ul className="tkx-list">
+                {p.perks.map((x) => (
+                  <li key={x}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+                    <span>{x}</span>
+                  </li>
+                ))}
+              </ul>
+              <a className="tkx-btn tkx-path__cta" href={p.href} onClick={(e) => go(e, p.href)}>{p.cta}</a>
             </div>
           ))}
         </div>
@@ -484,4 +535,4 @@ function SpeakersReel() {
   );
 }
 
-Object.assign(window, { PageHero, SectionHead, StatBand, CounterBand, CounterBandItem, SpeakerGrid, SpeakersReel, LogoWalls, TicketsBlock, Opportunities, OppCards });
+Object.assign(window, { PageHero, SectionHead, StatBand, CounterBand, CounterBandItem, SpeakerGrid, SpeakersReel, LogoWalls, TicketsBlock, AccessPathways, Opportunities, OppCards });
