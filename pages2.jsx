@@ -19,62 +19,65 @@ function SpeakersPage() {
   );
 }
 
-function PersonaPicker({ personas, selected, onPick }) {
+/* "What brings you to SPORT[GEN]?" — le choix de categorie et les cartes photo
+   sont un seul bloc : la selection reecrit le paragraphe d'intro, les visuels et
+   leurs puces. Sans selection, on retombe sur les cartes generiques
+   (`opportunities`), qui restent la vue par defaut d'un premier visiteur. */
+function PersonaExplorer({ personas, selected, onPick }) {
   const { Button } = window.SPORTGENDesignSystem_882f1e;
+  const { opportunities } = window.SGData;
+  const cardsRef = React.useRef(null);
+  const active = personas.find((p) => p.key === selected) || null;
+
+  // Une raison = une carte : [titre, phrase, photo] -> {title, items, photo}.
+  const cards = active
+    ? active.reasons.map((r) => ({ title: r[0], items: [r[1]], photo: r[2] }))
+    : opportunities;
+
+  // Le scroll-reveal global n'observe que les .reveal presents au changement de
+  // route. Ces cartes-ci sont remontees a chaque selection : sans ca elles
+  // resteraient decalees de --reveal-shift, jamais remises a leur place.
+  React.useEffect(() => {
+    if (!cardsRef.current) return;
+    const els = cardsRef.current.querySelectorAll('.reveal:not(.reveal--in)');
+    const t = setTimeout(() => els.forEach((el) => el.classList.add('reveal--in')), 30);
+    return () => clearTimeout(t);
+  }, [selected]);
+
+  // Certains CTA sortent du routeur par hash (sis.html) : on ne prend la main
+  // que sur les liens en "#".
+  const go = (e, href) => {
+    if (!href || href.charAt(0) !== '#') return;
+    e.preventDefault(); window.location.hash = href.replace('#', '');
+  };
+  const cta = active ? (active.cta || { label: 'See the full agenda', href: '#/agenda' }) : null;
+
   return (
     <section className="section persona-pick">
-      <div className="sg-container persona-pick__inner">
+      <div className="sg-container">
         <div className="persona-pick__head reveal">
-          <span className="sg-eyebrow sg-eyebrow--gold">Make it yours</span>
+          <span className="sg-eyebrow sg-eyebrow--gold">{active ? 'Tailored for ' + active.label : 'Make it yours'}</span>
           <h2 className="persona-pick__title">What brings you to <span className="sg-gold-text">SPORT[GEN]</span>?</h2>
-          <p className="persona-pick__lead">Tell us where you sit in the ecosystem and we'll tailor the case for attending to you.</p>
+          <p className="persona-pick__lead">{active ? active.intro : "Tell us where you sit in the ecosystem and we'll tailor the case for attending to you."}</p>
         </div>
         <div className="persona-grid reveal" role="radiogroup" aria-label="Which best describes you?">
           {personas.map((p) => {
-            const active = selected === p.key;
+            const on = selected === p.key;
             return (
-              <Button key={p.key} variant={active ? 'primary' : 'secondary'} size="lg"
-                type="button" role="radio" aria-checked={active}
-                onClick={() => onPick(active ? null : p.key)}>
+              <Button key={p.key} variant={on ? 'primary' : 'secondary'} size="lg"
+                type="button" role="radio" aria-checked={on}
+                onClick={() => onPick(on ? null : p.key)}>
                 {p.label}
               </Button>
             );
           })}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function PersonaResult({ persona }) {
-  const { Button } = window.SPORTGENDesignSystem_882f1e;
-  // Le CTA secondaire depend du persona (data.js). Certains pointent hors du routeur
-  // par hash (sis.html) : on ne prend la main que sur les liens en "#".
-  const go = (e, href) => {
-    if (!href || href.charAt(0) !== '#') return;
-    e.preventDefault(); window.location.hash = href.replace('#', '');
-  };
-  const cta = persona.cta || { label: 'See the full agenda', href: '#/agenda' };
-  return (
-    <section className="section persona-result" key={persona.key}>
-      <div className="sg-container sg-container--wide">
-        <div className="persona-result__head reveal">
-          <span className="sg-eyebrow sg-eyebrow--gold">Tailored for {persona.label}</span>
-          <h2 className="persona-result__title">{persona.titleWhite} <span className="sg-gold-text">{persona.titleGold}</span></h2>
-          <p className="persona-result__lead">{persona.intro}</p>
+        <div className="persona-cards" id="persona-result" ref={cardsRef}>
+          <OppCards cards={cards} key={selected || 'default'} />
         </div>
-        <div className="why-grid">
-          {persona.reasons.map((r, i) => (
-            <div className="why-card reveal" style={{ transitionDelay: i * 70 + 'ms' }} key={r[0]}>
-              <span className="why-card__dot" aria-hidden="true" />
-              <h3>{r[0]}</h3>
-              <p>{r[1]}</p>
-            </div>
-          ))}
-        </div>
-        <div className="persona-result__cta reveal">
+        <div className="persona-pick__cta reveal">
           <Button variant="primary" size="lg" href="#/tickets" onClick={(e) => go(e, '#/tickets')}>Get your ticket</Button>
-          <Button variant="secondary" size="lg" href={cta.href} onClick={(e) => go(e, cta.href)}>{cta.label}</Button>
+          {cta ? <Button variant="secondary" size="lg" href={cta.href} onClick={(e) => go(e, cta.href)}>{cta.label}</Button> : null}
         </div>
       </div>
     </section>
@@ -98,27 +101,21 @@ function WhyAttendPage() {
   const active = personas.find((p) => p.key === persona) || null;
   const [open, setOpen] = usePageState(active ? active.acc : -1);
 
+  // Pas de scroll automatique : les cartes sont maintenant juste sous les boutons,
+  // dans le meme bloc, donc deja dans le champ au moment du clic.
   const pick = (key) => {
     setPersona(key);
     try { key ? window.localStorage.setItem('sg_persona', key) : window.localStorage.removeItem('sg_persona'); } catch (e) {}
     const next = personas.find((p) => p.key === key);
     setOpen(next ? next.acc : -1);
-    if (key && typeof window.requestAnimationFrame === 'function') {
-      window.requestAnimationFrame(() => {
-        const el = document.getElementById('persona-result');
-        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
-      });
-    }
   };
   const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
   return (
     <React.Fragment>
       <PageHero eyebrow="Why Attend" art="curve" titleWhite="The global platform for" titleGold="sport leaders."
         sub="Where deals happen. Where the next era is defined." ctaLabel="See 2027 Tickets" ctaHref="#/tickets" />
-      <PersonaPicker personas={personas} selected={persona} onPick={pick} />
-      {active ? <div id="persona-result"><PersonaResult persona={active} /></div> : null}
-      <Opportunities />
       <CounterBand />
+      <PersonaExplorer personas={personas} selected={persona} onPick={pick} />
       <section className="section">
         <div className="sg-container sg-container--wide">
           <div className="vision reveal">
