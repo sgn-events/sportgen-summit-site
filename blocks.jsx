@@ -162,10 +162,11 @@ function TicketsBlock({ first, items, heading, id, plain, wide, theme }) {
               ) : null}
               {t.highlight ? (
                 <div className="tkx-card__hl">
-                  <span className="tkx-card__hl-label">{t.highlight.label}</span>
-                  {t.highlight.logo ? <img className="tkx-card__hl-logo" src={t.highlight.logo} alt={t.highlight.logoAlt || ''} loading="lazy" /> : null}
+                  <span className="tkx-card__hl-head">
+                    <span className="tkx-card__hl-label">{t.highlight.label}</span>
+                    {t.highlight.logo ? <img className="tkx-card__hl-logo" src={t.highlight.logo} alt={t.highlight.logoAlt || ''} loading="lazy" /> : null}
+                  </span>
                   <span className="tkx-card__hl-text">{t.highlight.text}</span>
-                  {t.highlight.footnote ? <span className="tkx-card__hl-note">{t.highlight.footnote}</span> : null}
                 </div>
               ) : null}
             </div>

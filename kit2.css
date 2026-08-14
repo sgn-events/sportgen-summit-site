@@ -2334,13 +2334,19 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 /* Abonnement SportBusiness en pied de carte Pro : simple filet, pas d'encadre. */
 .tkx-card__hl { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 9px;
   padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.14); }
+/* Hauteur minimale partagee par les deux blocs de pied (Startup night / Also included)
+   pour que leur filet tombe au meme niveau d'une carte a l'autre. Les cartes font deja
+   la meme hauteur via la grille, seul le pied faisait varier la position du trait. */
+.tkx-card__feat, .tkx-card__hl { min-height: var(--tkx-foot-h, 100px); }
 /* margin-top:auto colle le bloc en bas mais tombe a 0 quand la carte est pleine :
    l'ecart minimum vient de la liste au-dessus. */
 .tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 20px; }
-.tkx-card__hl-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-.tkx-card__hl-logo { display: block; height: 24px; width: auto; max-width: 100%; }
+/* Intitule a gauche, logo cale sur la marge droite de la carte : le libelle remonte
+   d'une ligne au lieu d'etre pousse sous le logo. */
+.tkx-card__hl-head { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tkx-card__hl-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
+.tkx-card__hl-logo { flex: none; display: block; height: 22px; width: auto; }
 .tkx-card__hl-text { font-size: 15px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
-.tkx-card__hl-note { font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.45); }
 
 /* Carte Pro : fond bleu plus affirme que les autres, liseré vif, et une lueur qui
    respire lentement pour la faire vivre sans animation agressive. */
@@ -2363,9 +2369,9 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
    un filet suffit a le detacher. Titre puis ligne de lieu/date, plus lisible qu'une
    phrase unique qui courait sur quatre lignes dans une colonne etroite.
    Intitule cale sur .tkx-card__intro, meme registre que "ELIGIBILITY REQUIREMENTS". */
-.tkx-card__feat { margin-top: auto; padding-top: 20px; width: 100%; display: flex; align-items: center; gap: 16px;
+.tkx-card__feat { margin-top: auto; padding-top: 20px; width: 100%; display: flex; align-items: center; gap: 14px;
   border-top: 1px solid rgba(255,255,255,0.14); }
-.tkx-card__feat-logo { flex: none; display: block; height: 46px; width: auto; }
+.tkx-card__feat-logo { flex: none; display: block; height: 40px; width: auto; }
 .tkx-card__feat-body { display: flex; flex-direction: column; gap: 4px; }
 .tkx-card__feat-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
 .tkx-card__feat-text { font-size: 14px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
