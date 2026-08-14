@@ -185,7 +185,7 @@ function TicketsPage() {
           <SpeakerGrid speakers={list} />
           {/* "See 2026 Speakers" porte l'action principale : pill plein contre contour. */}
           <div className="cta-row cta-row--center reveal tkx-spk__cta">
-            <Button variant="primary" size="lg" className="sg-btn--nav-navy" href="#/speakers" onClick={(e) => go(e, '#/speakers')}>See 2026 Speakers</Button>
+            <Button variant="primary" size="lg" className="sg-btn--cta" href="#/speakers" onClick={(e) => go(e, '#/speakers')}>See 2026 Speakers</Button>
             <Button variant="secondary" size="lg" href="#/why-attend" onClick={(e) => go(e, '#/why-attend')}>Why attend SGN 2027?</Button>
           </div>
         </div>
@@ -211,7 +211,7 @@ function TicketsPage() {
             ))}
           </div>
           <div className="cta-row cta-row--center reveal tkx-week__cta">
-            <Button variant="primary" size="lg" className="sg-btn--nav-navy" href="#/side-events" onClick={(e) => go(e, '#/side-events')}>See the full SGN Week</Button>
+            <Button variant="primary" size="lg" className="sg-btn--cta" href="#/side-events" onClick={(e) => go(e, '#/side-events')}>See the full SGN Week</Button>
           </div>
         </div>
       </section>

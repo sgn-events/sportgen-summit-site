@@ -108,7 +108,7 @@ function Nav() {
 
         {/* RIGHT, tickets + Explore SGN mega menu */}
         <div className="sg-nav__cta">
-          <Button variant="secondary" size="sm" className="sg-btn--nav-navy" href={ticketsHref} onClick={(e) => { e.preventDefault(); navTo(ticketsHref); }}>2027 Tickets</Button>
+          <Button variant="secondary" size="sm" className="sg-btn--nav-navy sg-btn--cta" href={ticketsHref} onClick={(e) => { e.preventDefault(); navTo(ticketsHref); }}>2027 Tickets</Button>
           <div className="sg-nav__mega">
             <button className="sg-nav__mega-trigger" aria-haspopup="true">
               <span>Explore SGN</span>{gridIcon}
@@ -200,7 +200,7 @@ function Nav() {
             </div>
           ))}
           <div className="sg-nav__mcta">
-            <Button variant="secondary" className="sg-btn--nav-navy" href={ticketsHref} onClick={(e) => { e.preventDefault(); navTo(ticketsHref); }}>2027 Tickets</Button>
+            <Button variant="secondary" className="sg-btn--nav-navy sg-btn--cta" href={ticketsHref} onClick={(e) => { e.preventDefault(); navTo(ticketsHref); }}>2027 Tickets</Button>
           </div>
         </div>
       )}

@@ -131,16 +131,6 @@ function TicketsBlock({ first, items, heading, id, plain, wide, theme }) {
               </div>
               <a className="tkx-btn" href={BUY_URL} target="_blank" rel="noopener">{t.cta || 'Buy Ticket'}</a>
               <div className="tkx-card__rule" aria-hidden="true"></div>
-              {/* Bloc partenaire mis en avant, logo en grand (Startup x PSG Labs). */}
-              {t.feature ? (
-                <div className="tkx-card__feat">
-                  <img className="tkx-card__feat-logo" src={t.feature.logo} alt={t.feature.logoAlt || ''} loading="lazy" />
-                  <span className="tkx-card__feat-body">
-                    <span className="tkx-card__feat-label">{t.feature.label}</span>
-                    <span className="tkx-card__feat-text">{t.feature.text}</span>
-                  </span>
-                </div>
-              ) : null}
               <p className="tkx-card__intro">{t.intro}</p>
               {t.lede ? <p className="tkx-card__lede">{t.lede}</p> : null}
               <ul className="tkx-list">
@@ -159,6 +149,16 @@ function TicketsBlock({ first, items, heading, id, plain, wide, theme }) {
                 const ci = t.note.indexOf(': ');
                 return <p className="tkx-card__note">{ci > 0 ? <React.Fragment><strong className="tkx-list__label">{t.note.slice(0, ci)}</strong>{t.note.slice(ci + 1)}</React.Fragment> : t.note}</p>;
               })() : null}
+              {/* Bloc partenaire en pied de carte, logo en grand (Startup x PSG Labs). */}
+              {t.feature ? (
+                <div className="tkx-card__feat">
+                  <img className="tkx-card__feat-logo" src={t.feature.logo} alt={t.feature.logoAlt || ''} loading="lazy" />
+                  <span className="tkx-card__feat-body">
+                    <span className="tkx-card__feat-label">{t.feature.label}</span>
+                    <span className="tkx-card__feat-text">{t.feature.text}</span>
+                  </span>
+                </div>
+              ) : null}
               {t.highlight ? (
                 <div className="tkx-card__hl">
                   <span className="tkx-card__hl-label">{t.highlight.label}</span>

@@ -680,24 +680,27 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
 
 /* ---------- Nav CTA principal : "2027 Tickets" ---------------
    Doit passer APRES le DA ci-dessus, qui ecrase .sg-btn--secondary en !important.
+   Classe separee de .sg-btn--nav-navy, qui ne porte QUE la mise en taille de la nav :
+   ses var(--nav-pad-*) ne sont definies que sur .sg-nav, donc hors nav le padding
+   tombait a zero et le libelle debordait du bouton.
    Meme famille que Get in Touch / Sponsor (.sg-nav__quick) mais un cran plus marque :
    liseré et halo plus francs, plus un reflet qui balaie l'interieur. */
-.sg-btn--nav-navy {
+.sg-btn--cta {
   position: relative; overflow: hidden;
   background: var(--navy-darkest) !important;
   border-color: rgba(180,200,255,0.85) !important;
   box-shadow: 0 0 0 1px rgba(150,175,255,0.45), 0 8px 30px -8px rgba(95,130,255,0.75) !important;
 }
-.sg-btn--nav-navy:hover {
+.sg-btn--cta:hover {
   background: #060c1e !important;
   border-color: rgba(215,228,255,1) !important;
   box-shadow: 0 0 0 1px rgba(180,200,255,0.7), 0 12px 36px -6px rgba(95,130,255,0.95) !important;
   transform: translateY(-1px) !important;
 }
 /* Le libelle passe au-dessus du reflet (Button rend ses enfants dans un <span>). */
-.sg-btn--nav-navy > span { position: relative; z-index: 1; }
+.sg-btn--cta > span { position: relative; z-index: 1; }
 /* Reflet diagonal : traverse vite, puis attend, pour attirer l'oeil sans clignoter. */
-.sg-btn--nav-navy::before {
+.sg-btn--cta::before {
   content: ''; position: absolute; top: -60%; bottom: -60%; left: -60%; width: 42%;
   pointer-events: none; transform: skewX(-18deg);
   background: linear-gradient(100deg, transparent 0%, rgba(190,212,255,0.45) 50%, transparent 100%);
@@ -707,7 +710,7 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
   0%, 64% { left: -60%; }
   90%, 100% { left: 135%; }
 }
-@media (prefers-reduced-motion: reduce) { .sg-btn--nav-navy::before { animation: none; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .sg-btn--cta::before { animation: none; opacity: 0; } }
 
 /* Partner-page buttons → same DA */
 .ptn-btn-light {
@@ -2356,12 +2359,14 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .tkx-card--pro .tkx-btn:hover { border-color: rgba(190,205,255,1); background: rgba(64,108,235,0.34); }
 @media (prefers-reduced-motion: reduce) { .tkx-card--pro::after { animation: none; opacity: 0.8; } }
 
-/* Bloc partenaire mis en avant (Startup x PSG Labs), logo en grand a gauche. */
-.tkx-card__feat { width: 100%; display: flex; align-items: center; gap: 16px; margin-bottom: 22px;
+/* Bloc partenaire en pied de carte (Startup x PSG Labs), logo en grand a gauche.
+   Intitule cale sur .tkx-card__intro, meme registre que "ELIGIBILITY REQUIREMENTS". */
+.tkx-card__feat { margin-top: auto; width: 100%; display: flex; align-items: center; gap: 16px;
   padding: 14px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); }
+.tkx-card:has(.tkx-card__feat) .tkx-list { margin-bottom: 20px; }
 .tkx-card__feat-logo { flex: none; display: block; height: 52px; width: auto; }
 .tkx-card__feat-body { display: flex; flex-direction: column; gap: 5px; }
-.tkx-card__feat-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+.tkx-card__feat-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
 .tkx-card__feat-text { font-size: 14px; font-weight: var(--fw-medium); line-height: 1.45; color: var(--white); }
 
 /* Passes SGN Invest dans la DA du site Invest : angles vifs, mono capitale, boutons carres. */
