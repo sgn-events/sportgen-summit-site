@@ -61,8 +61,9 @@ function NotFoundPage() {
   );
 }
 
-/* Le PDF est ouvert dans un nouvel onglet par <BrevoForm>, qui lit le chemin dans
-   BREVO_FORMS['brochure-sgn'].pdf. On le relit ici pour le lien de secours. */
+/* Le PDF est ouvert dans l'onglet courant par <BrevoForm>, qui lit le chemin dans
+   BREVO_FORMS['brochure-sgn'].pdf. On le relit ici pour le lien de secours, visible le temps
+   que la navigation parte. */
 const BROCHURE_PDF = window.BREVO_FORMS['brochure-sgn'].pdf;
 
 function BrochurePage({ startup }) {
@@ -86,8 +87,8 @@ function BrochurePage({ startup }) {
             <window.BrevoForm form="brochure-sgn" onSuccess={() => setSent(true)} />
             {sent ? (
               <p className="git__form-note">
-                The brochure opened in a new tab. If your browser blocked it,{' '}
-                <a href={BROCHURE_PDF} target="_blank" rel="noopener noreferrer">open it here</a>.
+                Opening the brochure. If nothing happens,{' '}
+                <a href={BROCHURE_PDF}>open it here</a>.
               </p>
             ) : null}
           </div>

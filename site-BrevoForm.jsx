@@ -27,25 +27,15 @@ function brevoEnsureHead() {
   }
 }
 
-/* Ouvre le PDF dans un nouvel onglet. Il est d'abord recupere en blob: un lien direct est
-   refuse dans les previews en bac a sable, et le blob permet aussi de retomber proprement sur
-   une navigation declenchee par un clic si la popup est bloquee. */
+/* Ouvre le PDF dans l'onglet courant, pas dans un nouvel onglet: sur mobile un second onglet
+   se retrouve mal, alors qu'ici le retour arriere ramene sur le site, au clavier comme au doigt.
+   `assign` et pas `replace`: replace ecrase l'entree d'historique de la page du formulaire, donc
+   le retour arriere sauterait la page et sortirait potentiellement du site. C'est aussi pour ca
+   qu'on ne peut pas utiliser la redirection de Brevo, qui fait un replace.
+   URL directe et pas blob: le blob n'apporte rien ici et donnerait une adresse imprononcable
+   dans la barre du navigateur, alors que le chemin du PDF est partageable tel quel. */
 function brevoOpenPdf(url) {
-  const open = (href) => {
-    const w = window.open(href, '_blank', 'noopener');
-    if (w) return;
-    const a = document.createElement('a');
-    a.href = href; a.target = '_blank'; a.rel = 'noopener';
-    document.body.appendChild(a); a.click(); a.remove();
-  };
-  fetch(url)
-    .then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
-    .then((b) => {
-      const blobUrl = URL.createObjectURL(b.slice(0, b.size, 'application/pdf'));
-      open(blobUrl);
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 120000);
-    })
-    .catch(() => open(url));
+  window.location.assign(url);
 }
 
 function BrevoForm({ form, onSuccess }) {

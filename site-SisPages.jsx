@@ -411,8 +411,8 @@ function SisGetInTouchPage() {
           <BrevoForm form="deck-invest" onSuccess={() => setSent(true)} />
           {sent ? (
             <p className="sis-git__note">
-              The deck opened in a new tab. If your browser blocked it,{' '}
-              <a href={deckPdf} target="_blank" rel="noopener noreferrer">open it here</a>.
+              Opening the deck. If nothing happens,{' '}
+              <a href={deckPdf}>open it here</a>.
             </p>
           ) : null}
         </div>

@@ -140,8 +140,8 @@ function HomeFeatures() {
 
 /* Gated "attendee snapshot" section: stats + scrolling attendee wall + lead-capture modal.
    La modale embarque le formulaire Brevo "Download the 2026 Attendee Snapshot", qui a sa
-   propre liste. <BrevoForm> ouvre le PDF dans un nouvel onglet a la soumission; on garde
-   `deliverSnapshot` pour le bouton de secours quand la popup a ete bloquee. */
+   propre liste. <BrevoForm> ouvre le PDF dans l'onglet courant a la soumission; on garde
+   `deliverSnapshot` pour le bouton de secours si la navigation ne part pas. */
 function deliverSnapshot() {
   window.brevoOpenPdf(window.SGData.snapshotPdf);
 }
@@ -168,7 +168,7 @@ function SnapshotGate({ open, onClose }) {
           <div className="snapgate__done">
             <p className="sg-eyebrow">Your download is ready</p>
             <h3 className="snapgate__title">Thank you. <span className="home-h2__gold">Enjoy the read.</span></h3>
-            <p className="snapgate__lede">The 2026 attendee snapshot opened in a new tab. If your browser blocked it, use the button below.</p>
+            <p className="snapgate__lede">Opening the 2026 attendee snapshot. If nothing happens, use the button below.</p>
             <Button variant="primary" size="lg" type="button" onClick={deliverSnapshot}>Open the PDF</Button>
           </div>
         ) : (
