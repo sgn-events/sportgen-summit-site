@@ -2178,6 +2178,12 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .snapgate__hs form { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; }
 .snapgate__hs form > * { grid-column: 1 / -1; }
 .snapgate__hs form > div:has(> .sib-input) { grid-column: auto; }
+/* Brevo empile ses propres gouttieres (.sib-form 32px, #sib-container 17px) au-dessus
+   du padding du panneau : 98px de creux sous le Submit, qu'on pouvait scroller pour
+   rien. On les annule dans la modale seulement; ailleurs le formulaire n'est pas
+   contraint en hauteur et garde son air. */
+.snapgate__hs .sib-form { padding: 0; }
+.snapgate__hs #sib-container { padding: 0; }
 .snapgate__form { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .snapgate__form .field--full { grid-column: span 2; }
 .snapgate__opt { text-transform: none; letter-spacing: 0; color: var(--text-muted); }
