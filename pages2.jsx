@@ -158,6 +158,7 @@ function TicketsPage() {
       return s;
     });
   const { investTickets, weekAccess } = window.SGData;
+  const { Button } = window.SPORTGENDesignSystem_882f1e;
   const go = (e, href) => {
     if (!href || href.charAt(0) !== '#') return;
     e.preventDefault(); window.location.hash = href.replace('#', '');
@@ -169,22 +170,23 @@ function TicketsPage() {
   const investHeading = (
     <div className="tkx-sechead tkx-invda reveal">
       <img className="tkx-invda__logo" src="assets/brand/sgn-investment-summit-white.png" alt="SGN Invest" />
-      <p className="tkx-invda__sub">One ticket, full access to both summit days and the SGN Invest programme.</p>
+      <p className="tkx-invda__sub">One ticket, full access to both summit days and to our sport investment summit, SGN Invest.</p>
       <a className="inv-btn tkx-invda__cta" href="sis.html">SGN Invest <span className="inv-btn__arrow">→</span></a>
     </div>
   );
   return (
     <React.Fragment>
       <TicketsBlock first />
-      <TicketsBlock items={investTickets} heading={investHeading} id="sgn-invest-tickets" plain wide />
+      <TicketsBlock items={investTickets} heading={investHeading} id="sgn-invest-tickets" plain wide theme="inv" />
       <AccessPathways />
       <section className="section">
         <div className="sg-container sg-container--wide">
           <h2 className="home-h2 reveal">Hear from our <span className="home-h2__gold">leaders and visionaries</span></h2>
           <SpeakerGrid speakers={list} />
+          {/* "See 2026 Speakers" porte l'action principale : pill plein contre contour. */}
           <div className="cta-row cta-row--center reveal tkx-spk__cta">
-            <a className="ptn-btn-light" href="#/speakers" onClick={(e) => go(e, '#/speakers')}>See 2026 Speakers</a>
-            <a className="ptn-btn-dark" href="#/why-attend" onClick={(e) => go(e, '#/why-attend')}>Why attend SGN 2027?</a>
+            <Button variant="primary" size="lg" className="sg-btn--nav-navy" href="#/speakers" onClick={(e) => go(e, '#/speakers')}>See 2026 Speakers</Button>
+            <Button variant="secondary" size="lg" href="#/why-attend" onClick={(e) => go(e, '#/why-attend')}>Why attend SGN 2027?</Button>
           </div>
         </div>
       </section>
@@ -207,6 +209,9 @@ function TicketsPage() {
                 <a className="ptn-act__btn" href={a.href} onClick={(e) => go(e, a.href)}>{a.cta} {arrowUR}</a>
               </article>
             ))}
+          </div>
+          <div className="cta-row cta-row--center reveal tkx-week__cta">
+            <Button variant="primary" size="lg" className="sg-btn--nav-navy" href="#/side-events" onClick={(e) => go(e, '#/side-events')}>See the full SGN Week</Button>
           </div>
         </div>
       </section>

@@ -2328,20 +2328,55 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .tkx-card__brand-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
 .tkx-card__brand img { display: block; height: 34px; width: auto; }
 
-/* Bloc "Also included" en pied de carte (abonnement SportBusiness sur le Pro).
-   Encadre plutot que simple filet : c'est l'argument qui distingue le Pro. */
-.tkx-card__hl { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
-  padding: 16px 18px; border-radius: 8px;
-  border: 1px solid rgba(124,140,255,0.35); background: rgba(64,108,235,0.10); }
+/* Abonnement SportBusiness en pied de carte Pro : simple filet, pas d'encadre. */
+.tkx-card__hl { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 9px;
+  padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.14); }
 /* margin-top:auto colle le bloc en bas mais tombe a 0 quand la carte est pleine :
    l'ecart minimum vient de la liste au-dessus. */
 .tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 20px; }
-.tkx-card__hl-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
-.tkx-card__hl-logo { display: block; height: 26px; width: auto; max-width: 100%; }
+.tkx-card__hl-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.tkx-card__hl-logo { display: block; height: 24px; width: auto; max-width: 100%; }
 .tkx-card__hl-text { font-size: 15px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
-.tkx-card__hl-note { font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.55); }
-/* La carte Pro porte l'argument differenciant : liseré un cran plus present. */
-.tkx-card--pro { border-color: rgba(124,140,255,0.62); }
+.tkx-card__hl-note { font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.45); }
+
+/* Carte Pro : fond bleu plus affirme que les autres, liseré vif, et une lueur qui
+   respire lentement pour la faire vivre sans animation agressive. */
+.tkx-card--pro {
+  border-color: rgba(124,140,255,0.62);
+  background: linear-gradient(165deg, rgba(30,44,110,0.55) 0%, rgba(10,16,52,0.88) 55%, rgba(4,7,24,0.92) 100%);
+}
+.tkx-card--pro::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit;
+  background: radial-gradient(120% 60% at 50% -10%, rgba(96,132,255,0.30) 0%, rgba(96,132,255,0) 60%);
+  animation: tkx-pro-breathe 6s ease-in-out infinite;
+}
+@keyframes tkx-pro-breathe { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+.tkx-card--pro:hover { border-color: rgba(170,190,255,0.95); box-shadow: 0 0 34px rgba(95,115,255,0.5); }
+.tkx-card--pro .tkx-btn { border-color: rgba(150,165,255,0.6); background: rgba(64,108,235,0.18); }
+.tkx-card--pro .tkx-btn:hover { border-color: rgba(190,205,255,1); background: rgba(64,108,235,0.34); }
+@media (prefers-reduced-motion: reduce) { .tkx-card--pro::after { animation: none; opacity: 0.8; } }
+
+/* Bloc partenaire mis en avant (Startup x PSG Labs), logo en grand a gauche. */
+.tkx-card__feat { width: 100%; display: flex; align-items: center; gap: 16px; margin-bottom: 22px;
+  padding: 14px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); }
+.tkx-card__feat-logo { flex: none; display: block; height: 52px; width: auto; }
+.tkx-card__feat-body { display: flex; flex-direction: column; gap: 5px; }
+.tkx-card__feat-label { font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+.tkx-card__feat-text { font-size: 14px; font-weight: var(--fw-medium); line-height: 1.45; color: var(--white); }
+
+/* Passes SGN Invest dans la DA du site Invest : angles vifs, mono capitale, boutons carres. */
+.tkx-card--inv {
+  --inv-fg: #f3f3f1; --inv-ink: #0b0b0d;
+  --inv-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  border-radius: 0; border-color: rgba(255,255,255,0.14);
+  background: linear-gradient(180deg, rgba(19,19,22,0.92) 0%, rgba(11,11,13,0.96) 100%);
+}
+.tkx-card--inv:hover { border-color: rgba(255,255,255,0.4); box-shadow: none; }
+.tkx-card--inv .tkx-card__tier { font-family: var(--inv-mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
+.tkx-card--inv .tkx-card__intro { font-family: var(--inv-mono); letter-spacing: 0.1em; }
+.tkx-card--inv .tkx-btn { border-radius: 0; font-family: var(--inv-mono); letter-spacing: 0.14em; background: var(--inv-fg); color: var(--inv-ink); border-color: var(--inv-fg); }
+.tkx-card--inv .tkx-btn:hover { background: transparent; color: var(--inv-fg); border-color: var(--inv-fg); box-shadow: none; transform: translateY(-2px); }
+.tkx-card--inv .tkx-list svg { color: var(--inv-fg); }
 
 /* Grille a 4 passes (SGN Invest) */
 .tkx-grid--4 { grid-template-columns: repeat(4, 1fr); max-width: 1320px; }

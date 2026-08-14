@@ -311,17 +311,20 @@
 
   const tickets = [
     { tier: 'Startup', price: '€390',
-      intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
-      'Sport Innovation evening with PSG Labs at the Parc des Princes, Thursday 27 May',
-      'Startup rate on the exhibition floor',
-    ], note: 'Eligibility: under $3 million raised in total funding, and under 5 years old.',
-      brand: { label: 'Powered by', name: 'PSG Labs', logo: 'assets/jury/psg-labs-logo.png' } },
+      // Bloc dedie a la soiree PSG Labs, avec le logo en grand.
+      feature: { label: 'Startup night', text: 'Sport Innovation evening with PSG Labs at the Parc des Princes, Thursday 27 May',
+        logo: 'assets/jury/psg-labs-logo.png', logoAlt: 'PSG Labs' },
+      intro: 'ELIGIBILITY REQUIREMENTS',
+      lede: 'To qualify for the discounted pass and unlock full Pro-level perks, your startup must meet both criteria:', perks: [
+      'Funding stage: under $3 million raised in total funding.',
+      'Company age: under 5 years old.',
+    ], note: 'Pass benefits: the exact same perks as a Pro ticket.' },
     { tier: 'Pro', price: '€790', intro: 'PERKS OF A PRO TICKET:', perks: [
       'Full 2-day access to all panels, keynotes & workshop sessions',
       'Exhibition floor access for both days',
       'All food and drinks during the event',
       'Access to the SGN networking app & networking lounge',
-    ], highlight: { label: 'Also included', text: 'A SportBusiness subscription*',
+    ], highlight: { label: 'Also included', text: 'A 1-year SportBusiness subscription*',
       logo: CDN + 'B2mDXyEk5zSAbiKFYNLvipEKaE.png', logoAlt: 'SportBusiness',
       footnote: '* Pro tickets only.' } },
     { tier: 'VIP', price: '€2290', featured: true, intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
