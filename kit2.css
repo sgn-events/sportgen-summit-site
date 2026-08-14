@@ -2155,12 +2155,16 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 @media (max-width: 560px) { .snap__stats { flex-direction: column; } .snap__line { font-size: 14px; } }
 
 /* Lead-capture modal gating the snapshot PDF */
-.snapgate { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 24px; background: rgba(0,5,25,0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: snapgate-in 0.24s var(--ease-out, cubic-bezier(.22,1,.36,1)); }
+/* padding-top degage la nav fixe : centre sur toute la hauteur, le panneau passait
+   sous elle et son contour haut etait coupe. */
+.snapgate { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 24px; padding-top: calc(var(--nav-height, 60px) + 28px); background: rgba(0,5,25,0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: snapgate-in 0.24s var(--ease-out, cubic-bezier(.22,1,.36,1)); }
 @keyframes snapgate-in { from { opacity: 0; } to { opacity: 1; } }
-/* max-height divisee par --page-zoom : body porte zoom: var(--page-zoom) et les unites
-   viewport ne sont pas compensees. Sans ca, a 1.4 (>=2200px) 90vh valait 1260px reels
-   pour 1000px de fenetre, et la modale sortait de l'ecran en haut comme en bas. */
-.snapgate__panel { --snapgate-pad: clamp(28px, 3vw, 44px); position: relative; display: flex; flex-direction: column; width: min(720px, 100%); max-height: calc(90vh / var(--page-zoom, 1)); overflow: auto; padding: var(--snapgate-pad); border-radius: var(--radius-lg, 20px); border: 1px solid var(--border-gold); background: linear-gradient(180deg, #00012B 0%, #070714 100%); box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
+/* max-height: 100% se resout sur la zone de grille de .snapgate, soit la fenetre moins
+   ses paddings (dont la reserve pour la nav). Donc pas de vh ici : body porte
+   zoom: var(--page-zoom) et les unites viewport ne sont pas compensees par le zoom,
+   90vh valait 1260px reels pour 1000px de fenetre a 1.4. Le pourcentage, lui, est
+   dans le meme repere que le parent. */
+.snapgate__panel { --snapgate-pad: clamp(28px, 3vw, 44px); position: relative; display: flex; flex-direction: column; width: min(720px, 100%); max-height: 100%; overflow: auto; padding: var(--snapgate-pad); border-radius: var(--radius-lg, 20px); border: 1px solid var(--border-gold); background: linear-gradient(180deg, #00012B 0%, #070714 100%); box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
 .snapgate__panel::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: var(--glow-gold-base); }
 /* La croix reste atteignable quand le panneau defile : sticky sur le conteneur qui
    scrolle, au lieu d'absolute qui la faisait sortir du champ des qu'on descendait.
