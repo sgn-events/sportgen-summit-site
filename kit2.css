@@ -2338,6 +2338,12 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
    pour que leur filet tombe au meme niveau d'une carte a l'autre. Les cartes font deja
    la meme hauteur via la grille, seul le pied faisait varier la position du trait. */
 .tkx-card__feat, .tkx-card__hl { min-height: var(--tkx-foot-h, 100px); }
+/* Ecart minimum AU-DESSUS du filet : le padding du bloc est sous le trait, et son
+   margin-top:auto retombe a zero des que la carte est pleine, le filet venait alors
+   coller le texte precedent. */
+.tkx-card:has(.tkx-card__feat) .tkx-card__note,
+.tkx-card:has(.tkx-card__hl) .tkx-card__note { margin-bottom: 20px; }
+.tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 20px; }
 /* margin-top:auto colle le bloc en bas mais tombe a 0 quand la carte est pleine :
    l'ecart minimum vient de la liste au-dessus. */
 .tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 20px; }
