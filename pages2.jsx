@@ -55,8 +55,8 @@ function PersonaExplorer({ personas, selected, onPick }) {
       <div className="sg-container">
         <div className="persona-pick__head reveal">
           <span className="sg-eyebrow sg-eyebrow--gold">{active ? 'Tailored for ' + active.label : 'Make it yours'}</span>
-          <h2 className="persona-pick__title">What brings you to <span className="sg-gold-text">SPORT[GEN]</span>?</h2>
-          <p className="persona-pick__lead">{active ? active.intro : "Tell us where you sit in the ecosystem and we'll tailor the case for attending to you."}</p>
+          <h2 className="persona-pick__title">Where do you fit at <span className="sg-gold-text">SPORT[GEN]</span>?</h2>
+          <p className="persona-pick__lead">{active ? active.intro : "Pick the one that describes you and we'll tailor the case for attending."}</p>
         </div>
         <div className="persona-grid reveal" role="radiogroup" aria-label="Which best describes you?">
           {personas.map((p) => {
