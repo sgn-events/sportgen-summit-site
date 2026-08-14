@@ -571,7 +571,10 @@ body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
 .brevo--navy #sib-container .checkbox::before { border-color: transparent; }
 .brevo--navy #sib-container input:checked + .checkbox { background: var(--gold); border-color: var(--gold); }
 .brevo--navy #sib-container input:checked + .checkbox::before { border-color: var(--navy-darkest); }
-.brevo--navy .sib-form-block__button { border-radius: var(--radius-pill, 999px) !important; padding: 13px 28px; }
+/* Meme rayon que le DA unifie des boutons plus bas dans ce fichier. 8px y est code en
+   dur faute de token correspondant (--radius-xs vaut 6, --radius-sm 10) : les deux
+   valeurs doivent bouger ensemble. La variante --invest garde sa pill (sis.css). */
+.brevo--navy .sib-form-block__button { border-radius: 8px !important; padding: 13px 28px; }
 .brevo__note { margin: 12px 0 0; font-size: 14px; color: var(--text-muted); }
 .brevo__note a { color: var(--gold); }
 .git__stars { align-self: center; width: 226px; height: auto; }
@@ -2154,7 +2157,10 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 /* Lead-capture modal gating the snapshot PDF */
 .snapgate { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 24px; background: rgba(0,5,25,0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: snapgate-in 0.24s var(--ease-out, cubic-bezier(.22,1,.36,1)); }
 @keyframes snapgate-in { from { opacity: 0; } to { opacity: 1; } }
-.snapgate__panel { position: relative; width: min(720px, 100%); max-height: 90vh; overflow: auto; padding: clamp(28px, 3vw, 44px); border-radius: var(--radius-lg, 20px); border: 1px solid var(--border-gold); background: linear-gradient(180deg, #00012B 0%, #070714 100%); box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
+/* max-height divisee par --page-zoom : body porte zoom: var(--page-zoom) et les unites
+   viewport ne sont pas compensees. Sans ca, a 1.4 (>=2200px) 90vh valait 1260px reels
+   pour 1000px de fenetre, et la modale sortait de l'ecran en haut comme en bas. */
+.snapgate__panel { position: relative; width: min(720px, 100%); max-height: calc(90vh / var(--page-zoom, 1)); overflow: auto; padding: clamp(28px, 3vw, 44px); border-radius: var(--radius-lg, 20px); border: 1px solid var(--border-gold); background: linear-gradient(180deg, #00012B 0%, #070714 100%); box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
 .snapgate__panel::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: var(--glow-gold-base); }
 .snapgate__close { position: absolute; top: 18px; right: 18px; z-index: 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; border: 1px solid var(--border-faint); background: rgba(255,255,255,0.06); color: var(--white); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
 .snapgate__close:hover { border-color: var(--accent); color: var(--accent); }
