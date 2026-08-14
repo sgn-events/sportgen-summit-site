@@ -2160,9 +2160,19 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 /* max-height divisee par --page-zoom : body porte zoom: var(--page-zoom) et les unites
    viewport ne sont pas compensees. Sans ca, a 1.4 (>=2200px) 90vh valait 1260px reels
    pour 1000px de fenetre, et la modale sortait de l'ecran en haut comme en bas. */
-.snapgate__panel { position: relative; width: min(720px, 100%); max-height: calc(90vh / var(--page-zoom, 1)); overflow: auto; padding: clamp(28px, 3vw, 44px); border-radius: var(--radius-lg, 20px); border: 1px solid var(--border-gold); background: linear-gradient(180deg, #00012B 0%, #070714 100%); box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
+.snapgate__panel { --snapgate-pad: clamp(28px, 3vw, 44px); position: relative; display: flex; flex-direction: column; width: min(720px, 100%); max-height: calc(90vh / var(--page-zoom, 1)); overflow: auto; padding: var(--snapgate-pad); border-radius: var(--radius-lg, 20px); border: 1px solid var(--border-gold); background: linear-gradient(180deg, #00012B 0%, #070714 100%); box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
 .snapgate__panel::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: var(--glow-gold-base); }
-.snapgate__close { position: absolute; top: 18px; right: 18px; z-index: 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; border: 1px solid var(--border-faint); background: rgba(255,255,255,0.06); color: var(--white); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+/* La croix reste atteignable quand le panneau defile : sticky sur le conteneur qui
+   scrolle, au lieu d'absolute qui la faisait sortir du champ des qu'on descendait.
+   Le panneau est passe en flex colonne pour la porter, d'ou align-self plutot que right.
+   Les deux marges la replacent a 18px du bord haut comme avant, tout en neutralisant sa
+   hauteur dans le flux : margin-top + 36 + margin-bottom = 0. Sans ca elle retombait sur
+   la ligne de l'eyebrow et le titre passait dessous.
+   `top` est negatif parce que la contrainte du sticky part de la boite de CONTENU, donc
+   apres le padding : un top positif la renvoyait sous l'eyebrow. */
+.snapgate__close { position: sticky; top: calc(18px - var(--snapgate-pad)); align-self: flex-end; flex: none;
+  margin-top: calc(18px - var(--snapgate-pad)); margin-bottom: calc(var(--snapgate-pad) - 54px);
+  z-index: 3; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; border: 1px solid var(--border-faint); background: rgba(255,255,255,0.06); color: var(--white); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
 .snapgate__close:hover { border-color: var(--accent); color: var(--accent); }
 .snapgate__close svg { width: 16px; height: 16px; }
 .snapgate__title { position: relative; z-index: 1; margin: 10px 0 8px; font-size: clamp(26px, 20px + 1.2vw, 36px); font-weight: 500; letter-spacing: -0.04em; line-height: 1.2; color: var(--white); }
