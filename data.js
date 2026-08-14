@@ -390,8 +390,8 @@
     },
     {
       key: 'tech', acc: 4,
-      label: 'Startups', short: 'Tech · Data · Platforms',
-      titleWhite: 'Buyers, partners and capital', titleGold: 'for tech.',
+      label: 'Startups', short: 'Products · Platforms · Data',
+      titleWhite: 'Buyers, partners and capital', titleGold: 'for startups.',
       intro: 'Get in front of the rights holders, brands and investors deciding which platforms define the next era of sport.',
       cta: { label: 'Apply to pitch at The Draft', href: '#/startup-competition' },
       cards: [

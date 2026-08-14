@@ -90,7 +90,7 @@ function WhyAttendPage() {
     ['Brands', 'Brands looking to connect with rights holders and reach engaged global audiences.'],
     ['Investment & Advisory', 'Investors and advisors scouting the next wave of value creation in sport.'],
     ['Agencies', 'Agencies building the partnerships and campaigns that move the industry.'],
-    ['Tech', 'Technology and data platforms reshaping how sport is produced and consumed.'],
+    ['Startups', 'Startups and scaleups building the products, platforms and formats of the next era.'],
     ['Media', 'Media and entertainment companies defining how the story gets told.'],
   ];
   const [persona, setPersona] = usePageState(() => {
