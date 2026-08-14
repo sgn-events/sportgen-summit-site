@@ -8,19 +8,16 @@
 /* Copy shared by all four forms — kept in one place so they stay in sync. Le message de
    succes ci-dessous n'est qu'un a-plat: Brevo renvoie le sien, propre a chaque formulaire. */
 const BREVO_COPY = {
-  consentIntro: 'SGN is committed to protecting and respecting your privacy, and we&#39;ll only use your personal '
-    + 'information to administer your account and to provide the products and services you requested from us. From '
-    + 'time to time, we would like to contact you about our products and services, as well as other content that may '
-    + 'be of interest to you. If you consent to us contacting you for this purpose, please tick below to say how you '
-    + 'would like us to contact you:',
+  /* Une seule ligne d'explication au lieu des trois pavés hérités de HubSpot (150 mots -> 45).
+     Ce sont les libellés des cases qui engagent juridiquement, pas la prose autour: on garde
+     donc les deux libellés au mot près, et on ne resserre que l'explication. Les trois
+     informations qui comptent y restent: la finalité, le droit de retrait, le lien vers la
+     politique de confidentialité. */
+  consentIntro: 'We use your details to send you what you asked for and to keep you posted on SPORT[GEN]. '
+    + 'Unsubscribe any time. See our <a target="_blank" href="https://sportgensummit.com/privacy" '
+    + 'rel="nofollow noopener">Privacy Policy</a>.',
   optInLabel: 'I agree to receive other communications from SGN.',
-  processingIntro: 'In order to provide you the content requested, we need to store and process your personal data. '
-    + 'If you consent to us storing your personal data for this purpose, please tick the checkbox below.',
   processingLabel: 'I agree to allow SGN to store and process my personal data.',
-  unsubscribe: 'You can unsubscribe from these communications at any time. For more information on how to '
-    + 'unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, '
-    + 'please review our <a target="_blank" href="https://sportgensummit.com/privacy" rel="nofollow noopener">'
-    + 'Privacy Policy</a>.',
   success: 'Thank you. Our team will contact you shortly.',
   error: 'Your subscription could not be saved. Please try again.',
 };
@@ -319,9 +316,7 @@ function brevoFormHTML(formKey) {
     + brevoPhoneField(v)
     + brevoText(BREVO_COPY.consentIntro, v.textColor)
     + brevoOptIn('OPT_IN', BREVO_COPY.optInLabel, v.optInColor)
-    + brevoText(BREVO_COPY.processingIntro, v.textColor)
     + brevoOptIn('DATA_PROCESSING_CONSENT', BREVO_COPY.processingLabel, v.optInColor)
-    + brevoText(BREVO_COPY.unsubscribe, v.textColor)
     + '<div style="padding: 8px 0;"><div class="sib-form-block" style="text-align: left">'
     + '<button class="sib-form-block__button sib-form-block__button-with-loader"'
     + ' style="font-family:Helvetica, sans-serif; font-size:16px; font-weight:700; text-align:left; color:'
