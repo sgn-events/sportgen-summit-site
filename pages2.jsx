@@ -29,10 +29,8 @@ function PersonaExplorer({ personas, selected, onPick }) {
   const cardsRef = React.useRef(null);
   const active = personas.find((p) => p.key === selected) || null;
 
-  // Une raison = une carte : [titre, phrase, photo] -> {title, items, photo}.
-  const cards = active
-    ? active.reasons.map((r) => ({ title: r[0], items: [r[1]], photo: r[2] }))
-    : opportunities;
+  // Meme forme que `opportunities` : {title, photo, items[3]}.
+  const cards = active ? active.cards : opportunities;
 
   // Le scroll-reveal global n'observe que les .reveal presents au changement de
   // route. Ces cartes-ci sont remontees a chaque selection : sans ca elles

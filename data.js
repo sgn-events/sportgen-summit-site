@@ -346,10 +346,10 @@
       titleWhite: 'Capital, partners & growth for', titleGold: 'rights holders.',
       intro: 'Meet the investors, brands and platforms actively looking to back the next era of teams, leagues and federations.',
       cta: { label: 'See the 2026 speaker lineup', href: '#/speakers' },
-      reasons: [
-        ['Meet capital that is deploying', 'Sit down with private equity, sovereign funds and family offices actively allocating to sport.', 'assets_opt/assets__photos__gala-handshake.jpg'],
-        ['Find your next sponsor', 'Curated introductions to brands and agencies looking for rights to activate against.', 'assets_opt/assets__partner-bnp-stage.jpg'],
-        ['Benchmark new revenue models', 'Direct-to-fan, data and media rights, see what is actually working from peers across the globe.', 'assets_opt/assets__news__sportgen-panel.jpg'],
+      cards: [
+        { title: 'Meet capital that is deploying', photo: 'assets_opt/assets__photos__gala-handshake.jpg', items: ['Private equity, sovereign funds & family offices', 'Investors actively allocating to sport', 'One-to-one meetings, not cold outreach'] },
+        { title: 'Find your next sponsor', photo: 'assets_opt/assets__partner-bnp-stage.jpg', items: ['Brands looking for rights to activate', 'Curated introductions', 'Agencies that build the partnership'] },
+        { title: 'Benchmark new revenue models', photo: 'assets_opt/assets__news__sportgen-panel.jpg', items: ['Direct-to-fan & media rights', 'Data and new commercial models', 'Real-world case studies from global peers'] },
       ],
     },
     {
@@ -358,10 +358,10 @@
       titleWhite: 'The right rights, and partners to activate them, ', titleGold: 'for brands.',
       intro: 'Find the properties, agencies and technology that turn sponsorship spend into measurable fan engagement.',
       cta: { label: 'See the 2026 speaker lineup', href: '#/speakers' },
-      reasons: [
-        ['Scout sponsorship inventory', 'Meet rights holders across leagues, teams and federations under one roof.', 'assets_opt/assets__partner-bnp-stage.jpg'],
-        ['Prove the ROI', 'Sessions and case studies on attribution, attention and what actually moves the needle.', 'assets_opt/assets__news__sportgen-panel.jpg'],
-        ['Build your activation stack', 'Connect with agencies, creators and platforms to bring campaigns to life.', CDN + 't4dVvEId1PV0qnMajtfRbF5rvi8.jpg'],
+      cards: [
+        { title: 'Scout sponsorship inventory', photo: 'assets_opt/assets__partner-bnp-stage.jpg', items: ['Leagues, teams & federations under one roof', 'Rights available to activate', 'Curated meetings'] },
+        { title: 'Prove the ROI', photo: 'assets_opt/assets__news__sportgen-panel.jpg', items: ['Attribution & attention measurement', 'Real-world case studies', 'Sessions on what moves the needle'] },
+        { title: 'Build your activation stack', photo: CDN + 't4dVvEId1PV0qnMajtfRbF5rvi8.jpg', items: ['Agencies, creators & platforms', 'Technology and data partners', 'Campaigns from idea to execution'] },
       ],
     },
     {
@@ -370,10 +370,10 @@
       titleWhite: 'Deal flow and the next wave of value', titleGold: 'for investors.',
       intro: 'Source opportunities, pressure-test theses and meet the operators shaping valuations across the sports economy.',
       cta: { label: 'Join SGN Invest', href: 'sis.html' },
-      reasons: [
-        ['Source proprietary deal flow', 'Rights holders, startups and operators raising and open to capital.', 'assets_opt/assets__photos__the-draft-stage.jpg'],
-        ['Sharpen your thesis', 'Five forward-looking themes on where value is migrating next in sport.', 'assets_opt/assets__news__sportgen-stage.jpg'],
-        ['Meet co-investors & LPs', 'The capital community of sport, gathered in one room.', 'assets_opt/assets__vip-networking.jpg'],
+      cards: [
+        { title: 'Source proprietary deal flow', photo: 'assets_opt/assets__photos__the-draft-stage.jpg', items: ['Rights holders open to capital', '200+ startups pitching at The Draft', 'Operators actively raising'] },
+        { title: 'Sharpen your thesis', photo: 'assets_opt/assets__news__sportgen-stage.jpg', items: ['5 future-oriented themes', 'Where value is migrating next', 'Real-world case studies'] },
+        { title: 'Meet co-investors & LPs', photo: 'assets_opt/assets__vip-networking.jpg', items: ['The capital community of sport', 'Investor Breakfast & VIP Dinner', 'Private meeting rooms'] },
       ],
     },
     {
@@ -382,10 +382,10 @@
       titleWhite: 'Win mandates and partners', titleGold: 'for agencies.',
       intro: 'Meet the brands and rights holders commissioning the partnerships and campaigns that move the industry.',
       cta: { label: 'See the 2026 speaker lineup', href: '#/speakers' },
-      reasons: [
-        ['Meet brands with budgets', 'Decision-makers looking for partners to design and run their programs.', CDN + 'grjj04CQv3NcrpZa86oFpvIHN0Q.jpg'],
-        ['Land new rights-holder clients', 'Teams and leagues seeking commercial and creative expertise.', CDN + 'fgOqDRsDf4r3haBleHzcp5GSE.jpg'],
-        ['Stay ahead of the brief', 'See what CMOs and rights holders will be asking for next.', 'assets_opt/assets__news__sportgen-panel.jpg'],
+      cards: [
+        { title: 'Meet brands with budgets', photo: CDN + 'grjj04CQv3NcrpZa86oFpvIHN0Q.jpg', items: ['Decision-makers commissioning programs', '300 organizations represented', 'Curated meetings'] },
+        { title: 'Land new rights-holder clients', photo: CDN + 'fgOqDRsDf4r3haBleHzcp5GSE.jpg', items: ['Teams, leagues & federations', 'Commercial and creative mandates', 'Private meeting rooms'] },
+        { title: 'Stay ahead of the brief', photo: 'assets_opt/assets__news__sportgen-panel.jpg', items: ['What CMOs will ask for next', '5 future-oriented themes', 'Real-world case studies'] },
       ],
     },
     {
@@ -394,10 +394,10 @@
       titleWhite: 'Buyers, partners and capital', titleGold: 'for tech.',
       intro: 'Get in front of the rights holders, brands and investors deciding which platforms define the next era of sport.',
       cta: { label: 'Apply to pitch at The Draft', href: '#/startup-competition' },
-      reasons: [
-        ['Reach real buyers', 'Leagues, teams and brands actively evaluating new platforms and data products.', CDN + 't4dVvEId1PV0qnMajtfRbF5rvi8.jpg'],
-        ['Pitch on the main stage', 'The Draft, compete with 200+ startups for visibility and capital.', 'assets_opt/assets__photos__the-draft-stage.jpg'],
-        ['Find your investors', 'VCs and strategics scouting the next infrastructure of sport.', 'assets_opt/assets__vip-networking.jpg'],
+      cards: [
+        { title: 'Reach real buyers', photo: CDN + 't4dVvEId1PV0qnMajtfRbF5rvi8.jpg', items: ['Leagues, teams & brands evaluating platforms', 'Innovation Room & demo space', 'Curated meetings with decision-makers'] },
+        { title: 'Pitch on the main stage', photo: 'assets_opt/assets__photos__the-draft-stage.jpg', items: ['The Draft, 200+ startups competing', 'Pitch in front of the full summit', 'A jury of investors and operators'] },
+        { title: 'Find your investors', photo: 'assets_opt/assets__vip-networking.jpg', items: ['VCs and strategics scouting sport', 'Investor Breakfast', 'Private meeting rooms'] },
       ],
     },
     {
@@ -406,10 +406,10 @@
       titleWhite: 'Rights, audiences and the story', titleGold: 'for media.',
       intro: 'Connect with the rights holders, platforms and brands defining how sport gets distributed and told.',
       cta: { label: 'Apply for a media pass', href: '#/medias' },
-      reasons: [
-        ['Secure the next rights', 'Meet leagues and federations rethinking distribution and direct-to-fan.', 'assets_opt/assets__news__sportgen-stage.jpg'],
-        ['Build models that hold', 'Sessions on margins, retention and winning the second screen.', 'assets_opt/assets__news__sportgen-panel.jpg'],
-        ['Partner on content', 'Brands, creators and platforms looking to co-create the story.', CDN + 'Ia440MI3OIGoYp0KDRROqwrm0.jpg'],
+      cards: [
+        { title: 'Secure the next rights', photo: 'assets_opt/assets__news__sportgen-stage.jpg', items: ['Leagues & federations rethinking distribution', 'Direct-to-fan strategies', 'Curated meetings with rights holders'] },
+        { title: 'Build models that hold', photo: 'assets_opt/assets__news__sportgen-panel.jpg', items: ['Margins, retention & the second screen', 'Real-world case studies', '100 speakers across the industry'] },
+        { title: 'Partner on content', photo: CDN + 'Ia440MI3OIGoYp0KDRROqwrm0.jpg', items: ['Brands, creators & platforms', 'Interview Area & Podcast Studio', 'Co-create the story'] },
       ],
     },
   ];
