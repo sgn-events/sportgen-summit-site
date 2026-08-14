@@ -156,6 +156,7 @@ function TicketsBlock({ first, items, heading, id, plain, wide, theme }) {
                   <span className="tkx-card__feat-body">
                     <span className="tkx-card__feat-label">{t.feature.label}</span>
                     <span className="tkx-card__feat-text">{t.feature.text}</span>
+                    {t.feature.meta ? <span className="tkx-card__feat-meta">{t.feature.meta}</span> : null}
                   </span>
                 </div>
               ) : null}

@@ -312,7 +312,8 @@
   const tickets = [
     { tier: 'Startup', price: '€390',
       // Bloc dedie a la soiree PSG Labs, avec le logo en grand.
-      feature: { label: 'Startup night', text: 'Sport Innovation evening with PSG Labs at the Parc des Princes, Thursday 27 May',
+      feature: { label: 'Startup night', text: 'Sport Innovation evening with PSG Labs',
+        meta: 'Parc des Princes · Thursday 27 May',
         logo: 'assets/jury/psg-labs-logo.png', logoAlt: 'PSG Labs' },
       intro: 'ELIGIBILITY REQUIREMENTS',
       lede: 'To qualify for the discounted pass and unlock full Pro-level perks, your startup must meet both criteria:', perks: [

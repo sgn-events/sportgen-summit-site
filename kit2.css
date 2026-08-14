@@ -2359,15 +2359,17 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .tkx-card--pro .tkx-btn:hover { border-color: rgba(190,205,255,1); background: rgba(64,108,235,0.34); }
 @media (prefers-reduced-motion: reduce) { .tkx-card--pro::after { animation: none; opacity: 0.8; } }
 
-/* Bloc partenaire en pied de carte (Startup x PSG Labs), logo en grand a gauche.
+/* Bloc partenaire en pied de carte (Startup x PSG Labs), logo a gauche, sans contenant :
+   un filet suffit a le detacher. Titre puis ligne de lieu/date, plus lisible qu'une
+   phrase unique qui courait sur quatre lignes dans une colonne etroite.
    Intitule cale sur .tkx-card__intro, meme registre que "ELIGIBILITY REQUIREMENTS". */
-.tkx-card__feat { margin-top: auto; width: 100%; display: flex; align-items: center; gap: 16px;
-  padding: 14px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); }
-.tkx-card:has(.tkx-card__feat) .tkx-list { margin-bottom: 20px; }
-.tkx-card__feat-logo { flex: none; display: block; height: 52px; width: auto; }
-.tkx-card__feat-body { display: flex; flex-direction: column; gap: 5px; }
+.tkx-card__feat { margin-top: auto; padding-top: 20px; width: 100%; display: flex; align-items: center; gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.14); }
+.tkx-card__feat-logo { flex: none; display: block; height: 46px; width: auto; }
+.tkx-card__feat-body { display: flex; flex-direction: column; gap: 4px; }
 .tkx-card__feat-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
-.tkx-card__feat-text { font-size: 14px; font-weight: var(--fw-medium); line-height: 1.45; color: var(--white); }
+.tkx-card__feat-text { font-size: 14px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
+.tkx-card__feat-meta { font-size: 13px; line-height: 1.35; color: rgba(255,255,255,0.62); }
 
 /* Passes SGN Invest dans la DA du site Invest : angles vifs, mono capitale, boutons carres. */
 .tkx-card--inv {
