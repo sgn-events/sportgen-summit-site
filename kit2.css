@@ -2519,3 +2519,57 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 @media (max-width: 900px) { .rlv-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 860px) { .rlv-week { grid-template-columns: 1fr; } .rlv-week__card { aspect-ratio: 16 / 10; } }
 @media (max-width: 620px) { .rlv-grid { grid-template-columns: 1fr; } }
+
+/* ============ Audit mobile (aout 2026) ============
+   Tout ce bloc est scope a des media queries max-width : il ne change
+   RIEN au rendu ordinateur. Objectifs : pages moins longues, textes
+   lisibles sur les photos claires, burger visible partout. */
+
+/* Le burger devient une croix quand le menu est ouvert (le burger
+   n'existe qu'en mobile, kit.css le masque au-dela de 900px). */
+.sg-nav__burger span { transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out); }
+.sg-nav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.sg-nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.sg-nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  /* Les heros de page occupaient un ecran entier pour un titre :
+     hauteur naturelle sur mobile, chaque page gagne ~1 ecran. */
+  .page-hero, .page-hero--tall { min-height: 0; padding-top: calc(var(--nav-height) + 5rem); padding-bottom: 3.5rem; }
+}
+
+@media (max-width: 860px) {
+  /* Cartes "The rest of the week" (Relive) : voile renforce, le texte
+     passait sur des zones claires des photos en format 16/10. */
+  .rlv-week__grad { background: linear-gradient(to top, rgba(0,5,25,0.96) 8%, rgba(0,5,25,0.62) 52%, rgba(0,5,25,0.12) 88%); }
+}
+
+@media (max-width: 600px) {
+  /* Sections un peu plus compactes sur telephone. */
+  :root { --section-pad-y: 2.25rem; }
+
+  /* Agenda : rangs d'intervenants plus denses (photo et nom plus petits),
+     la page passait 14 000px de haut. */
+  .ag-guest__photo { width: 56px; height: 58px; }
+  .ag-guest--mod .ag-guest__photo { width: 52px; height: 54px; }
+  .ag-guest__row { gap: 14px; }
+  .ag-guest__profile { width: auto; flex: 1 1 0; }
+  .ag-guest__name { font-size: 19px; }
+  .ag-guests { gap: 16px; }
+  .ag-session__title { font-size: 23px; }
+  /* La carte "Moderated by" (width: min-content + largeurs fixes des
+     enfants) debordait de 32px a droite de l'ecran. */
+  .ag-guest--mod { width: 100%; box-sizing: border-box; }
+
+  /* Cartes photo a puces (Startup, Medias, Tickets) : le degrade ne
+     couvrait pas les lignes de texte sur les photos claires. */
+  .opp-card__shade { height: 100%; transform: none; background: linear-gradient(180deg, rgba(13,13,13,0.94) 0%, rgba(13,13,13,0.55) 45%, rgba(13,13,13,0) 78%); }
+
+  /* Cartes speakers : typo reduite (les noms longs passaient sur les
+     visages) et voile bas etendu pour garder le texte lisible. */
+  .sg-speaker__name { font-size: 15px; }
+  .sg-speaker__role { font-size: 11px; }
+  .sg-speaker__org { font-size: 12px; }
+  .sg-speaker__profile { padding: 12px; }
+  .sg-speaker__scrim { background: linear-gradient(to top, rgba(3,4,12,0.94) 0%, rgba(3,4,12,0.8) 26%, rgba(3,4,12,0.38) 52%, rgba(3,4,12,0) 72%); }
+}

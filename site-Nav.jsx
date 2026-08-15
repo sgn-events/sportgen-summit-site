@@ -41,7 +41,7 @@ function Nav() {
     const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.18);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    const onHash = () => setRoute(window.location.hash.replace('#', '') || '/');
+    const onHash = () => { setRoute(window.location.hash.replace('#', '') || '/'); setOpen(false); setOpenCol(null); };
     window.addEventListener('hashchange', onHash);
     return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('hashchange', onHash); };
   }, []);

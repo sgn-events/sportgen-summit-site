@@ -509,9 +509,30 @@
   .inv-hero__cta { justify-content: flex-start; }
   .inv-shead { grid-template-columns: 1fr; gap: 14px; }
   .inv-shead__idx { padding-top: 0; }
-  .inv-voices, .inv-part, .inv-figs { grid-template-columns: 1fr; }
+  /* Audit mobile : les portrats speakers restent sur 2 colonnes (en 1
+     colonne chaque carte prenait presque un ecran, page interminable). */
+  .inv-part, .inv-figs { grid-template-columns: 1fr; }
+  .inv-voice__name { font-size: 15px; }
+  .inv-voice__role { font-size: 12.5px; }
+  .inv-voice__body { padding: 12px 12px 16px; }
   .inv-fig:nth-child(2n) { border-right: 0; }
   .inv-pcol:nth-child(odd) { border-right: 0; }
   .inv-ses { grid-template-columns: 40px 1fr; }
   .inv-ses__who { grid-column: 2; text-align: left; margin-top: 4px; }
+}
+
+/* Audit mobile : le burger (spans blancs) etait invisible sur le fond
+   ivoire des pages Invest. Le burger n'existe qu'en mobile. Valeur en
+   dur car --inv-ink est defini sur .inv et la nav vit en dehors. */
+.sg-nav--inv .sg-nav__burger span { background: #0b0b0d; }
+
+/* Audit mobile : le tiroir mobile reste bleu nuit meme sur les pages
+   Invest, mais l'override encre sombre ci-dessus s'appliquait aussi au
+   CTA "2027 Tickets" du tiroir, qui devenait invisible. On lui rend le
+   style standard du CTA nav (kit2.css, "Nav CTA principal"). */
+.sg-nav--inv .sg-nav__mobile .sg-btn--nav-navy {
+  background: var(--navy-darkest) !important;
+  border-color: rgba(180,200,255,0.85) !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 1px rgba(150,175,255,0.45), 0 8px 30px -8px rgba(95,130,255,0.75) !important;
 }
