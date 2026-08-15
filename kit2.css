@@ -2337,7 +2337,7 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 /* Hauteur minimale partagee par les deux blocs de pied (Startup night / Also included)
    pour que leur filet tombe au meme niveau d'une carte a l'autre. Les cartes font deja
    la meme hauteur via la grille, seul le pied faisait varier la position du trait. */
-.tkx-card__feat, .tkx-card__hl { min-height: var(--tkx-foot-h, 100px); }
+.tkx-card__feat, .tkx-card__hl { min-height: var(--tkx-foot-h, 126px); }
 /* Ecart minimum AU-DESSUS du filet : le padding du bloc est sous le trait, et son
    margin-top:auto retombe a zero des que la carte est pleine, le filet venait alors
    coller le texte precedent. */
@@ -2353,6 +2353,9 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .tkx-card__hl-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
 .tkx-card__hl-logo { flex: none; display: block; height: 22px; width: auto; }
 .tkx-card__hl-text { font-size: 15px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
+/* Renvoi de l'asterisque : marge propre, le gap du bloc l'ecarterait comme une ligne
+   a part entiere alors qu'il appartient a la ligne au-dessus. */
+.tkx-card__hl-note { margin-top: -4px; font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.45); }
 
 /* Carte Pro : fond bleu plus affirme que les autres, liseré vif, et une lueur qui
    respire lentement pour la faire vivre sans animation agressive. */
