@@ -316,7 +316,7 @@
         meta: 'Parc des Princes · Thursday 27 May',
         logo: 'assets/jury/psg-labs-logo.png', logoAlt: 'PSG Labs' },
       intro: 'ELIGIBILITY REQUIREMENTS',
-      lede: 'To qualify for the discounted pass and unlock full Pro-level perks, your startup must meet both criteria:', perks: [
+      lede: 'To qualify for the discounted pass, your startup must meet both criteria:', perks: [
       'Funding stage: under $3 million raised in total funding.',
       'Company age: under 5 years old.',
     ], note: 'Pass benefits: the exact same perks as a Pro ticket.' },
@@ -325,9 +325,8 @@
       'Exhibition floor access for both days',
       'All food and drinks during the event',
       'Access to the SGN networking app & networking lounge',
-    ], highlight: { label: 'Also included', text: 'A 1-year SportBusiness subscription*',
-      logo: CDN + 'B2mDXyEk5zSAbiKFYNLvipEKaE.png', logoAlt: 'SportBusiness',
-      footnote: '* Pro & VIP tickets only.' } },
+    ], highlight: { label: 'Also included', text: 'A 1-year SportBusiness subscription',
+      logo: CDN + 'B2mDXyEk5zSAbiKFYNLvipEKaE.png', logoAlt: 'SportBusiness' } },
     { tier: 'VIP', price: '€2290', featured: true, intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
       'Invitation to the VIP Dinner',
       'Access to the VIP Lounge on both days',

@@ -2337,16 +2337,16 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 /* Hauteur minimale partagee par les deux blocs de pied (Startup night / Also included)
    pour que leur filet tombe au meme niveau d'une carte a l'autre. Les cartes font deja
    la meme hauteur via la grille, seul le pied faisait varier la position du trait. */
-.tkx-card__feat, .tkx-card__hl { min-height: var(--tkx-foot-h, 126px); }
+.tkx-card__feat, .tkx-card__hl { min-height: var(--tkx-foot-h, 102px); }
 /* Ecart minimum AU-DESSUS du filet : le padding du bloc est sous le trait, et son
    margin-top:auto retombe a zero des que la carte est pleine, le filet venait alors
    coller le texte precedent. */
 .tkx-card:has(.tkx-card__feat) .tkx-card__note,
 .tkx-card:has(.tkx-card__hl) .tkx-card__note { margin-bottom: 20px; }
-.tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 20px; }
+.tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 16px; }
 /* margin-top:auto colle le bloc en bas mais tombe a 0 quand la carte est pleine :
    l'ecart minimum vient de la liste au-dessus. */
-.tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 20px; }
+.tkx-card:has(.tkx-card__hl) .tkx-list { margin-bottom: 16px; }
 /* Intitule a gauche, logo cale sur la marge droite de la carte : le libelle remonte
    d'une ligne au lieu d'etre pousse sous le logo. */
 .tkx-card__hl-head { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -2380,7 +2380,7 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
    Intitule cale sur .tkx-card__intro, meme registre que "ELIGIBILITY REQUIREMENTS". */
 .tkx-card__feat { margin-top: auto; padding-top: 20px; width: 100%; display: flex; align-items: center; gap: 14px;
   border-top: 1px solid rgba(255,255,255,0.14); }
-.tkx-card__feat-logo { flex: none; display: block; height: 40px; width: auto; }
+.tkx-card__feat-logo { flex: none; display: block; height: 34px; width: auto; }
 .tkx-card__feat-body { display: flex; flex-direction: column; gap: 4px; }
 .tkx-card__feat-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
 .tkx-card__feat-text { font-size: 14px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
@@ -2419,6 +2419,9 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .tkx-sechead { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-bottom: clamp(28px, 1.5rem + 2vw, 48px); text-align: center; }
 .tkx-head--sub { margin: 0; font-size: clamp(28px, 22px + 1.4vw, 42px); }
 .section--tickets-plain { padding-top: clamp(1.5rem, 1rem + 1.5vw, 2.5rem); }
+/* Bas de section resserre : --section-pad-y est un token global, on ne le touche pas,
+   mais la grille de billets doit tenir dans un ecran plein. */
+.section--tickets { padding-bottom: clamp(2rem, 1.5rem + 1.6vw, 3.25rem); }
 
 /* SGN Week : deux voies d'acces, cote a cote */
 .tkx-duo { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 12px + 1.5vw, 40px); max-width: 1020px; margin: 0 auto; }

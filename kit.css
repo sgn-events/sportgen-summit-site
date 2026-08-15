@@ -275,8 +275,8 @@ main { display: block; overflow-x: clip; }
 .section--tickets__bg { position: absolute; inset: 0; z-index: 0; background-color: #04081A; background-image: url('assets/backgrounds/bg-stage-rings.png'); background-repeat: no-repeat; background-position: center; background-size: cover; }
 .section--tickets__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #000519, rgba(0,5,25,0.35) 30%, rgba(0,5,25,0.35) 70%, #000519 100%); }
 .section--tickets > .sg-container { position: relative; z-index: 1; }
-.section--first { padding-top: calc(var(--nav-height) + 56px); }
-.tkx-head { margin: 0 0 56px; text-align: center; font-size: clamp(36px, 29px + 1.6vw, 56px); font-weight: 500; letter-spacing: -0.04em; line-height: 1.25; color: var(--white); text-wrap: balance; }
+.section--first { padding-top: calc(var(--nav-height) + 24px); }
+.tkx-head { margin: 0 0 30px; text-align: center; font-size: clamp(32px, 26px + 1.3vw, 46px); font-weight: 500; letter-spacing: -0.04em; line-height: 1.2; color: var(--white); text-wrap: balance; }
 .tkx-head__gold {
   background-image: radial-gradient(50% 50% at 50% 50%, var(--gold-highlight) 54.55%, var(--gold) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
@@ -288,7 +288,7 @@ main { display: block; overflow-x: clip; }
   background: linear-gradient(180deg, rgba(13,18,48,0.72) 0%, rgba(4,7,24,0.85) 100%);
   border: 1px solid rgba(255,255,255,0.10); border-radius: 8px;
   /* Rythme vertical resserre : les cartes etaient trop hautes. */
-  padding: clamp(18px, 14px + 0.6vw, 26px) clamp(20px, 15px + 0.8vw, 32px);
+  padding: clamp(16px, 13px + 0.5vw, 22px) clamp(18px, 14px + 0.7vw, 28px);
   transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
 .tkx-card > * { position: relative; z-index: 1; }
@@ -316,9 +316,9 @@ main { display: block; overflow-x: clip; }
 .tkx-card--vip { border-color: rgba(255,176,73,0.7); box-shadow: 0 30px 80px rgba(0,0,0,0.4); }
 /* Halo doré au survol (VIP) */
 .tkx-card--vip:hover { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(214,170,70,0.3), 0 0 30px rgba(255,176,73,0.45); }
-.tkx-card__tier { margin: 0 0 12px; font-size: clamp(24px, 20px + 0.7vw, 32px); font-weight: 400; letter-spacing: -0.02em; color: #EDEDED; }
+.tkx-card__tier { margin: 0 0 10px; font-size: clamp(22px, 19px + 0.5vw, 27px); font-weight: 400; letter-spacing: -0.02em; color: #EDEDED; }
 .tkx-card__price { display: flex; align-items: baseline; gap: 9px; margin: 0 0 16px; }
-.tkx-card__amount { font-size: clamp(38px, 31px + 1.4vw, 54px); font-weight: 500; letter-spacing: -0.02em; line-height: 1; color: #EDEDED; }
+.tkx-card__amount { font-size: clamp(34px, 28px + 1.1vw, 44px); font-weight: 500; letter-spacing: -0.02em; line-height: 1; color: #EDEDED; }
 .tkx-card__vat { font-size: 15px; color: rgba(255,255,255,0.5); }
 .tkx-btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -342,9 +342,9 @@ main { display: block; overflow-x: clip; }
   animation: tkx-goldsweep 1.1s linear infinite;
 }
 @keyframes tkx-goldsweep { from { background-position: 0% 50%; } to { background-position: 220% 50%; } }
-.tkx-card__rule { width: 100%; height: 1px; background: rgba(255,255,255,0.14); margin: 18px 0 14px; }
-.tkx-card__intro { margin: 0 0 14px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
-.tkx-card__lede { margin: 0 0 16px; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.7); }
+.tkx-card__rule { width: 100%; height: 1px; background: rgba(255,255,255,0.14); margin: 14px 0 12px; }
+.tkx-card__intro { margin: 0 0 10px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
+.tkx-card__lede { margin: 0 0 12px; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.7); }
 .tkx-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
 .tkx-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.5; color: #EDEDED; }
 .tkx-list svg { flex: none; width: 17px; height: 17px; margin-top: 4px; color: var(--gold); }
