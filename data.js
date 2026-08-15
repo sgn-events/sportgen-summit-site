@@ -325,8 +325,9 @@
       'Exhibition floor access for both days',
       'All food and drinks during the event',
       'Access to the SGN networking app & networking lounge',
-    ], highlight: { label: 'Also included', text: 'A 1-year SportBusiness subscription',
-      logo: CDN + 'B2mDXyEk5zSAbiKFYNLvipEKaE.png', logoAlt: 'SportBusiness' } },
+    ], highlight: { label: 'Also included', text: 'A 1-year SportBusiness subscription*',
+      logo: CDN + 'B2mDXyEk5zSAbiKFYNLvipEKaE.png', logoAlt: 'SportBusiness',
+      footnote: '* Pro & VIP tickets only.' } },
     { tier: 'VIP', price: '€2290', featured: true, intro: 'PERKS OF A PRO TICKET PLUS:', perks: [
       'Invitation to the VIP Dinner',
       'Access to the VIP Lounge on both days',

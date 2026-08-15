@@ -2352,7 +2352,9 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .tkx-card__hl-head { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .tkx-card__hl-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: rgba(255,255,255,0.5); }
 .tkx-card__hl-logo { flex: none; display: block; height: 22px; width: auto; }
-.tkx-card__hl-text { font-size: 15px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
+/* 14px et non 15 : a 15 le libelle passait sur deux lignes dans une colonne de trois,
+   le pied du Pro depassait alors la hauteur partagee et decalait son filet. */
+.tkx-card__hl-text { font-size: 14px; font-weight: var(--fw-semibold); line-height: 1.35; color: var(--white); }
 /* Renvoi de l'asterisque : marge propre, le gap du bloc l'ecarterait comme une ligne
    a part entiere alors qu'il appartient a la ligne au-dessus. */
 .tkx-card__hl-note { margin-top: -4px; font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.45); }
