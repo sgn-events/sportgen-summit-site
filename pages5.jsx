@@ -166,8 +166,128 @@ function InvestorBreakfastPage() {
   );
 }
 
+/* ── RELIVE SGN 2026 ──────────────────────────────────────────────
+   Une carte = le visuel de session deja produit, rien d'ecrit dessous, et le
+   bouton "Watch Now" de la home (assets/watch-now.png) en bas a gauche. Toute la
+   carte est le lien vers la session complete sur YouTube.
+   Les sessions dont le visuel n'existe pas encore (`placeholder`) sont
+   reconstituees ici : photo du speaker, accroche, logo [SGN]. */
+function ReliveCard({ item }) {
+  return (
+    <a className="rlv-card reveal" href={item.youtube} target="_blank" rel="noopener"
+       aria-label={'Watch on YouTube: ' + item.title}>
+      {item.placeholder ? (
+        <span className="rlv-ph">
+          <img className="rlv-ph__img" src="assets_opt/bg-gold-trails.jpg" alt="" loading="lazy" />
+          <span className="rlv-ph__grad" aria-hidden="true"></span>
+          <span className="rlv-ph__head">{item.headline}</span>
+          <span className="rlv-ph__who">
+            {item.people.map((p) => (
+              <span className="rlv-ph__person" key={p.name}>
+                <b>{p.name}</b><i>{p.role}</i><i>{p.org}</i>
+              </span>
+            ))}
+          </span>
+          {/* Pas d'asset blanc "[SGN]" dans le repo (sgn-wordmark.png est dore
+              et sans crochets), on reproduit donc la marque en texte. */}
+          <span className="rlv-ph__mark" aria-hidden="true">[SGN]</span>
+        </span>
+      ) : (
+        <img className="rlv-card__img" src={item.poster} alt={item.title} loading="lazy" />
+      )}
+      <span className="rlv-card__scrim" aria-hidden="true"></span>
+      <span className="rlv-card__watch" aria-hidden="true">
+        <img src="assets/watch-now.png" alt="" />
+      </span>
+    </a>
+  );
+}
+
+function RelivePage() {
+  const { relive, reliveWeek, heroVideo } = window.SGData;
+  const { Button } = window.SPORTGENDesignSystem_882f1e;
+  const { NativeVideo } = window;
+  const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
+  return (
+    <React.Fragment>
+      <PageHero eyebrow="27 &amp; 28 May 2026 · Pavillon Gabriel, Paris"
+        bgImage="assets_opt/assets__news__sportgen-stage.jpg"
+        titleWhite="Global leaders." titleGold="Defining moments." stacked
+        sub="Watch the keynotes, firesides and panels that set the agenda at the first edition of SPORT[GEN] Summit."
+        ctaLabel="2027 Tickets" ctaHref="#/tickets"
+        cta2Label="Sponsorship opportunities" cta2Href="#/sponsor" />
+
+      <section className="section" data-screen-label="Aftermovie">
+        <div className="sg-container sg-container--wide">
+          <div className="opps-head reveal">
+            <h2 className="opps-head__line">Two days in Paris,</h2>
+            <h2 className="opps-head__line opps-head__line--gold">one aftermovie.</h2>
+          </div>
+          <div className="rlv-film reveal">
+            {/* Poster different de la photo du hero, qui est deja la vue de scene. */}
+            <NativeVideo src={heroVideo} poster="assets_opt/assets__news__sportgen-panel.jpg" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section" data-screen-label="Relive SGN 2026">
+        <div className="sg-container sg-container--wide">
+          <div className="opps-head reveal">
+            <h2 className="opps-head__line">Relive</h2>
+            <h2 className="opps-head__line opps-head__line--gold">SGN 2026</h2>
+          </div>
+          <div className="rlv-grid">
+            {relive.map((item) => (
+              <ReliveCard key={item.title} item={item} />
+            ))}
+          </div>
+          <div className="cta-row cta-row--center reveal" style={{ marginTop: 'clamp(32px, 3vw, 52px)' }}>
+            <Button variant="secondary" href="#/speakers" onClick={(e) => go(e, '#/speakers')}>See 2026 Speakers</Button>
+            <Button variant="primary" href="#/agenda" onClick={(e) => go(e, '#/agenda')}>Browse the 2026 agenda</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" data-screen-label="SGN Week 2026">
+        <div className="sg-container sg-container--wide">
+          <div className="opps-head reveal">
+            <h2 className="opps-head__line">The rest of the week,</h2>
+            <h2 className="opps-head__line opps-head__line--gold">off the main stage.</h2>
+          </div>
+          <div className="rlv-week">
+            {reliveWeek.map((w) => (
+              <a className="rlv-week__card reveal" key={w.title} href={w.href} onClick={(e) => go(e, w.href)}>
+                <img className="rlv-week__img" src={w.photo} alt="" loading="lazy" />
+                <span className="rlv-week__grad" aria-hidden="true"></span>
+                <span className="rlv-week__text">
+                  <b>{w.title}</b>
+                  <em>{w.sub}</em>
+                  {/* Vrai bouton du site : la carte entiere etant deja un lien, on
+                      reprend les classes du DS sur un span (pas de lien imbrique). */}
+                  <span className="sg-btn sg-btn--secondary rlv-week__btn">{w.cta}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section sgnw-cta-band">
+        <div className="sg-container sgnw-cta-band__inner">
+          <h2 className="sgnw-cta-band__h2 reveal">2026 was the first edition. <span className="sgnw-gold">2027 is the one to be in.</span></h2>
+          <p className="sgnw-cta-band__sub">Same week, same city, a bigger room. Secure your pass before the room fills up.</p>
+          <div className="cta-row cta-row--center">
+            <Button variant="secondary" href="#/why-attend" onClick={(e) => go(e, '#/why-attend')}>Why attend SGN 2027?</Button>
+            <Button variant="primary" href="#/tickets" onClick={(e) => go(e, '#/tickets')}>Get your 2027 ticket</Button>
+          </div>
+        </div>
+      </section>
+    </React.Fragment>
+  );
+}
+
 /* Both event routes now resolve to the single merged Side Events page. */
 const HalfTimeDrinksPage = SideEventsMergedPage;
 const ClosingDrinksPage = SideEventsMergedPage;
 
-Object.assign(window, { SideEventsMergedPage, HalfTimeDrinksPage, InvestorBreakfastPage, ClosingDrinksPage });
+Object.assign(window, { SideEventsMergedPage, HalfTimeDrinksPage, InvestorBreakfastPage, ClosingDrinksPage, RelivePage });

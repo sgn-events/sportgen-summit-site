@@ -3,7 +3,7 @@ const { useState: useAppState, useEffect: useAppEffect } = React;
 
 const ROUTES = {
   '': 'HomePage', '/': 'HomePage', '/home': 'HomePage',
-  '/agenda': 'AgendaPage', '/why-attend': 'WhyAttendPage', '/speakers': 'SpeakersPage',
+  '/agenda': 'AgendaPage', '/why-attend': 'WhyAttendPage', '/speakers': 'SpeakersPage', '/relive': 'RelivePage',
   '/startup-competition': 'StartupPage', '/medias': 'MediasPage', '/news': 'NewsPage', '/app': 'AppPage',
   '/side-events': 'SideEventsPage', '/vip-dinner': 'VipDinnerPage', '/french-open': 'FrenchOpenPage',
   '/half-time-drinks': 'HalfTimeDrinksPage', '/investor-breakfast': 'InvestorBreakfastPage', '/closing-drinks': 'ClosingDrinksPage',

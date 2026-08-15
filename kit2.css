@@ -258,7 +258,7 @@
 .page-hero__inner { position: relative; z-index: 1; max-width: 880px; }
 .page-hero__title { font-size: var(--fs-display); font-weight: var(--fw-semibold); line-height: 1.06; letter-spacing: -0.04em; margin-top: 1rem; }
 .page-hero__sub { margin-top: 1.25rem; font-size: var(--fs-lead); font-weight: var(--fw-light); color: var(--text-body); max-width: 60ch; }
-.page-hero__cta { margin-top: 2rem; }
+.page-hero__cta { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 14px; }
 .page-hero__img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .page-hero__shade { position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, rgba(0,5,25,0.45), rgba(0,5,25,0.15) 45%, #000519 100%); }
 /* SGN Week recap hero — montage is bright, push a heavier veil so the copy reads cleanly */
@@ -2440,3 +2440,82 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
 .tkx-path:hover .tkx-btn { border-color: rgba(150,165,255,0.95); box-shadow: 0 0 16px rgba(95,115,255,0.42); }
 
 @media (max-width: 860px) { .tkx-duo { grid-template-columns: 1fr; } }
+
+/* ── Relive SGN 2026 ───────────────────────────────────────────────
+   Les visuels de session (assets_opt/...speakers) sont des cartes finies :
+   accroche, nom, fonction et logo [SGN] y sont deja. On ne pose donc rien
+   dessus ni dessous, seulement le bouton "Watch Now" de la home. */
+.rlv-film { max-width: 1000px; margin: clamp(28px, 3vw, 52px) auto 0; }
+
+.rlv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 14px + 1vw, 36px); }
+.rlv-card { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden;
+  /* Les JPEG optimises ont perdu l'alpha des coins arrondis du PNG source :
+     12px reproduit le rayon de l'artwork (3,4 % de sa largeur) a cette taille. */
+  border-radius: 12px; text-decoration: none;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.rlv-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px -24px rgba(0,0,0,0.9); }
+.rlv-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.rlv-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Bouton "Watch Now" identique aux reels de la home. Le PNG embarque son ombre :
+   7,6 % de vide a gauche et 31 % en bas, d'ou les decalages negatifs qui posent
+   la pastille a environ 16px des bords visibles de la carte.
+   La pastille est en verre depoli : sur un visuel clair et charge elle se noyait.
+   Elle est donc agrandie et surtout ombree. Le voile sombre du coin bas-gauche
+   reste, mais tres discret : il ne fait que poser un fond a la pastille, il ne
+   doit pas se lire comme un filtre sur le visuel. L'essentiel du contraste vient
+   de l'ombre portee. */
+.rlv-card__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(72% 40% at 0% 100%, rgba(0,5,25,0.52) 0%, rgba(0,5,25,0.22) 42%, rgba(0,5,25,0) 74%); }
+.rlv-card__watch { position: absolute; left: 4px; bottom: -8px; width: 52%; max-width: 230px; display: block; z-index: 2;
+  transition: transform var(--dur-base) var(--ease-out), filter var(--dur-base) var(--ease-out); }
+.rlv-card__watch img { width: 100%; height: auto; display: block;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.78)) drop-shadow(0 2px 4px rgba(0,0,0,0.62)); }
+.rlv-card:hover .rlv-card__watch { transform: scale(1.045); filter: brightness(1.12); }
+
+/* Carte de remplacement, tant que le visuel de la session n'est pas produit.
+   Meme composition que l'artwork reel : fond bleu a trainees lumineuses,
+   accroche en haut a gauche, intervenants a droite, marque en bas a droite.
+   Pas de portrait : les photos speakers sont des cadrages serres, elles
+   entraient en collision avec le texte. */
+.rlv-ph { position: absolute; inset: 0; display: block; background: var(--blue-deep); }
+.rlv-ph__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; display: block; }
+.rlv-ph__grad { position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(22,40,125,0.92) 0%, rgba(22,40,125,0.66) 42%, rgba(22,40,125,0.30) 66%, rgba(2,7,28,0.42) 100%); }
+.rlv-ph__head { position: absolute; top: 8%; left: 8%; right: 8%; font-size: clamp(19px, 15px + 0.9vw, 26px);
+  font-weight: var(--fw-bold); line-height: 1.18; letter-spacing: -0.01em; color: var(--white); }
+.rlv-ph__who { position: absolute; top: 36%; left: 8%; right: 8%; display: flex; flex-direction: column; gap: 12px; text-align: right; }
+.rlv-ph__person { display: flex; flex-direction: column; }
+.rlv-ph__person b { font-size: clamp(14px, 11px + 0.5vw, 17px); font-weight: var(--fw-bold); color: var(--white); }
+.rlv-ph__person i { font-style: normal; font-size: clamp(12px, 10px + 0.35vw, 15px); line-height: 1.3; color: rgba(255,255,255,0.70); }
+.rlv-ph__mark { position: absolute; right: 8%; bottom: 7%; font-size: clamp(24px, 18px + 1.4vw, 36px);
+  font-weight: var(--fw-regular); letter-spacing: 0.14em; line-height: 1; color: var(--white); }
+
+/* Le reste de la semaine : trois vignettes cliquables */
+.rlv-week { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 12px + 1vw, 30px); }
+.rlv-week__card { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--border-faint); text-decoration: none;
+  transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }
+.rlv-week__card:hover { border-color: var(--border-gold); transform: translateY(-4px); }
+.rlv-week__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rlv-week__grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,5,25,0.94) 4%, rgba(0,5,25,0.35) 48%, rgba(0,5,25,0) 76%); }
+.rlv-week__text { position: absolute; left: 22px; right: 22px; bottom: 22px; display: flex; flex-direction: column; gap: 6px; }
+.rlv-week__text b { font-size: clamp(20px, 17px + 0.6vw, 25px); font-weight: var(--fw-bold); color: var(--text-primary); }
+.rlv-week__text em { font-style: normal; font-size: 14px; line-height: 1.5; color: var(--text-body); }
+/* Le CTA est le bouton secondaire du site (classes du DS sur un span).
+   Le survol de la carte doit l'allumer comme un vrai survol de bouton : le DA
+   unifie ecrase .sg-btn--secondary en !important, on repasse donc en !important
+   apres lui. Pas de translateY ici, la carte se souleve deja. */
+.rlv-week__btn { align-self: flex-start; margin-top: 8px; }
+.rlv-week__card:hover .rlv-week__btn {
+  background: rgba(12,18,42,0.8) !important;
+  border-color: rgba(150,175,255,0.85) !important;
+  box-shadow: 0 0 0 1px rgba(150,175,255,0.3), 0 10px 28px -10px rgba(95,130,255,0.55) !important;
+}
+
+/* Trois cartes par ligne sur tout ce qui ressemble a un ecran d'ordinateur :
+   on ne retombe a deux colonnes qu'en dessous de 900px (tablette, fenetre
+   reduite, volet de preview). */
+@media (max-width: 900px) { .rlv-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 860px) { .rlv-week { grid-template-columns: 1fr; } .rlv-week__card { aspect-ratio: 16 / 10; } }
+@media (max-width: 620px) { .rlv-grid { grid-template-columns: 1fr; } }

@@ -120,6 +120,7 @@ const SITEMAP_GROUPS = [
       ['Agenda 2026', '#/agenda', 'Full programme across all stages'],
       ['Why Attend', '#/why-attend', 'The case for joining'],
       ['Speakers', '#/speakers', '71 leaders shaping sport'],
+      ['Relive SGN 2026', '#/relive', 'Sessions and films from the first edition'],
       ['Startup Competition', '#/startup-competition', 'The Draft, pitch on the main stage'],
       ['Media', '#/medias', 'Press, coverage and assets'],
     ],

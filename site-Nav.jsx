@@ -23,6 +23,7 @@ const MEGA_COLS = [
   ] },
   { heading: 'Program', sub: '2026 Edition', items: [
     ['2026 Agenda', '#/agenda'], ['2026 Speakers', '#/speakers'], ['Why Attend', '#/why-attend'],
+    ['Relive SGN 2026', '#/relive'],
   ] },
   { heading: 'Ecosystem', items: [
     ['Sponsors', '#/sponsor'], ['Media', '#/medias'], ['News', '#/news'], ['SGN App', '#/app'],

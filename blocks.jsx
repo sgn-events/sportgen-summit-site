@@ -1,7 +1,7 @@
 /* SPORT[GEN], shared, reusable page blocks (composed across all routes) */
 
 // Generic page hero: eyebrow + two-tone H1 + subtitle + optional CTA, on a gold-streak plate (or a photo via bgImage).
-function PageHero({ eyebrow, titleWhite, titleGold, sub, ctaLabel, ctaHref, variant, bgImage, stacked, art, goldFirst, heroClass }) {
+function PageHero({ eyebrow, titleWhite, titleGold, sub, ctaLabel, ctaHref, cta2Label, cta2Href, variant, bgImage, stacked, art, goldFirst, heroClass }) {
   const { Button } = window.SPORTGENDesignSystem_882f1e;
   const go = (e, href) => {
     if (/^https?:/i.test(href || '')) return; // external links navigate normally
@@ -18,7 +18,13 @@ function PageHero({ eyebrow, titleWhite, titleGold, sub, ctaLabel, ctaHref, vari
           ? <h1 className="page-hero__title"><span className={'sg-gold-text' + (stacked ? ' page-hero__gold-line' : '')}>{titleGold}</span> {titleWhite}</h1>
           : <h1 className="page-hero__title">{titleWhite} {titleGold ? <span className={'sg-gold-text' + (stacked ? ' page-hero__gold-line' : '')}>{titleGold}</span> : null}</h1>}
         {sub ? <p className="page-hero__sub">{sub}</p> : null}
-        {ctaLabel ? <div className="page-hero__cta"><Button variant="primary" size="lg" href={ctaHref} onClick={(e) => go(e, ctaHref)}>{ctaLabel}</Button></div> : null}
+        {ctaLabel ? (
+          <div className="page-hero__cta">
+            <Button variant="primary" size="lg" href={ctaHref} onClick={(e) => go(e, ctaHref)}>{ctaLabel}</Button>
+            {/* Second bouton facultatif, aucune page existante ne le passe. */}
+            {cta2Label ? <Button variant="secondary" size="lg" href={cta2Href} onClick={(e) => go(e, cta2Href)}>{cta2Label}</Button> : null}
+          </div>
+        ) : null}
       </div>
     </section>
   );

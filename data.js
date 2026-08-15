@@ -152,6 +152,61 @@
     src: REEL_VIDEOS[s.name] || heroVideo,
   }));
 
+  // ── Relive SGN, les sessions filmees de l'edition 2026 ──────────────────────
+  // Une carte = un visuel deja produit + le lien vers la session complete sur
+  // YouTube. Les visuels de session (assets/photos/sessions) sont les cartes
+  // definitives ; ceux de assets/photos/speakers sont les anciennes cartes de reel,
+  // encore en place tant que la version session n'existe pas.
+  // Une entree `placeholder: true` n'a aucun visuel : la carte est alors
+  // reconstituee en CSS (voir .rlv-ph). Plus aucune entree n'en utilise.
+  const SESSION_CARD = 'assets_opt/assets__photos__sessions__';   // visuels de session definitifs
+  const REEL_CARD = 'assets_opt/assets__photos__speakers__';       // anciennes cartes de reel
+  const relive = [
+    { title: 'Road to Number One — Eno Polo, ATP Tour',
+      poster: SESSION_CARD + 'road-to-number-one.jpg',
+      youtube: 'https://www.youtube.com/watch?v=xUzsYbMg_XE' },
+    { title: "Behind the NFL's Entry to France — Brett Gosper, National Football League",
+      poster: SESSION_CARD + 'nfl-entry-to-france.jpg',
+      youtube: 'https://www.youtube.com/watch?v=8f3BgfM3RF8' },
+    { title: 'From coach to founder — Patrick Mouratoglou, UTS',
+      poster: REEL_CARD + 'patrick-mouratoglou-reel-card.jpg',
+      youtube: 'https://www.youtube.com/watch?v=PBzpHEZXBko' },
+    { title: '2026 and beyond — Romy Gai, FIFA',
+      poster: REEL_CARD + 'romy-gai-reel-card.jpg',
+      youtube: 'https://www.youtube.com/watch?v=qaI9dl_Og4E' },
+    { title: 'From Paris to the New World: a Global Ambition — Richard Heaselgrave, Paris Saint-Germain',
+      poster: SESSION_CARD + 'paris-to-the-new-world.jpg',
+      youtube: 'https://www.youtube.com/watch?v=2JSrQfJHYiI' },
+    { title: 'Playing to win, on and off the court — Caroline Garcia, Tennis Insider Club',
+      poster: REEL_CARD + 'caroline-garcia-reel-card.jpg',
+      youtube: 'https://www.youtube.com/watch?v=9elD_ZXbhXM' },
+    { title: 'Building a brand-athlete partnership — Dominic Thiem & Dominik Beier',
+      poster: SESSION_CARD + 'brand-athlete-partnership.jpg',
+      youtube: 'https://www.youtube.com/watch?v=OTeOgjTBA04' },
+    { title: 'Fireside with David Coulthard, Velocity Experience',
+      poster: REEL_CARD + 'david-coulthard-reel-card.jpg',
+      youtube: 'https://www.youtube.com/watch?v=A_AZ-KhhTwo' },
+    { title: 'The San Antonio x Ledger story — Brandon James & Ariel Wengroff',
+      poster: SESSION_CARD + 'san-antonio-x-ledger.jpg',
+      youtube: 'https://www.youtube.com/watch?v=TAORK7soGEQ' },
+    { title: 'How tech, data and AI are transforming tennis — Teodora Ivanova & Bob Markham',
+      poster: SESSION_CARD + 'tech-data-ai-tennis.jpg',
+      youtube: 'https://www.youtube.com/watch?v=yw_WHRvrm4I' },
+    { title: 'Accelerating progress — Doriane Pin, Mercedes F1 Team',
+      poster: REEL_CARD + 'doriane-pin-reel-card.jpg',
+      youtube: 'https://www.youtube.com/watch?v=5dGf75QD0-Y' },
+  ];
+
+  // "Relive" : le reste de la semaine 2026, chaque carte renvoie vers sa page.
+  const reliveWeek = [
+    { title: 'The Gala', sub: 'A private dinner for 200 leaders, the night before the summit opened.',
+      photo: CDN + 'bANilaK7upt6HZwAfunCY1YBkiw.jpeg', href: '#/vip-dinner', cta: 'Relive the Gala' },
+    { title: 'The Draft', sub: 'Startups on stage, investors in the room, one winner at the end of the day.',
+      photo: 'assets_opt/assets__photos__the-draft-stage.jpg', href: '#/startup-competition', cta: 'See The Draft' },
+    { title: 'Closing Drinks', sub: 'Golden hour over Paris to close two days of deal-making.',
+      photo: 'assets_opt/assets__closing-golden.jpg', href: '#/closing-drinks', cta: 'Relive the closing' },
+  ];
+
   // Auto-scrolling "Trusted by the industry leaders" marquee, real partner logos
   const marquee = ['0wKm4XbrfMQTfvoWUOheFFPe7ys.png',
     'LvuVB5FXB8AX00VvoQVXQyCFvA0.png', 'gGOnNMRaqcQzaTsChA9D1VuSc.png', '5yqukeigbpRRQIZRKWRlrXGxbM.png',
@@ -818,7 +873,7 @@
 
   window.SGData = {
     heroVideo, foundingLogo: CDN + 'c2mRXIJQpZi8ck3KGrvcjObcIoE.png',
-    speakersHome, speakersAll, reelSpeakers, weeklyReel, reels, marquee, walls, partnerTiers, stats, tickets, investTickets, accessPathways, weekAccess, socials,
+    speakersHome, speakersAll, reelSpeakers, weeklyReel, reels, relive, reliveWeek, marquee, walls, partnerTiers, stats, tickets, investTickets, accessPathways, weekAccess, socials,
     snapshotStats, snapshotAttendees, snapshotPdf,
     opportunities, oppStar, personas, homeFeatures, startupSteps, startupWinners, startupJury, startupFaq, startup, interests, agendaLive,
   };

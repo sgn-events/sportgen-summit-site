@@ -41,6 +41,7 @@ function Footer() {
         <nav className="footer__links">
           <a href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Get In Touch</a>
           <a href="#/speakers" onClick={(e) => go(e, '#/speakers')}>2026 Speakers</a>
+          <a href="#/relive" onClick={(e) => go(e, '#/relive')}>Relive SGN 2026</a>
           <a href="#/partner" onClick={(e) => go(e, '#/partner')}>Partner</a>
           <a href="#/faq" onClick={(e) => go(e, '#/faq')}>FAQ</a>
           {/* Pas de lien vers #/sitemap : la route reste servie, mais on n'y accede
