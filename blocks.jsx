@@ -1,16 +1,26 @@
 /* SPORT[GEN], shared, reusable page blocks (composed across all routes) */
 
 // Generic page hero: eyebrow + two-tone H1 + subtitle + optional CTA, on a gold-streak plate (or a photo via bgImage).
-function PageHero({ eyebrow, titleWhite, titleGold, sub, ctaLabel, ctaHref, cta2Label, cta2Href, variant, bgImage, stacked, art, goldFirst, heroClass }) {
+// `collage` (optionnel, avec bgImage) : liste d'images qui remplacent bgImage sous 900px en
+// mosaique (kit2.css) — un montage horizontal en cover ne montre qu'une bande sur telephone.
+// Les deux jeux d'images sont en loading="lazy" : le jeu masque par la media query
+// (display: none) n'est jamais telecharge, chaque appareil ne charge que le sien.
+function PageHero({ eyebrow, titleWhite, titleGold, sub, ctaLabel, ctaHref, cta2Label, cta2Href, variant, bgImage, stacked, art, goldFirst, heroClass, collage }) {
   const { Button } = window.SPORTGENDesignSystem_882f1e;
   const go = (e, href) => {
     if (/^https?:/i.test(href || '')) return; // external links navigate normally
     e.preventDefault(); window.location.hash = (href || '#/').replace('#', '');
   };
+  const hasCollage = !!(bgImage && collage && collage.length);
   return (
-    <section className={'page-hero' + (variant === 'tall' ? ' page-hero--tall' : '') + (heroClass ? ' ' + heroClass : '')}>
+    <section className={'page-hero' + (variant === 'tall' ? ' page-hero--tall' : '') + (hasCollage ? ' page-hero--collage' : '') + (heroClass ? ' ' + heroClass : '')}>
       <div className={'page-hero__bg' + (art ? ' page-hero__bg--' + art : '')} aria-hidden="true" />
-      {bgImage ? <img className="page-hero__img" src={bgImage} alt="" aria-hidden="true" /> : null}
+      {bgImage ? <img className="page-hero__img" src={bgImage} alt="" aria-hidden="true" loading={hasCollage ? 'lazy' : undefined} /> : null}
+      {hasCollage ? (
+        <div className="page-hero__collage" aria-hidden="true">
+          {collage.map((src) => <img key={src} src={src} alt="" loading="lazy" />)}
+        </div>
+      ) : null}
       {bgImage ? <div className="page-hero__shade" aria-hidden="true" /> : null}
       <div className="sg-container page-hero__inner">
         {eyebrow ? <span className="sg-eyebrow sg-eyebrow--gold">{eyebrow}</span> : null}

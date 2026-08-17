@@ -432,6 +432,7 @@ function SideEventsPage() {
   return (
     <React.Fragment>
       <PageHero eyebrow="SGN Week · 2026 Recap" art="frame" heroClass="sgnw-rec-hero" bgImage={'assets/photos/sgn-week-montage.png'}
+        collage={['assets_opt/sgnw-strip-eiffel.jpg', 'assets_opt/sgnw-strip-marine.jpg', 'assets_opt/assets__closing-golden.jpg']}
         titleWhite="Where the summit" titleGold="carries on after dark." stacked
         sub="The conversations that matter rarely happen on a conference floor. Around SportGen, a curated series of dinners, breakfasts and drinks gives the room a reason to stay in Paris."
         ctaLabel="Be part of 2027" ctaHref="#/get-in-touch" />
