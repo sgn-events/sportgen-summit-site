@@ -536,3 +536,9 @@
   color: #fff !important;
   box-shadow: 0 0 0 1px rgba(150,175,255,0.45), 0 8px 30px -8px rgba(95,130,255,0.75) !important;
 }
+
+/* Audit mobile (aout 2026) : la pastille "Free for LPs" etait a 10.5px,
+   illisible sur telephone. Regle ici car invest.css charge apres kit2.css. */
+@media (max-width: 900px) {
+  .invtx-card__flag { font-size: 12px; }
+}

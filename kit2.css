@@ -2536,6 +2536,45 @@ body.route-investment-summit::before { background-image: linear-gradient(180deg,
   /* Les heros de page occupaient un ecran entier pour un titre :
      hauteur naturelle sur mobile, chaque page gagne ~1 ecran. */
   .page-hero, .page-hero--tall { min-height: 0; padding-top: calc(var(--nav-height) + 5rem); padding-bottom: 3.5rem; }
+  /* Exception : le hero SGN Week est un montage photo plein ecran,
+     la hauteur naturelle le coupait a mi-photo. */
+  .page-hero.sgnw-rec-hero { min-height: calc(100svh / var(--page-zoom, 1)); }
+  /* Voile renforce : le texte passait sur la pierre claire du montage. */
+  .sgnw-rec-hero .page-hero__shade { background: linear-gradient(180deg, rgba(0,5,25,0.55), rgba(0,5,25,0.66) 45%, rgba(0,5,25,0.94) 100%); }
+
+  /* Titres de section (Sponsor, Side Events...) : white-space: pre les
+     empechait de passer a la ligne, ils debordaient de l'ecran. */
+  .opps-head__line { white-space: normal; }
+
+  /* Hero Sponsor : le decalage -15vh remontait l'eyebrow SPONSOR sous
+     le logo de la nav fixe (et laissait un grand vide en bas). */
+  .vip-hero.ptn-hero .ptn-hero__inner { transform: none; }
+
+  /* Mur d'invites (home) : les noms longs (International Olympic
+     Committee...) etaient coupes en pleine lettre. */
+  .snap__line-entity { overflow: hidden; text-overflow: ellipsis; }
+
+  /* Cibles tactiles sous les 24px minimum : liens du footer et points
+     du carrousel Relive. Le padding agrandit la zone cliquable sans
+     changer le rendu. */
+  .footer__links a { padding: 10px 0; }
+  .footer__bar a { display: inline-block; padding: 8px 2px; margin: -8px -2px; }
+  .reelx-dots { gap: 14px; }
+  .reelx-dot { position: relative; }
+  .reelx-dot::before { content: ""; position: absolute; inset: -10px; }
+
+  /* Numeros des cartes photo de la home : sous 11px, illisibles.
+     (La pastille "Free for LPs" equivalente est corrigee dans invest.css,
+     charge apres ce fichier.) */
+  .hf-pcard__num { font-size: 11px; }
+
+  /* Liens inline seuls sur leur ligne (Plan your trip, FAQ) :
+     zone tactile elargie, rendu identique. */
+  .pyt-map-link, .pyt-assist__link, .faqp-card__link { display: inline-block; padding: 9px 0; margin: -9px 0; }
+
+  /* Lien Privacy Policy dans le texte de consentement des formulaires
+     Brevo : zone tactile elargie sans bouger la ligne. */
+  .sib-text-form-block a { display: inline-block; padding: 6px 0; margin: -6px 0; }
 }
 
 @media (max-width: 860px) {
