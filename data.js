@@ -865,6 +865,13 @@
     ],
   };
 
+  /* Page Medias : accordeon "Activities for Medias" (meme forme que startup.activities). */
+  const mediaActivities = [
+    { label: 'Media Area', body: 'A dedicated workspace at the heart of the venue, with desks, wifi and power, so you can write, edit and publish your stories while the summit unfolds around you.' },
+    { label: 'Media Lounge', body: 'A reserved lounge to meet speakers, executives and founders between sessions, for interviews, briefings and off-the-record conversations.' },
+    { label: 'Podcast Studio', body: 'A fully equipped studio inside the venue to record your interviews and episodes with the leaders shaping sport, technology and culture.' },
+  ];
+
   const socials = {
     linkedin: 'https://www.linkedin.com/company/sportgen-summit/',
     instagram: 'https://www.instagram.com/sportgensummit/',
@@ -876,5 +883,6 @@
     speakersHome, speakersAll, reelSpeakers, weeklyReel, reels, relive, reliveWeek, marquee, walls, partnerTiers, stats, tickets, investTickets, accessPathways, weekAccess, socials,
     snapshotStats, snapshotAttendees, snapshotPdf,
     opportunities, oppStar, personas, homeFeatures, startupSteps, startupWinners, startupJury, startupFaq, startup, interests, agendaLive,
+    mediaActivities,
   };
 })();

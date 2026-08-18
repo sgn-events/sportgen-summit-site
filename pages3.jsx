@@ -331,9 +331,10 @@ function StartupPage() {
 }
 
 function MediasPage() {
-  const { walls, oppStar } = window.SGData;
+  const { walls, oppStar, mediaActivities } = window.SGData;
   const { Button } = window.SPORTGENDesignSystem_882f1e;
   const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
+  const [actOpen, setActOpen] = React.useState(0);
   const CDN = 'https://framerusercontent.com/images/';
   /* Formulaire Brevo interne (#/media-pass), remplace l'ancien Google Form. */
   const MEDIA_FORM = '#/media-pass';
@@ -375,9 +376,16 @@ function MediasPage() {
                 </div>
               </div>
               <div className="acts__list">
-                {['Media Area', 'Media Lounge', 'Podcast Studio'].map((a) => (
-                  <div className="acc" key={a}>
-                    <div className="acc__q"><p className="acc__label">{a}</p>{chev}</div>
+                {mediaActivities.map((a, i) => (
+                  <div className={'acc' + (i === actOpen ? ' is-open' : '')} key={a.label}>
+                    <button type="button" className="acc__q" aria-expanded={i === actOpen} onClick={() => setActOpen((o) => (o === i ? -1 : i))}>
+                      <p className="acc__label">{a.label}</p>{chev}
+                    </button>
+                    <div className="acc__body">
+                      <div className="acc__body-inner">
+                        <p className="acc__text">{a.body}</p>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
