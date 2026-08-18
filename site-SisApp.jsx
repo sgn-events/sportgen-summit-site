@@ -5,6 +5,7 @@ const SIS_ROUTES = {
   '': 'InvestmentSummitPage', '/': 'InvestmentSummitPage', '/home': 'InvestmentSummitPage',
   '/speakers': 'SisSpeakersPage',
   '/media': 'SisMediaPage',
+  '/media-pass': 'SisMediaPassPage',
   '/sponsor': 'SisSponsorPage',
   '/agenda': 'SisAgendaPage',
   '/why-lp': 'SisLpPage',

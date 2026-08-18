@@ -335,7 +335,8 @@ function MediasPage() {
   const { Button } = window.SPORTGENDesignSystem_882f1e;
   const go = (e, href) => { e.preventDefault(); window.location.hash = href.replace('#', ''); };
   const CDN = 'https://framerusercontent.com/images/';
-  const MEDIA_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScDx0Ycp8zuil1oCCb_ZGZjHPkMTygoxAyF7bT2Adfi89eTig/viewform';
+  /* Formulaire Brevo interne (#/media-pass), remplace l'ancien Google Form. */
+  const MEDIA_FORM = '#/media-pass';
   const cards = [
     { title: 'Meet the Future of Sport', photo: CDN + 'bYVI6HO8cxnNKsF6MAd1FtWec.jpg', items: ['Top entrepreneurs', 'International scaleups', 'Innovation Room'] },
     { title: 'Access to Global Leaders', photo: 'assets/news/sportgen-panel.jpg', items: ['World renowned speakers', 'Business leaders', 'Experts & trend setters'] },
@@ -347,7 +348,7 @@ function MediasPage() {
   return (
     <React.Fragment>
       <PageHero eyebrow="Medias" art="network" titleWhite="SportGen Summit" titleGold="for Media."
-        sub="A must-attend event for global media, with unparalleled access to exclusive stories and the sport's most influential leaders." ctaLabel="Become a Media Partner" ctaHref={MEDIA_FORM} />
+        sub="A must-attend event for global media, with unparalleled access to exclusive stories and the sport's most influential leaders." ctaLabel="Apply for a Media Pass" ctaHref={MEDIA_FORM} />
       <section className="section">
         <div className="sg-container">
           <div className="opps-head reveal">
@@ -370,7 +371,7 @@ function MediasPage() {
                 <h3 className="acts__title">Activities for Medias</h3>
                 <h4 className="acts__desc">Don’t just cover the future of sport, help shape it at SportGen Summit 2027. Join leading global outlets for exclusive access to key insights, major announcements, and direct engagement with the leaders redefining sport, technology, and culture.</h4>
                 <div className="cta-row">
-                  <Button variant="primary" href={MEDIA_FORM} target="_blank" rel="noopener">Apply for Media Pass</Button>
+                  <Button variant="primary" href={MEDIA_FORM} onClick={(e) => go(e, MEDIA_FORM)}>Apply for Media Pass</Button>
                 </div>
               </div>
               <div className="acts__list">

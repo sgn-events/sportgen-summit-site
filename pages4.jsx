@@ -111,6 +111,42 @@ function BrochurePage({ startup }) {
 function DownloadBrochurePage() { return <BrochurePage />; }
 function DownloadBrochureStartupPage() { return <BrochurePage startup />; }
 
+/* Demande de Media Pass — formulaire Brevo 'media-sgn' (liste "Media Pass SGN - Website").
+   Pas de PDF : Brevo affiche son message de succès, la relance se fait par email. */
+function MediaPassPage() {
+  const { interests } = window.SGData;
+  const loop = interests.concat(interests);
+  return (
+    <section className="git-wrap">
+      <div className="sg-container sg-container--wide git">
+        <div className="git__left reveal">
+          <h1 className="git__title">Apply for a Media Pass</h1>
+          <h4 className="git__text">
+            Covering the business of sport? Request your accreditation for SPORT[GEN] Summit 2027,
+            26&ndash;27 May at Pavillon Gabriel, Paris. Media passes are complimentary for
+            credentialed journalists; our team reviews every request individually.
+          </h4>
+        </div>
+        <div className="git__right reveal">
+          <div className="git__form-panel">
+            <window.BrevoForm form="media-sgn" />
+          </div>
+          <div className="git__chips" aria-hidden="true">
+            <div className="git__chips-track">
+              {loop.map((c, i) => (
+                <span className="git-chip" key={i}>
+                  <span className="git-chip__icon"></span>
+                  <span className="git-chip__label">{c}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const SITEMAP_GROUPS = [
   {
     label: 'The Summit',
@@ -123,6 +159,7 @@ const SITEMAP_GROUPS = [
       ['Relive SGN 2026', '#/relive', 'Sessions and films from the first edition'],
       ['Startup Competition', '#/startup-competition', 'The Draft, pitch on the main stage'],
       ['Media', '#/medias', 'Press, coverage and assets'],
+      ['Media Pass', '#/media-pass', 'Request your press accreditation'],
     ],
   },
   {
@@ -371,4 +408,4 @@ function AppPage() {
   );
 }
 
-Object.assign(window, { TermsPage, PrivacyPage, ContestRulesPage, NotFoundPage, DownloadBrochurePage, DownloadBrochureStartupPage, SitemapPage, AppPage });
+Object.assign(window, { TermsPage, PrivacyPage, ContestRulesPage, NotFoundPage, DownloadBrochurePage, DownloadBrochureStartupPage, MediaPassPage, SitemapPage, AppPage });

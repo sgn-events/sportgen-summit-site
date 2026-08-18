@@ -110,7 +110,7 @@ function SisMediaPage() {
           <p className="sis-phead__sub" style={{ marginTop: '18px' }}>
             A non-exhaustive picture of the outlets we host. Media passes are complimentary for credentialed journalists; we review every request individually.
           </p>
-          <a className="inv-btn" href="#/get-in-touch" style={{ marginTop: '28px' }}>
+          <a className="inv-btn" href="#/media-pass" style={{ marginTop: '28px' }}>
             Apply for media accreditation <span className="inv-btn__arrow">→</span>
           </a>
         </div>
@@ -421,4 +421,34 @@ function SisGetInTouchPage() {
   );
 }
 
-Object.assign(window, { SisSpeakersPage, SisMediaPage, SisSponsorPage, SisAgendaPage, SisLpPage, SisGetInTouchPage });
+/* ─────────────────────────── MEDIA PASS ─────────────────────────── */
+/* Formulaire Brevo 'media-invest' (liste "Media Pass SGN Invest - Website"), pas de PDF :
+   Brevo affiche son message de succès, la relance se fait par email. */
+const SIS_MEDIA_PASS_POINTS = [
+  'Complimentary for credentialed journalists',
+  'Access to the room where sport’s capital is priced',
+  'Interviews with funds, LPs and rights-holders',
+  'Every request reviewed individually by our team',
+];
+
+function SisMediaPassPage() {
+  const { BrevoForm } = window;
+  return (
+    <SisShell idx="[02]" kicker="Press & media"
+      title={<>Media Pass<br />request</>}
+      sub="Request your accreditation for the SGN Investment Summit. Our team reviews every request individually and comes back to you by email.">
+      <div className="sis-git">
+        <div className="sis-git__side inv-rv">
+          <ul className="sis-lp-break__list">
+            {SIS_MEDIA_PASS_POINTS.map((p) => <li key={p}>{p}</li>)}
+          </ul>
+        </div>
+        <div className="sis-git__form inv-rv">
+          <BrevoForm form="media-invest" />
+        </div>
+      </div>
+    </SisShell>
+  );
+}
+
+Object.assign(window, { SisSpeakersPage, SisMediaPage, SisSponsorPage, SisAgendaPage, SisLpPage, SisGetInTouchPage, SisMediaPassPage });

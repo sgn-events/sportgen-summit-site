@@ -76,6 +76,20 @@ const BREVO_FORMS = {
     action: 'https://a3e44c04.sibforms.com/serve/MUIFAOG03DtkyQWq7CripDVROBc8pg5CoKLa6khc5tbYOsU8e6XjczRYdZ46OTdmRwvtQ3X4XdBuboBvTL_s50p9IJhrWrTFQ5f-qDP81M2GIO8MTOMuIO_rxOAlCSWswQwBkHd0rIFvmi9k9vdpfPK93UheTUGPJPd8tEbsJujZPRiTXA15mqOISMn2lnlaPL5d8nVEee5dRCYxYA==',
     pdf: 'assets/sgn-2026-attendee-snapshot.pdf',
   },
+  /* index.html #/media-pass — liste "Media Pass SGN - Website". Deux champs de plus que les
+     autres (JOB_TITLE, COMPANY), configurés à l'identique côté Brevo — le markup doit rester
+     le miroir exact du formulaire Brevo, champ pour champ. */
+  'media-sgn': {
+    theme: 'navy',
+    mediaFields: true,
+    action: 'https://a3e44c04.sibforms.com/serve/MUIFAC9qtW1XEhQLLP6dX7dLsGwf2esJbhjZa5smb80yf-iG7ot0l1W9ZTTSXSb1ygnhiZJb6R6Odf0fR_-3xW0M6dwCNK4nY2Ztw8XmYXHqeysAH_BQ0EvpzQcfgC69F33Db0IfXCKTYMC5fQvjf_IsEGwmLdvmqawFfFDyxgcAs34fvx-N8E0djPj-5T6dn0Dgi8Z3fCSpJDv4zQ==',
+  },
+  /* sis.html #/media-pass — liste "Media Pass SGN Invest - Website". Mêmes champs que media-sgn. */
+  'media-invest': {
+    theme: 'invest',
+    mediaFields: true,
+    action: 'https://a3e44c04.sibforms.com/serve/MUIFAEN5m6zwFd9_ycG3xNBIIEhDJGIIqIPi5YyyAk-r8S8VSwhZkKKUL4GIyVNo4D-42MHSDLxtIe6PEG_Kj-bcPQTP_-CDcAstCwDy3qdSw8dmXHZpxMrkIw4Ljejh4MX-2WfTegXPHjx6WLjPpI6bqipesYOoyi7kiIhuURfnv-lGVBGjV4dSubv58iO2SBgUkJ6FeWZHSRv1hA==',
+  },
 };
 
 /* Palette effective d'un formulaire: son theme, plus son `action`. */
@@ -314,6 +328,12 @@ function brevoFormHTML(formKey) {
     + brevoInput('LASTNAME', 'Last Name', v.labelColor, 'maxlength="200" type="text"')
     + brevoInput('EMAIL', 'Email', v.labelColor, 'type="text" value=""')
     + brevoPhoneField(v)
+    /* Champs propres aux formulaires Media Pass — présents dans le formulaire Brevo
+       correspondant, donc obligatoires ici aussi (un champ manquant => 400 générique). */
+    + (v.mediaFields
+      ? brevoInput('JOB_TITLE', 'Job Title', v.labelColor, 'maxlength="200" type="text"')
+        + brevoInput('COMPANY', 'Media Outlet', v.labelColor, 'maxlength="200" type="text"')
+      : '')
     + brevoText(BREVO_COPY.consentIntro, v.textColor)
     + brevoOptIn('OPT_IN', BREVO_COPY.optInLabel, v.optInColor)
     + brevoOptIn('DATA_PROCESSING_CONSENT', BREVO_COPY.processingLabel, v.optInColor)
