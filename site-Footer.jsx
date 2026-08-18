@@ -22,7 +22,8 @@ function Footer() {
           )}
           <div className="footer__top-right">
             <div className="footer__meta"><span>26 &amp; 27 May 2027</span><span>Paris, France</span></div>
-            <Button variant="primary" size="lg" href="#/tickets" onClick={(e) => go(e, '#/tickets')}>Get Your Ticket</Button>
+            {/* Billetterie masquee (aout 2026) : le CTA renvoie vers le formulaire Get in Touch. */}
+            <Button variant="primary" size="lg" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register Interest</Button>
           </div>
         </div>
 

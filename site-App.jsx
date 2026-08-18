@@ -17,9 +17,18 @@ const ROUTES = {
   '/404': 'NotFoundPage',
 };
 
+/* Billetterie masquee (aout 2026) : les pages Tickets restent dans le code mais ne sont
+   plus servies, on renvoie vers le formulaire Get in Touch (ou la page Invest pour sa
+   billetterie). Vider cet objet pour les retablir. */
+const HIDDEN_ROUTE_REDIRECTS = {
+  '/tickets': '/get-in-touch',
+  '/investment-summit/tickets': '/investment-summit',
+};
+
 function currentPath() {
   const h = window.location.hash.replace(/^#/, '');
-  return h || '/';
+  const p = h || '/';
+  return HIDDEN_ROUTE_REDIRECTS[p] || p;
 }
 
 /* Tweaks — sitewide "feel" controls, applied by writing CSS custom properties
@@ -96,6 +105,12 @@ function App() {
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
+
+  // Normalise l'URL des routes masquees (currentPath rend deja la bonne page).
+  useAppEffect(() => {
+    const raw = window.location.hash.replace(/^#/, '') || '/';
+    if (HIDDEN_ROUTE_REDIRECTS[raw]) window.location.replace('#' + HIDDEN_ROUTE_REDIRECTS[raw]);
+  }, [path]);
 
   // Toggle a route-level class so Home can widen its page margins AND so every
   // other route gets its own full-page background plate (see kit2.css body::before):

@@ -83,7 +83,8 @@ function SpeakerGrid({ speakers, footer, cols }) {
         <div className="section__foot">
           <a className="section__foot-link" href="#/speakers" onClick={(e) => go(e, '#/speakers')}>See All 2026 Speakers <IconButton label="See all speakers" /></a>
           <hr className="sg-rule" />
-          <Button variant="primary" href="#/tickets" onClick={(e) => go(e, '#/tickets')}>Get Your Ticket</Button>
+          {/* Billetterie masquee : le CTA renvoie vers le formulaire Get in Touch. */}
+          <Button variant="primary" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register Interest</Button>
         </div>
       ) : null}
     </React.Fragment>
@@ -120,7 +121,11 @@ function LogoWalls({ groups }) {
 
 /* `items` / `heading` / `id` permettent de rejouer la meme grille pour SGN Invest sur la
    page Tickets; sans eux on retombe sur la grille principale, telle qu'appelee ailleurs. */
+/* Billetterie masquee (aout 2026) : la vente 2027 n'est pas ouverte, on cache toutes les
+   sections Tickets du site sans rien supprimer. Repasser a false pour tout reafficher. */
+const TICKETS_HIDDEN = true;
 function TicketsBlock({ first, items, heading, id, plain, wide, theme }) {
+  if (TICKETS_HIDDEN) return null;
   const { tickets } = window.SGData;
   const list = items || tickets;
   const BUY_URL = 'https://pointenoire.swoogo.com/sportgensummit2027/Registration';

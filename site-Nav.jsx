@@ -1,9 +1,10 @@
 /* SPORT[GEN], sticky navigation: left link pills + right "Explore SGN" mega menu */
 const { useState: useNavState, useEffect: useNavEffect } = React;
 
-/* Left-of-logo quick links. A third tuple element = dropdown sub-items. */
+/* Left-of-logo quick links. A third tuple element = dropdown sub-items.
+   Un href sans '#' quitte l'app (autre page du site, ex. sis.html). */
 const NAV_LEFT = [
-  ['Get in Touch', '#/get-in-touch'],
+  ['SGN Invest', 'sis.html'],
   ['Sponsor', '#/sponsor', [
     ['Sponsor with SGN', '#/sponsor'],
     ['Book a call', 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b'],
@@ -49,7 +50,10 @@ function Nav() {
   const navTo = (href) => { setOpen(false); setOpenCol(null); window.location.hash = href.replace('#', ''); };
   const isActive = (href) => route === href.replace('#', '');
   const isInv = route.startsWith('/investment-summit');  // SGN Investment Summit: graphite art-direction
-  const ticketsHref = isInv ? '#/investment-summit/tickets' : '#/tickets';
+  /* Billetterie masquee (aout 2026) : le CTA "2027 Tickets" devient "Register Interest"
+     vers le formulaire Get in Touch. Retablir ticketsHref pour rouvrir la billetterie :
+     const ticketsHref = isInv ? '#/investment-summit/tickets' : '#/tickets'; */
+  const ctaHref = '#/get-in-touch';
 
   // Live-site pill animation: label slides up, gold rounded layer rises, twin label slides in
   const fx = (text) => (
@@ -93,7 +97,7 @@ function Nav() {
             ) : (
               <a key={href}
                  className="sg-nav__quick"
-                 href={href} onClick={(e) => { e.preventDefault(); navTo(href); }}>{label}</a>
+                 href={href} onClick={href.startsWith('#') ? (e) => { e.preventDefault(); navTo(href); } : undefined}>{label}</a>
             )
           ))}
         </nav>
@@ -107,9 +111,9 @@ function Nav() {
           )}
         </a>
 
-        {/* RIGHT, tickets + Explore SGN mega menu */}
+        {/* RIGHT, register interest + Explore SGN mega menu */}
         <div className="sg-nav__cta">
-          <Button variant="secondary" size="sm" className="sg-btn--nav-navy sg-btn--cta" href={ticketsHref} onClick={(e) => { e.preventDefault(); navTo(ticketsHref); }}>2027 Tickets</Button>
+          <Button variant="secondary" size="sm" className="sg-btn--nav-navy sg-btn--cta" href={ctaHref} onClick={(e) => { e.preventDefault(); navTo(ctaHref); }}>Register Interest</Button>
           <div className="sg-nav__mega">
             <button className="sg-nav__mega-trigger" aria-haspopup="true">
               <span>Explore SGN</span>{gridIcon}
@@ -182,7 +186,8 @@ function Nav() {
                 )}
               </div>
             ) : (
-              <button key={href} className="sg-nav__mtrigger" onClick={() => navTo(href)}>{label}</button>
+              <button key={href} className="sg-nav__mtrigger"
+                onClick={() => { if (href.startsWith('#')) navTo(href); else window.location.href = href; }}>{label}</button>
             )
           ))}
           {MEGA_COLS.map((col) => (
@@ -201,7 +206,7 @@ function Nav() {
             </div>
           ))}
           <div className="sg-nav__mcta">
-            <Button variant="secondary" className="sg-btn--nav-navy sg-btn--cta" href={ticketsHref} onClick={(e) => { e.preventDefault(); navTo(ticketsHref); }}>2027 Tickets</Button>
+            <Button variant="secondary" className="sg-btn--nav-navy sg-btn--cta" href={ctaHref} onClick={(e) => { e.preventDefault(); navTo(ctaHref); }}>Register Interest</Button>
           </div>
         </div>
       )}
