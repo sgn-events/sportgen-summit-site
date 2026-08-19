@@ -13,9 +13,17 @@ const SIS_ROUTES = {
   '/tickets': 'InvestTicketsPage',
 };
 
+/* Billetterie masquee (aout 2026) : la page Tickets SIS reste dans le code mais n'est
+   plus servie, on renvoie vers le formulaire Get in Touch de SGN Invest.
+   Vider cet objet pour la retablir (meme mecanique que HIDDEN_ROUTE_REDIRECTS cote SGN). */
+const SIS_HIDDEN_ROUTE_REDIRECTS = {
+  '/tickets': '/get-in-touch',
+};
+
 function sisCurrentPath() {
   const h = window.location.hash.replace(/^#/, '');
-  return h || '/';
+  const p = h || '/';
+  return SIS_HIDDEN_ROUTE_REDIRECTS[p] || p;
 }
 
 function SisAppRoot() {
@@ -27,6 +35,12 @@ function SisAppRoot() {
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
+
+  // Normalise l'URL des routes masquees (sisCurrentPath rend deja la bonne page).
+  useSisAppEffect(() => {
+    const raw = window.location.hash.replace(/^#/, '') || '/';
+    if (SIS_HIDDEN_ROUTE_REDIRECTS[raw]) window.location.replace('#' + SIS_HIDDEN_ROUTE_REDIRECTS[raw]);
+  }, [path]);
 
   // Wire scroll-reveal on each route (mirrors the SGN app)
   useSisAppEffect(() => {

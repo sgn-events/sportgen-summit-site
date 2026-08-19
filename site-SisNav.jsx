@@ -16,7 +16,10 @@ const SIS_LINKS = [
   ]],
 ];
 
-const SIS_TICKETS_HREF = '#/tickets';
+/* Billetterie masquee (aout 2026) : le bouton "Tickets" devient "Register Interest"
+   vers le formulaire Get in Touch de SGN Invest. Retablir pour rouvrir :
+   const SIS_TICKETS_HREF = '#/tickets'; */
+const SIS_CTA_HREF = '#/get-in-touch';
 
 function SisNav() {
   const [route, setRoute] = useSisNavState(window.location.hash.replace('#', '') || '/');
@@ -69,7 +72,7 @@ function SisNav() {
                 <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor"></rect>
               </svg>
             </a>
-            <a className="sis-nav__btn sis-nav__btn--gold" href={SIS_TICKETS_HREF} onClick={(e) => nav(e, SIS_TICKETS_HREF)}>Tickets</a>
+            <a className="sis-nav__btn sis-nav__btn--gold" href={SIS_CTA_HREF} onClick={(e) => nav(e, SIS_CTA_HREF)}>Register Interest</a>
             <button className="sis-nav__burger" type="button" aria-label="Menu" onClick={() => setOpen((v) => !v)}>
               <span></span><span></span><span></span>
             </button>
@@ -93,7 +96,7 @@ function SisNav() {
         ))}
         <div className="sis-mobile__btns">
           <a className="sis-nav__btn sis-nav__btn--outline" href="index.html">Explore SGN</a>
-          <a className="sis-nav__btn sis-nav__btn--gold" href={SIS_TICKETS_HREF} onClick={(e) => nav(e, SIS_TICKETS_HREF)}>Tickets</a>
+          <a className="sis-nav__btn sis-nav__btn--gold" href={SIS_CTA_HREF} onClick={(e) => nav(e, SIS_CTA_HREF)}>Register Interest</a>
         </div>
       </div>
     </React.Fragment>

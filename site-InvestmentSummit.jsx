@@ -171,7 +171,7 @@ function InvestmentSummitPage() {
               Two days inside the SPORT[GEN] Summit where <b>the capital of sport</b> gathers, private equity, sovereign funds, venture and the operators raising and deploying it. Where deals begin.
             </p>
             <div className="inv-hero__cta inv-rv">
-              <a className="inv-btn" href="#/investment-summit/tickets" onClick={(e) => go(e, '#/investment-summit/tickets')}>Request your pass <span className="inv-btn__arrow">→</span></a>
+              <a className="inv-btn" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register interest <span className="inv-btn__arrow">→</span></a>
               <a className="inv-btn inv-btn--ghost" href="#voices" onClick={(e) => { e.preventDefault(); document.getElementById('inv-voices').scrollIntoView({ behavior: 'smooth' }); }}>See the lineup</a>
             </div>
           </div>
@@ -314,7 +314,7 @@ function InvestmentSummitPage() {
           <h2 className="inv-rv">Where deals<br /><span className="inv-silver">begin.</span></h2>
           <p className="inv-cta__sub inv-rv">Join the capital community of sport for two days in Paris during Roland-Garros week.</p>
           <div className="inv-cta__btns inv-rv">
-            <a className="inv-btn" href="#/investment-summit/tickets" onClick={(e) => go(e, '#/investment-summit/tickets')}>Request your pass <span className="inv-btn__arrow">→</span></a>
+            <a className="inv-btn" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register interest <span className="inv-btn__arrow">→</span></a>
             <a className="inv-btn inv-btn--ghost" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Talk to the team</a>
           </div>
         </div>
