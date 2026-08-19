@@ -46,6 +46,10 @@ const INV_PARTICIPANTS = [
   ['Venture & Growth Capital', ['Will Ventures', 'Left Lane Capital', '20VC', 'Athvance Capital', 'Gamma Waves Partners', 'Clubhouse Ventures', 'The Players Fund']],
 ];
 
+/* Billetterie masquee (aout 2026) : cache la section Passes de la home Invest
+   (sis.html et #/investment-summit) sans rien supprimer. Repasser a false pour reafficher. */
+const INV_TICKETS_HIDDEN = true;
+
 /* Investment Summit dedicated passes (prices to confirm). */
 const INV_TICKETS = [
   { tier: 'LP Pass', price: 'On request', intro: 'FOR LIMITED PARTNERS:', perks: [
@@ -272,7 +276,8 @@ function InvestmentSummitPage() {
         </div>
       </section>
 
-      {/* ───────── PASSES ───────── */}
+      {/* ───────── PASSES (masquee tant que INV_TICKETS_HIDDEN) ───────── */}
+      {INV_TICKETS_HIDDEN ? null : (
       <section className="inv-section" style={{ paddingTop: 0 }}>
         <div className="inv-wrap">
           <div className="inv-shead">
@@ -306,6 +311,7 @@ function InvestmentSummitPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ───────── FINAL CTA ───────── */}
       <section className="inv-cta">
