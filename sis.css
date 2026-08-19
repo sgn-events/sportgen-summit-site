@@ -424,15 +424,17 @@
 .brevo--invest .brevo__note { margin: 12px 0 0; font-family: var(--inv-mono); font-size: 12.5px; color: var(--inv-dim); }
 .brevo--invest .brevo__note a { color: var(--sis-blue); }
 
-/* ---------- footer ---------- */
-.sis-foot { background: #0b0b0d; color: #f3f3f1; padding: clamp(48px,6vw,80px) 0 36px; }
-.sis-foot__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; padding-bottom: 34px; border-bottom: 1px solid rgba(255,255,255,0.16); }
+/* ---------- footer (blanc, aligne sur le systeme light de la page) ----------
+   Encres en hex : les tokens --inv-* d'invest.css sont scopes sous .inv,
+   inaccessibles ici (le footer est hors de .inv). Memes valeurs. */
+.sis-foot { background: #ffffff; color: #0b0b0d; padding: clamp(48px,6vw,80px) 0 36px; border-top: 1px solid rgba(11,11,13,0.10); }
+.sis-foot__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; padding-bottom: 34px; border-bottom: 1px solid rgba(11,11,13,0.14); }
 .sis-foot__brand { display: inline-flex; align-items: center; }
 .sis-foot__brand img { height: 44px; width: auto; display: block; }
-.sis-foot__meta { display: flex; gap: 22px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.08em; color: #b5b5ba; }
+.sis-foot__meta { display: flex; gap: 22px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.08em; color: #5c5c62; }
 .sis-foot__links { display: flex; flex-wrap: wrap; gap: 22px; padding: 28px 0; }
-.sis-foot__links a { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #d8d8dc; text-decoration: none; transition: color .2s; }
-.sis-foot__links a:hover { color: var(--sis-blue-soft); }
+.sis-foot__links a { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0b0b0d; text-decoration: none; transition: color .2s; }
+.sis-foot__links a:hover { color: var(--sis-blue); }
 .sis-foot__bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #6a6a70; }
-.sis-foot__bar a { color: #9a9aa0; text-decoration: none; }
-.sis-foot__bar a:hover { color: var(--sis-blue-soft); }
+.sis-foot__bar a { color: #5c5c62; text-decoration: none; }
+.sis-foot__bar a:hover { color: var(--sis-blue); }

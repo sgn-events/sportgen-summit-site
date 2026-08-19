@@ -1,4 +1,4 @@
-/* [SGN] INVESTMENT SUMMIT, footer (dark mono) */
+/* [SGN] INVESTMENT SUMMIT, footer (blanc, mono) */
 // Self-contained: each script/bundle module gets its own scope, so define the URL locally
 // rather than relying on a const from SisNav.jsx.
 const SIS_FOOT_BUY = 'https://pointenoire.swoogo.com/sportgensummit2027/Registration';
@@ -9,7 +9,7 @@ function SisFooter() {
       <div className="inv-wrap">
         <div className="sis-foot__top">
           <a className="sis-foot__brand" href="#/">
-            <img src="assets/brand/sgn-investment-summit-white.png" alt="[SGN] Invest" />
+            <img src="assets/brand/sgn-investment-summit.png" alt="[SGN] Invest" />
           </a>
           <div className="sis-foot__meta">
             <span>26 May 2027</span><span>Paris, France</span>
