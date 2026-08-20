@@ -95,27 +95,29 @@ const SIS_PRESS = [
 /* Bandeau medias presents en 2026 (feedback aout 2026), meme format que le bandeau
    investisseurs de la home (.inv-invmarq). Logos repris du deck SIS
    (github.com/sgn-events/sis-deck-skill, slide Media Presence), copies dans
-   assets/logos/media/. Le filtre du bandeau les rend noirs uniformement. */
+   assets/logos/media/. Le filtre du bandeau les rend noirs uniformement.
+   `h` recalibre la hauteur par logo (defaut 34px) : les marques compactes/carrees
+   paraissent minuscules a hauteur fixe a cote des wordmarks larges (Maddyness). */
 const SIS_MEDIA_STRIP = [
-  { name: 'Financial Times', src: 'assets/logos/media/financial-times.png' },
-  { name: 'Sky', src: 'assets/logos/media/sky.png' },
-  { name: 'beIN Media Group', src: 'assets/logos/media/bein.png' },
-  { name: 'AFP', src: 'assets/logos/media/afp.png' },
-  { name: 'SportBusiness', src: 'assets/logos/media/sportbusiness.png' },
-  { name: 'Forbes', src: 'assets/logos/media/forbes.png' },
-  { name: 'Sport Business Club', src: 'assets/logos/media/sport-business-club.png' },
-  { name: 'Canal+', src: 'assets/logos/media/canal-plus.png' },
-  { name: 'M6', src: 'assets/logos/media/m6.png' },
-  { name: 'La Gazzetta dello Sport', src: 'assets/logos/media/gazzetta.png' },
-  { name: "L'Équipe", src: 'assets/logos/media/lequipe.png' },
-  { name: 'Le Point', src: 'assets/logos/media/le-point.png' },
-  { name: 'BFM Business', src: 'assets/logos/media/bfm-business.png' },
-  { name: 'france.tv', src: 'assets/logos/media/france-tv.png' },
-  { name: 'RMC Sport', src: 'assets/logos/media/rmc-sport.png' },
+  { name: 'Financial Times', src: 'assets/logos/media/financial-times.png', h: 40 },
+  { name: 'Sky', src: 'assets/logos/media/sky.png', h: 50 },
+  { name: 'beIN Media Group', src: 'assets/logos/media/bein.png', h: 48 },
+  { name: 'AFP', src: 'assets/logos/media/afp.png', h: 46 },
+  { name: 'SportBusiness', src: 'assets/logos/media/sportbusiness.png', h: 38 },
+  { name: 'Forbes', src: 'assets/logos/media/forbes.png', h: 48 },
+  { name: 'Sport Business Club', src: 'assets/logos/media/sport-business-club.png', h: 50 },
+  { name: 'Canal+', src: 'assets/logos/media/canal-plus.png', h: 36 },
+  { name: 'M6', src: 'assets/logos/media/m6.png', h: 48 },
+  { name: 'La Gazzetta dello Sport', src: 'assets/logos/media/gazzetta.png', h: 36 },
+  { name: "L'Équipe", src: 'assets/logos/media/lequipe.png', h: 44 },
+  { name: 'Le Point', src: 'assets/logos/media/le-point.png', h: 38 },
+  { name: 'BFM Business', src: 'assets/logos/media/bfm-business.png', h: 54 },
+  { name: 'france.tv', src: 'assets/logos/media/france-tv.png', h: 50 },
+  { name: 'RMC Sport', src: 'assets/logos/media/rmc-sport.png', h: 54 },
   { name: 'Maddyness', src: 'assets/logos/media/maddyness.png' },
-  { name: 'Sport Buzz Business', src: 'assets/logos/media/sport-buzz-business.png' },
-  { name: 'vibes', src: 'assets/logos/media/vibes.png' },
-  { name: 'Les Echos', src: 'assets/logos/media/les-echos.png' },
+  { name: 'Sport Buzz Business', src: 'assets/logos/media/sport-buzz-business.png', h: 54 },
+  { name: 'vibes', src: 'assets/logos/media/vibes.png', h: 54 },
+  { name: 'Les Echos', src: 'assets/logos/media/les-echos.png', h: 38 },
 ];
 
 function SisMediaPage() {
@@ -129,7 +131,7 @@ function SisMediaPage() {
           <div className="inv-invmarq__track">
             {SIS_MEDIA_STRIP.concat(SIS_MEDIA_STRIP).map((m, i) => (
               <div className="inv-invmarq__cell" key={m.name + i}>
-                {m.word ? <span className="inv-invword">{m.word}</span> : <img src={m.src} alt={m.name} loading="lazy" />}
+                {m.word ? <span className="inv-invword">{m.word}</span> : <img src={m.src} alt={m.name} loading="lazy" style={m.h ? { height: m.h + 'px' } : undefined} />}
               </div>
             ))}
           </div>

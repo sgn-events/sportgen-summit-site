@@ -122,15 +122,15 @@ const INV_LOGOS = [
 ];
 
 /* Investors strip on the SIS home, real funds + institutions in the room.
-   Taille uniforme pour tous les logos (feedback aout 2026), hauteur unique en CSS
-   (.inv-invmarq__cell img), plus d'overrides `h` par logo. */
+   Hauteur par defaut 34px (.inv-invmarq__cell img) ; `h` recalibre les logos
+   dont les proportions les font paraitre trop petits (feedback aout 2026). */
 const INV_STRIP = [
   { name: 'The Carlyle Group', src: INV_LOGO_CDN + '0wKm4XbrfMQTfvoWUOheFFPe7ys.png' },
   { name: 'Avenue Capital', src: 'assets/logos/avenue-capital.png' },
-  { name: 'BNP Paribas', src: 'https://framerusercontent.com/images/slCL53NvqEbZ8mCu0dMoIJNesTI.png' },
+  { name: 'BNP Paribas', src: 'https://framerusercontent.com/images/slCL53NvqEbZ8mCu0dMoIJNesTI.png', h: 46 },
   { name: 'Left Lane Capital', src: 'assets/logos/left-lane.png' },
   { name: 'Morgan Stanley', word: 'Morgan Stanley' },
-  { name: 'APEX', src: INV_LOGO_CDN + 'bkMmpr6NP0OUpWnewViZQLRfc.png' },
+  { name: 'APEX', src: INV_LOGO_CDN + 'bkMmpr6NP0OUpWnewViZQLRfc.png', h: 52 },
   { name: 'TRAIL Capital', src: 'assets/logos/trail.png' },
   { name: '20VC', src: INV_LOGO_CDN + 'T9cbGVkT9VMMbAhR50Z9LLCHOw.png' },
   { name: 'Athvance Capital', src: 'assets/logos/athvance.png' },
@@ -218,7 +218,7 @@ function InvestmentSummitPage() {
               <div className="inv-invmarq__cell" key={c.name + i}>
                 {c.word
                   ? <span className="inv-invword">{c.word}</span>
-                  : <img src={c.src} alt={c.name} loading="lazy" />}
+                  : <img src={c.src} alt={c.name} loading="lazy" style={c.h ? { height: c.h + 'px' } : undefined} />}
               </div>
             ))}
           </div>
