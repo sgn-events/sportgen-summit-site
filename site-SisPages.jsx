@@ -45,9 +45,9 @@ function SisShell({ idx, kicker, title, sub, children }) {
 /* ─────────────────────────── SPEAKERS ─────────────────────────── */
 function SisSpeakersPage() {
   return (
-    <SisShell idx="[01]" kicker="The room speaks"
-      title={<>The voices shaping<br />the capital of sport</>}
-      sub="Limited partners, fund managers, bankers and the operators they back, the people defining how money moves through sport, on stage across two days in Paris.">
+    <SisShell idx="[01]" kicker="On stage"
+      title={<>The people who decide<br />where the money goes</>}
+      sub="Allocators, fund managers, bankers and the operators they back. On stage for two days in Paris, on the record.">
       <div className="sis-spk-grid">
         {SIS_VOICES.map((s, i) => (
           <article className="sis-spk" key={s[0] + i}>
@@ -65,7 +65,11 @@ function SisSpeakersPage() {
       </div>
       <div className="inv-voices__foot inv-rv" style={{ marginTop: 'clamp(36px,5vw,56px)' }}>
         <span className="inv-voices__note">+ 100 speakers across the full SPORT[GEN] programme. Updated continuously toward May 2027.</span>
-        <a className="inv-btn" href={SIS_BUY} target="_blank" rel="noopener">Request your pass <span className="inv-btn__arrow">→</span></a>
+        {/* Deux CTAs (feedback aout 2026) : LP vers la page LP, investisseur vers le formulaire. */}
+        <span className="sis-foot-ctas">
+          <a className="inv-btn" href="#/why-lp" onClick={(e) => sisGo(e, '#/why-lp')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
+          <a className="inv-btn inv-btn--ghost" href="#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')}>Request an Investor Pass</a>
+        </span>
       </div>
     </SisShell>
   );
@@ -88,11 +92,35 @@ const SIS_PRESS = [
   ['SportBusiness', 'Industry'],
 ];
 
+/* Bandeau medias finance/business 2026 (feedback aout 2026), meme format que le
+   bandeau investisseurs de la home (.inv-invmarq). Wordmarks typographiques comme
+   "Morgan Stanley" sur la home ; remplacer par des fichiers logos quand on les a. */
+const SIS_MEDIA_STRIP = [
+  { name: 'Bloomberg', word: 'Bloomberg' },
+  { name: 'Financial Times', word: 'Financial Times' },
+  { name: 'Les Échos', word: 'Les Échos' },
+  { name: 'Reuters', word: 'Reuters' },
+  { name: 'Sportico', word: 'Sportico' },
+  { name: 'SportBusiness', word: 'SportBusiness' },
+];
+
 function SisMediaPage() {
   return (
     <SisShell idx="[02]" kicker="Press & media"
       title={<>A finance story,<br />told from inside sport</>}
       sub="SGN Invest is built for finance, economics and business media. Accreditation gives you the room where sport's capital is raised, priced and deployed.">
+      <div className="sis-media-band inv-rv">
+        <span className="inv-eyebrow">Finance &amp; business media in the room in 2026</span>
+        <div className="inv-invmarq" aria-hidden="true">
+          <div className="inv-invmarq__track">
+            {SIS_MEDIA_STRIP.concat(SIS_MEDIA_STRIP).map((m, i) => (
+              <div className="inv-invmarq__cell" key={m.name + i}>
+                {m.word ? <span className="inv-invword">{m.word}</span> : <img src={m.src} alt={m.name} loading="lazy" />}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
       <div className="sis-media-grid">
         {SIS_MEDIA_REASONS.map((r) => (
           <div className="sis-media-card" key={r[1]}>
@@ -125,10 +153,12 @@ function SisMediaPage() {
 }
 
 /* ─────────────────────────── SPONSOR ─────────────────────────── */
+/* Chiffres officiels harmonises sur tout SGN Invest (aout 2026) :
+   200 Investors · 80+ LP's · 90% Director level. */
 const SIS_FIG = [
-  ['200', '+', 'Active investors'],
-  ['300', '+', 'Organizations'],
-  ['70', '%', 'Director-level & up'],
+  ['200', '', 'Investors'],
+  ['80', '+', "LP's"],
+  ['90', '%', 'Director level'],
 ];
 
 const SIS_SPON_DECK = '#/get-in-touch';
@@ -187,8 +217,8 @@ function SisCount({ value, suffix }) {
 function SisSponsorPage() {
   return (
     <SisShell idx="[03]" kicker="Partner with us"
-      title={<>Put your brand<br />where capital meets</>}
-      sub="Reach the most senior, hardest-to-access audience in sport: the funds, family offices and banks deciding where the next decade of investment goes.">
+      title={<>Buy access,<br />not signage</>}
+      sub="The funds, family offices and banks financing sport are in one room for two days. Sponsoring SGN Invest puts you in the conversation they came for, not on the lanyard.">
       <div className="sis-spon-cta inv-rv">
         <a className="inv-btn" href={SIS_SPON_DECK} onClick={(e) => sisGo(e, '#/get-in-touch')}>Explore Sponsorship Opportunities <span className="inv-btn__arrow">→</span></a>
         <a className="inv-btn inv-btn--ghost" href={SIS_SPON_DECK} onClick={(e) => sisGo(e, '#/get-in-touch')}>Download Sponsorship Deck</a>

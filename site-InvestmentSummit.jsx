@@ -25,9 +25,9 @@ const INV_VOICES = [
 
 /* Pull-quotes from leading investment voices on stage. */
 const INV_QUOTES = [
-  ['“The best returns in sport go to those who read the game before the spreadsheet.”', 'Marc Lasry', 'Chairman & CEO of', 'Avenue Capital', 'cYNJZ7PeuRme6ygWI2V7HJT3fU.png'],
-  ['“Private capital is no longer a spectator in sport, it is shaping how the industry gets built.”', 'Adnan Khalef', 'Managing Director of', 'The Carlyle Group', 'NNxaTxwoAuvSV6BqobSwCmgKae8.jpeg'],
-  ['“The biggest opportunity in sport is the blind spot everyone else keeps overlooking.”', 'António Caçorino', 'CEO & Founder of', 'APEX', 'OoVzkBGf4K24lUhuRZoKcvb4.jpg'],
+  ['“The best returns in sport go to those who read the game before the spreadsheet.”', 'Marc Lasry', 'Chairman & CEO', 'Avenue Capital', 'cYNJZ7PeuRme6ygWI2V7HJT3fU.png'],
+  ['“Private capital is no longer a spectator in sport, it is shaping how the industry gets built.”', 'Adnan Khalef', 'Managing Director', 'The Carlyle Group', 'NNxaTxwoAuvSV6BqobSwCmgKae8.jpeg'],
+  ['“The biggest opportunity in sport is the blind spot everyone else keeps overlooking.”', 'António Caçorino', 'CEO & Founder', 'APEX', 'OoVzkBGf4K24lUhuRZoKcvb4.jpg'],
 ];
 
 /* Investment-led main-stage sessions (real, from the 2026 agenda). */
@@ -71,10 +71,12 @@ const INV_TICKETS = [
   ] },
 ];
 
+/* Chiffres officiels harmonises sur tout SGN Invest (aout 2026) :
+   200 Investors · 80+ LP's · 90% Director level. */
 const INV_FIGURES = [
-  ['250', '', 'Curated investors', 'hand-selected'],
-  ['100', '', "LP's", 'limited partners'],
-  ['90', '%', 'Director-level & up', 'decision-makers'],
+  ['200', '', 'Investors', ''],
+  ['80', '+', "LP's", ''],
+  ['90', '%', 'Director level', ''],
 ];
 
 /* count-up gated by viewport */
@@ -119,14 +121,16 @@ const INV_LOGOS = [
   ['The Players Fund', 'assets/logos/players-fund.png'],
 ];
 
-/* Investors strip on the SIS home, real funds + institutions in the room. */
+/* Investors strip on the SIS home, real funds + institutions in the room.
+   Taille uniforme pour tous les logos (feedback aout 2026), hauteur unique en CSS
+   (.inv-invmarq__cell img), plus d'overrides `h` par logo. */
 const INV_STRIP = [
   { name: 'The Carlyle Group', src: INV_LOGO_CDN + '0wKm4XbrfMQTfvoWUOheFFPe7ys.png' },
   { name: 'Avenue Capital', src: 'assets/logos/avenue-capital.png' },
   { name: 'BNP Paribas', src: 'https://framerusercontent.com/images/slCL53NvqEbZ8mCu0dMoIJNesTI.png' },
-  { name: 'Left Lane Capital', src: 'assets/logos/left-lane.png', h: 48 },
+  { name: 'Left Lane Capital', src: 'assets/logos/left-lane.png' },
   { name: 'Morgan Stanley', word: 'Morgan Stanley' },
-  { name: 'APEX', src: INV_LOGO_CDN + 'bkMmpr6NP0OUpWnewViZQLRfc.png', h: 50 },
+  { name: 'APEX', src: INV_LOGO_CDN + 'bkMmpr6NP0OUpWnewViZQLRfc.png' },
   { name: 'TRAIL Capital', src: 'assets/logos/trail.png' },
   { name: '20VC', src: INV_LOGO_CDN + 'T9cbGVkT9VMMbAhR50Z9LLCHOw.png' },
   { name: 'Athvance Capital', src: 'assets/logos/athvance.png' },
@@ -151,32 +155,34 @@ function InvestmentSummitPage() {
     <div className={'inv' + (light ? ' inv--light' : '')} ref={rootRef}>
       <div className="inv-grid" aria-hidden="true"></div>
 
-      {/* ───────── HERO ───────── */}
+      {/* ───────── HERO (refonte aout 2026 : tout aligne a gauche, style Machina.
+           Logo + lieu/date remplacent l'ancienne barre meta bordee.) ───────── */}
       <header className="inv-hero">
         <div className="inv-hero__glow" aria-hidden="true"></div>
         <div className="inv-wrap">
+          <div className="inv-hero__brand inv-rv">
+            <img src="assets/brand/sgn-investment-summit.png" alt="[SGN] Invest" />
+          </div>
           <div className="inv-hero__meta inv-rv">
-            <span>[ SGN <b>Invest</b> ]</span>
-            <span>26 <b>May 2027</b></span>
-            <span>Paris, <b>France</b></span>
+            <span>Automobile Club de France</span>
+            <span>Paris</span>
+            <span>May 2027</span>
           </div>
 
           <div className="inv-hero__head">
             <h1 className="inv-h1">
-              <span className="inv-mask"><span>Europe's</span></span>
-              <span className="inv-mask"><span>Leading Sport</span></span>
-              <span className="inv-mask"><span className="inv-silver">Investment</span></span>
-              <span className="inv-mask"><span>Event</span></span>
+              <span className="inv-mask"><span>Where sport meets</span></span>
+              <span className="inv-mask"><span className="inv-silver">institutional capital</span></span>
             </h1>
           </div>
 
           <div className="inv-hero__lower">
             <p className="inv-hero__lead inv-rv">
-              Two days inside the SPORT[GEN] Summit where <b>the capital of sport</b> gathers, private equity, sovereign funds, venture and the operators raising and deploying it. Where deals begin.
+              Two days in Paris where the people allocating capital to sport meet the people deploying it. <b>200 investors. 80+ Limited Partners.</b> The funds, family offices, banks and rights holders that decide how the industry gets financed in one room, during Roland-Garros week.
             </p>
             <div className="inv-hero__cta inv-rv">
-              <a className="inv-btn" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register interest <span className="inv-btn__arrow">→</span></a>
-              <a className="inv-btn inv-btn--ghost" href="#voices" onClick={(e) => { e.preventDefault(); document.getElementById('inv-voices').scrollIntoView({ behavior: 'smooth' }); }}>See the lineup</a>
+              <a className="inv-btn" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register your Interest <span className="inv-btn__arrow">→</span></a>
+              <a className="inv-btn inv-btn--ghost" href="#/sponsor" onClick={(e) => go(e, '#/sponsor')}>Sponsor SGN Invest</a>
             </div>
           </div>
         </div>
@@ -191,7 +197,8 @@ function InvestmentSummitPage() {
                   <figcaption className="inv-tvcard__who">
                     <img className="inv-tvcard__ph" src={INV_CDN + q[4]} alt={q[1]} loading="lazy" />
                     <div className="inv-tvcard__name">{q[1]}</div>
-                    <div className="inv-tvcard__role">{q[2]} <b>{q[3]}</b></div>
+                    <div className="inv-tvcard__role">{q[2]}</div>
+                    <div className="inv-tvcard__org">{q[3]}</div>
                   </figcaption>
                 </figure>
               ))}
@@ -203,7 +210,7 @@ function InvestmentSummitPage() {
       {/* ───────── INVESTORS BAND ───────── */}
       <section className="inv-section inv-section--light" style={{ paddingTop: 'clamp(20px,3vw,40px)', paddingBottom: 'clamp(24px,3vw,44px)' }}>
         <div className="inv-wrap">
-          <h2 className="inv-invhead inv-rv">Meet the investors owning the future of the game</h2>
+          <h2 className="inv-invhead inv-rv">Who was in the room in 2026</h2>
         </div>
         <div className="inv-invmarq" aria-hidden="true">
           <div className="inv-invmarq__track">
@@ -211,7 +218,7 @@ function InvestmentSummitPage() {
               <div className="inv-invmarq__cell" key={c.name + i}>
                 {c.word
                   ? <span className="inv-invword">{c.word}</span>
-                  : <img src={c.src} alt={c.name} loading="lazy" style={c.h ? { height: c.h + 'px' } : undefined} />}
+                  : <img src={c.src} alt={c.name} loading="lazy" />}
               </div>
             ))}
           </div>
@@ -225,8 +232,8 @@ function InvestmentSummitPage() {
             <span className="inv-shead__idx inv-rv">[01]</span>
             <div className="inv-shead__main">
               <span className="inv-eyebrow inv-rv">Why the room matters</span>
-              <h2 className="inv-h2 inv-rv">The most exclusive room of investors</h2>
-              <p className="inv-shead__sub inv-rv">The investment community of sport, funds, banks, family offices and the rights holders they back, convened during Roland-Garros week. Concentrated, senior, and there to do business.</p>
+              <h2 className="inv-h2 inv-rv">A room built on qualification, not volume</h2>
+              <p className="inv-shead__sub inv-rv">Every investor pass is reviewed before it is issued. We cap the room deliberately: 200 investors, 80 of them limited partners. The result is a floor where a GP meets allocators instead of vendors, and an LP meets managers instead of a queue.</p>
             </div>
           </div>
 
@@ -235,7 +242,7 @@ function InvestmentSummitPage() {
               <div className="inv-fig inv-rv" key={f[2]} style={{ animationDelay: (i * 70) + 'ms' }}>
                 <InvCountUp value={f[0]} suffix={f[1]} />
                 <span className="inv-fig__label">{f[2]}</span>
-                <span className="inv-fig__note">{f[3]}</span>
+                {f[3] ? <span className="inv-fig__note">{f[3]}</span> : null}
               </div>
             ))}
           </div>
@@ -249,7 +256,7 @@ function InvestmentSummitPage() {
             <span className="inv-shead__idx inv-rv">[02]</span>
             <div className="inv-shead__main">
               <span className="inv-eyebrow inv-rv">Top voices</span>
-              <h2 className="inv-h2 inv-rv">The leading voices speaking<br />at SGN Invest</h2>
+              <h2 className="inv-h2 inv-rv">The people writing<br />the cheques, on the record</h2>
             </div>
           </div>
 
@@ -317,8 +324,8 @@ function InvestmentSummitPage() {
       <section className="inv-cta">
         <div className="inv-wrap">
           <span className="inv-eyebrow inv-cta__eyebrow inv-rv">[ 26 May 2027 · Paris ]</span>
-          <h2 className="inv-rv">Where deals<br /><span className="inv-silver">begin.</span></h2>
-          <p className="inv-cta__sub inv-rv">Join the capital community of sport for two days in Paris during Roland-Garros week.</p>
+          <h2 className="inv-rv">Applications for the<br />2027 room <span className="inv-silver">are open.</span></h2>
+          <p className="inv-cta__sub inv-rv">LP passes are complimentary and reviewed individually. Investor and sponsor places are limited by design.</p>
           <div className="inv-cta__btns inv-rv">
             <a className="inv-btn" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register interest <span className="inv-btn__arrow">→</span></a>
             <a className="inv-btn inv-btn--ghost" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Talk to the team</a>
@@ -329,7 +336,7 @@ function InvestmentSummitPage() {
       <a className="inv-lpbar" href="#/why-lp" onClick={(e) => go(e, '#/why-lp')}>
         <div className="inv-lpbar__track">
           {Array.from({ length: 12 }).map((_, i) => (
-            <span className="inv-lpbar__item" key={i}>Free for LPs, Apply for an LP Pass <span className="inv-lpbar__sep">✦</span></span>
+            <span className="inv-lpbar__item" key={i}>Complimentary for verified LPs · Apply for an LP Pass <span className="inv-lpbar__sep">✦</span></span>
           ))}
         </div>
       </a>

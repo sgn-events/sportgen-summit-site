@@ -85,8 +85,8 @@
 .sis-body .inv--light .inv-hero__glow {
   background: radial-gradient(60% 60% at 50% 30%, rgba(255,176,73,0.22), transparent 70%);
 }
-/* hero meta highlighted values in gold */
-.sis-body .inv-hero__meta span b { color: var(--sis-blue); }
+/* hero lieu/date : separateurs en gold (la ligne remplace l'ancienne barre meta) */
+.sis-body .inv-hero__meta span + span::before { color: var(--sis-blue); }
 /* primary CTA buttons become brand gold with dark ink */
 .sis-body .inv-btn {
   background: var(--sis-grad); color: var(--sis-gold-ink); border: 1px solid transparent;
@@ -291,6 +291,10 @@
 .sis-phead__sub { margin: 22px 0 0; max-width: 620px; font-family: var(--inv-mono); font-size: 14px; line-height: 1.7; color: var(--inv-dim); }
 
 /* ---------- MEDIA page ---------- */
+/* bandeau medias finance/business 2026, meme format que le bandeau de la home */
+.sis-media-band { margin-top: clamp(36px, 5vw, 60px); }
+.sis-media-band .inv-eyebrow { margin-bottom: 18px; }
+
 .sis-media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--inv-line); border: 1px solid var(--inv-line); margin-top: clamp(36px,5vw,60px); }
 .sis-media-card { background: var(--inv-bg); padding: 30px 28px 34px; display: flex; flex-direction: column; gap: 12px; }
 .sis-media-card__idx { font-family: var(--inv-mono); font-size: 12px; letter-spacing: 0.16em; color: var(--inv-mute); }
@@ -358,6 +362,9 @@
 .sis-agenda__d { display: block; margin-top: 5px; font-family: var(--inv-mono); font-size: 12.5px; line-height: 1.6; color: var(--inv-dim); }
 
 /* ---------- speakers full grid reuse inv-voices ---------- */
+/* pied de page speakers : deux CTAs cote a cote (LP pass / investor pass) */
+.sis-foot-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+
 .sis-spk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--inv-line); border: 1px solid var(--inv-line); margin-top: clamp(36px,5vw,56px); }
 @media (max-width: 1024px) { .sis-spk-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 760px) { .sis-spk-grid { grid-template-columns: repeat(2, 1fr); } }

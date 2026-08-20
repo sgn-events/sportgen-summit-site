@@ -96,37 +96,42 @@
 @keyframes inv-lpmarq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .inv-lpbar__track { animation: none; } }
 
-/* ============================================================ HERO */
-.inv-hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 132px; padding-bottom: clamp(2rem, 4vh, 4rem); }
+/* ============================================================ HERO
+   Refonte aout 2026 (feedback) : tout aligne a gauche, style Machina.
+   Logo + ligne lieu/date remplacent l'ancienne barre meta bordee ; plus de
+   min-height 100svh ni de centrage vertical pour que tout le premier ecran
+   (logo, titre, lead, CTAs) soit visible au chargement. */
+.inv-hero { position: relative; padding-top: clamp(112px, 13vh, 148px); padding-bottom: clamp(2rem, 4vh, 4rem); }
 .inv-hero__glow {
   position: absolute; left: 50%; top: -10%; width: 1200px; height: 760px; transform: translateX(-50%);
   background: radial-gradient(60% 60% at 50% 30%, rgba(190,196,210,0.16), transparent 70%);
   pointer-events: none; z-index: 0;
 }
-.inv-hero__meta {
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px;
-  padding: 16px 0; border-top: 1px solid var(--inv-line); border-bottom: 1px solid var(--inv-line);
-}
-.inv-hero__meta span { font-family: var(--inv-mono); font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--inv-dim); }
-.inv-hero__meta span b { color: var(--inv-fg); font-weight: 500; }
+.inv-hero__brand { margin-bottom: 20px; }
+.inv-hero__brand img { height: clamp(42px, 4.5vw, 60px); width: auto; display: block; }
+.inv-hero__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
+.inv-hero__meta span { font-family: var(--inv-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--inv-fg); }
+.inv-hero__meta span + span::before { content: "·"; margin-right: 14px; color: var(--inv-mute); }
 
-.inv-hero__head { padding: clamp(44px, 7vw, 92px) 0 clamp(32px, 4vw, 56px); }
+.inv-hero__head { padding: clamp(26px, 4vw, 48px) 0 clamp(20px, 3vw, 34px); }
 .inv-h1 {
   margin: 0; font-weight: 800; text-transform: uppercase;
   font-size: clamp(34px, 6vw, 84px); line-height: 0.9; letter-spacing: -0.035em;
 }
 .inv-h1 .inv-mask { padding-bottom: 0.04em; margin-top: -0.04em; }
 
-.inv-hero__lower { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: end; padding-bottom: 56px; }
+.inv-hero__lower { padding-bottom: clamp(28px, 4vh, 48px); }
 .inv-hero__lead { max-width: 62ch; margin: 0; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.6; color: #000; font-weight: 400; }
 .inv-hero__lead b { color: var(--inv-fg); font-weight: 600; }
-.inv-hero__cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+.inv-hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: clamp(24px, 3vw, 34px); }
 
 /* ---- top voices (hero pull-quotes) ---- */
 .inv-tvoices { padding: clamp(28px, 4vw, 56px) 0 clamp(36px, 5vw, 68px); }
+/* Meme typo que le grand titre du hero (.inv-h1) : graisse 800, meme tracking
+   (feedback aout 2026, harmonisation grand titre / sous-titres). */
 .inv-tvoices__title {
-  margin: 0 0 clamp(28px, 3.4vw, 52px); font-weight: 700; text-transform: uppercase; white-space: nowrap;
-  font-size: clamp(26px, 4.15vw, 61px); line-height: 0.96; letter-spacing: -0.03em; color: var(--inv-fg);
+  margin: 0 0 clamp(28px, 3.4vw, 52px); font-weight: 800; text-transform: uppercase; white-space: nowrap;
+  font-size: clamp(26px, 4.15vw, 61px); line-height: 0.96; letter-spacing: -0.035em; color: var(--inv-fg);
 }
 .inv-tvcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.6vw, 28px); align-items: stretch; }
 .inv-tvcard {
@@ -150,6 +155,8 @@
 .inv-tvcard__name { margin-top: 18px; font-family: var(--inv-mono); font-weight: 700; font-size: 17px; letter-spacing: -0.005em; color: var(--inv-fg); }
 .inv-tvcard__role { margin-top: 6px; font-family: var(--inv-mono); font-size: 12.5px; letter-spacing: -0.01em; color: var(--inv-dim); line-height: 1.45; white-space: nowrap; }
 .inv-tvcard__role b { color: var(--inv-fg); font-weight: 700; }
+/* societe sur sa propre ligne, en gras (feedback aout 2026) */
+.inv-tvcard__org { margin-top: 3px; font-family: var(--inv-mono); font-size: 12.5px; font-weight: 700; letter-spacing: -0.01em; color: var(--inv-fg); white-space: nowrap; }
 @media (max-width: 900px) {
   .inv-tvcards { grid-template-columns: 1fr; }
   .inv-tvoices__title { white-space: normal; }
@@ -173,7 +180,7 @@
 .inv-section--light .inv-shead__idx { color: var(--inv-ink-dim); }
 .inv-shead__main { }
 .inv-shead__main .inv-eyebrow { margin-bottom: 22px; }
-.inv-h2 { margin: 0; font-weight: 700; text-transform: uppercase; font-size: clamp(26px, 4.15vw, 61px); line-height: 0.96; letter-spacing: -0.03em; max-width: 18ch; }
+.inv-h2 { margin: 0; font-weight: 800; text-transform: uppercase; font-size: clamp(26px, 4.15vw, 61px); line-height: 0.96; letter-spacing: -0.035em; max-width: 18ch; }
 .inv-shead__sub { margin: 24px 0 0; max-width: 52ch; font-size: clamp(16px,1.3vw,19px); line-height: 1.6; color: var(--inv-dim); }
 .inv-section--light .inv-eyebrow { color: var(--inv-ink-dim); }
 .inv-section--light .inv-eyebrow::before { background: var(--inv-ink); }
@@ -230,8 +237,8 @@
 /* ---- investors band ---- */
 .inv-invhead {
   max-width: none; margin: 0 0 clamp(28px, 3.4vw, 52px);
-  text-align: left; font-weight: 700; text-transform: uppercase;
-  font-size: clamp(26px, 4.15vw, 61px); line-height: 0.96; letter-spacing: -0.03em; color: var(--inv-fg);
+  text-align: left; font-weight: 800; text-transform: uppercase;
+  font-size: clamp(26px, 4.15vw, 61px); line-height: 0.96; letter-spacing: -0.035em; color: var(--inv-fg);
 }
 .inv-invmarq { border-top: 1px solid var(--inv-line); border-bottom: 1px solid var(--inv-line); overflow: hidden; }
 .inv-invmarq__track { display: flex; width: max-content; animation: inv-invmarq 46s linear infinite; }
@@ -240,6 +247,8 @@
   flex: none; display: flex; align-items: center; justify-content: center;
   height: clamp(62px, 6vw, 84px); padding: 0 clamp(18px, 2.2vw, 34px);
 }
+/* Trait fin entre chaque logo + hauteur unique pour tous (feedback aout 2026). */
+.inv-invmarq__cell + .inv-invmarq__cell { border-left: 1px solid var(--inv-line); }
 .inv-invmarq__cell img { height: 34px; width: auto; object-fit: contain; filter: grayscale(1) brightness(0); }
 .inv-invword { font-family: var(--inv-disp); font-weight: 800; font-size: 30px; letter-spacing: 0.01em; color: var(--inv-fg); white-space: nowrap; }
 @keyframes inv-invmarq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -504,9 +513,7 @@
 @media (max-width: 720px) {
   .inv-wrap { padding: 0 22px; }
   .inv-grid { background-size: 50% 100%; }
-  .inv-hero { padding-top: 104px; }
-  .inv-hero__lower { grid-template-columns: 1fr; gap: 28px; }
-  .inv-hero__cta { justify-content: flex-start; }
+  .inv-hero { padding-top: 96px; }
   .inv-shead { grid-template-columns: 1fr; gap: 14px; }
   .inv-shead__idx { padding-top: 0; }
   /* Audit mobile : les portrats speakers restent sur 2 colonnes (en 1
