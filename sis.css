@@ -240,9 +240,29 @@
   background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.45); transform: translateY(-1px);
 }
 .sis-nav__btn--gold {
+  position: relative; overflow: hidden; z-index: 0;
   color: var(--sis-gold-ink); background: var(--sis-grad); border: 1px solid transparent;
-  box-shadow: 0 0 0 1px rgba(255,176,73,0.25), 0 8px 26px -10px rgba(255,176,73,0.55);
+  /* anneau 1px supprime (feedback aout 2026), on garde juste le halo doux */
+  box-shadow: 0 8px 26px -10px rgba(255,176,73,0.55);
 }
+/* Buees dorees animees a l'interieur du bouton (feedback aout 2026) : nappes
+   radiales floutees dans les golds de marque, qui derivent et se melangent. */
+.sis-nav__btn--gold::before {
+  content: ""; position: absolute; inset: -60% -30%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(38% 55% at 22% 32%, #FFEBAF 0%, rgba(255,235,175,0) 70%),
+    radial-gradient(42% 60% at 78% 70%, #FFB049 0%, rgba(255,176,73,0) 72%),
+    radial-gradient(30% 45% at 60% 18%, #FFD089 0%, rgba(255,208,137,0) 70%),
+    radial-gradient(36% 50% at 38% 82%, #FFC24D 0%, rgba(255,194,77,0) 70%);
+  filter: blur(6px);
+  animation: sis-goldmist 7s ease-in-out infinite alternate;
+}
+@keyframes sis-goldmist {
+  0%   { transform: translate3d(-8%, -6%, 0) rotate(-4deg) scale(1); }
+  50%  { transform: translate3d(6%, 5%, 0) rotate(5deg) scale(1.12); }
+  100% { transform: translate3d(-5%, 7%, 0) rotate(-3deg) scale(1.05); }
+}
+@media (prefers-reduced-motion: reduce) { .sis-nav__btn--gold::before { animation: none; } }
 .sis-nav__btn--gold:hover { filter: brightness(0.96); transform: translateY(-1px); }
 .sis-nav__btn-icon { color: rgba(0,0,0,0.7); flex-shrink: 0; }
 
@@ -282,9 +302,9 @@
 
 /* ---------- generic sub-page header (under fixed nav) ---------- */
 .sis-page { padding-top: 100px; }
-/* Padding haut reduit (feedback aout 2026) : on arrive directement sur le titre
-   sous la nav, sans grand vide (ancienne valeur : clamp(54px, 8vw, 104px)). */
-.sis-phead { padding: clamp(24px, 3vw, 44px) 0 clamp(28px, 4vw, 48px); border-bottom: 1px solid var(--inv-line); }
+/* Padding haut reduit (feedback aout 2026, puis -15% supplementaires) : on arrive
+   directement sur le titre sous la nav (valeur d'origine : clamp(54px, 8vw, 104px)). */
+.sis-phead { padding: clamp(8px, 1.4vw, 22px) 0 clamp(28px, 4vw, 48px); border-bottom: 1px solid var(--inv-line); }
 .sis-phead__idx { font-family: var(--inv-mono); font-size: 12.5px; letter-spacing: 0.2em; color: var(--inv-mute); }
 .sis-phead h1 {
   margin: 14px 0 0; font-family: var(--inv-disp); font-weight: 800; letter-spacing: -0.02em; line-height: 0.98;
