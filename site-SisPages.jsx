@@ -92,16 +92,30 @@ const SIS_PRESS = [
   ['SportBusiness', 'Industry'],
 ];
 
-/* Bandeau medias finance/business 2026 (feedback aout 2026), meme format que le
-   bandeau investisseurs de la home (.inv-invmarq). Wordmarks typographiques comme
-   "Morgan Stanley" sur la home ; remplacer par des fichiers logos quand on les a. */
+/* Bandeau medias presents en 2026 (feedback aout 2026), meme format que le bandeau
+   investisseurs de la home (.inv-invmarq). Logos repris du deck SIS
+   (github.com/sgn-events/sis-deck-skill, slide Media Presence), copies dans
+   assets/logos/media/. Le filtre du bandeau les rend noirs uniformement. */
 const SIS_MEDIA_STRIP = [
-  { name: 'Bloomberg', word: 'Bloomberg' },
-  { name: 'Financial Times', word: 'Financial Times' },
-  { name: 'Les Échos', word: 'Les Échos' },
-  { name: 'Reuters', word: 'Reuters' },
-  { name: 'Sportico', word: 'Sportico' },
-  { name: 'SportBusiness', word: 'SportBusiness' },
+  { name: 'Financial Times', src: 'assets/logos/media/financial-times.png' },
+  { name: 'Sky', src: 'assets/logos/media/sky.png' },
+  { name: 'beIN Media Group', src: 'assets/logos/media/bein.png' },
+  { name: 'AFP', src: 'assets/logos/media/afp.png' },
+  { name: 'SportBusiness', src: 'assets/logos/media/sportbusiness.png' },
+  { name: 'Forbes', src: 'assets/logos/media/forbes.png' },
+  { name: 'Sport Business Club', src: 'assets/logos/media/sport-business-club.png' },
+  { name: 'Canal+', src: 'assets/logos/media/canal-plus.png' },
+  { name: 'M6', src: 'assets/logos/media/m6.png' },
+  { name: 'La Gazzetta dello Sport', src: 'assets/logos/media/gazzetta.png' },
+  { name: "L'Équipe", src: 'assets/logos/media/lequipe.png' },
+  { name: 'Le Point', src: 'assets/logos/media/le-point.png' },
+  { name: 'BFM Business', src: 'assets/logos/media/bfm-business.png' },
+  { name: 'france.tv', src: 'assets/logos/media/france-tv.png' },
+  { name: 'RMC Sport', src: 'assets/logos/media/rmc-sport.png' },
+  { name: 'Maddyness', src: 'assets/logos/media/maddyness.png' },
+  { name: 'Sport Buzz Business', src: 'assets/logos/media/sport-buzz-business.png' },
+  { name: 'vibes', src: 'assets/logos/media/vibes.png' },
+  { name: 'Les Echos', src: 'assets/logos/media/les-echos.png' },
 ];
 
 function SisMediaPage() {
@@ -110,7 +124,7 @@ function SisMediaPage() {
       title={<>A finance story,<br />told from inside sport</>}
       sub="SGN Invest is built for finance, economics and business media. Accreditation gives you the room where sport's capital is raised, priced and deployed.">
       <div className="sis-media-band inv-rv">
-        <span className="inv-eyebrow">Finance &amp; business media in the room in 2026</span>
+        <span className="inv-eyebrow">The media in the room in 2026</span>
         <div className="inv-invmarq" aria-hidden="true">
           <div className="inv-invmarq__track">
             {SIS_MEDIA_STRIP.concat(SIS_MEDIA_STRIP).map((m, i) => (

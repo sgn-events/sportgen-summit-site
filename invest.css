@@ -336,7 +336,8 @@
 .inv-cta { position: relative; padding: clamp(80px, 12vw, 170px) 0; text-align: center; border-top: 1px solid var(--inv-line); }
 .inv-cta__eyebrow { justify-content: center; margin-bottom: 30px; }
 .inv-cta__eyebrow::before { display: none; }
-.inv-cta h2 { margin: 0 auto; font-weight: 800; text-transform: uppercase; font-size: clamp(40px, 9vw, 128px); line-height: 0.9; letter-spacing: -0.035em; }
+/* Taille reduite de 20% (feedback aout 2026, l'ancien clamp(40px,9vw,128px) etait trop gros) */
+.inv-cta h2 { margin: 0 auto; font-weight: 800; text-transform: uppercase; font-size: clamp(32px, 7.2vw, 102px); line-height: 0.9; letter-spacing: -0.035em; }
 .inv-cta__sub { margin: 28px auto 40px; max-width: 46ch; font-size: clamp(16px,1.4vw,20px); line-height: 1.6; color: var(--inv-dim); }
 .inv-cta__btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
