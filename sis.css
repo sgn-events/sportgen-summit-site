@@ -246,21 +246,23 @@
   box-shadow: 0 8px 26px -10px rgba(255,176,73,0.55);
 }
 /* Buees dorees animees a l'interieur du bouton (feedback aout 2026) : nappes
-   radiales floutees dans les golds de marque, qui derivent et se melangent. */
+   radiales floutees dans les golds de marque, qui derivent et se melangent.
+   Contraste volontairement marque (creme clair vs ambre profond #E39C10 /
+   #c98a14, deja dans la palette) sinon l'effet est invisible sur le degrade. */
 .sis-nav__btn--gold::before {
-  content: ""; position: absolute; inset: -60% -30%; z-index: -1; pointer-events: none;
+  content: ""; position: absolute; inset: -70% -35%; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(38% 55% at 22% 32%, #FFEBAF 0%, rgba(255,235,175,0) 70%),
-    radial-gradient(42% 60% at 78% 70%, #FFB049 0%, rgba(255,176,73,0) 72%),
-    radial-gradient(30% 45% at 60% 18%, #FFD089 0%, rgba(255,208,137,0) 70%),
-    radial-gradient(36% 50% at 38% 82%, #FFC24D 0%, rgba(255,194,77,0) 70%);
-  filter: blur(6px);
-  animation: sis-goldmist 7s ease-in-out infinite alternate;
+    radial-gradient(34% 48% at 20% 30%, #FFEBAF 0%, rgba(255,235,175,0) 70%),
+    radial-gradient(40% 55% at 80% 68%, #E39C10 0%, rgba(227,156,16,0) 72%),
+    radial-gradient(28% 42% at 62% 16%, #FFD089 0%, rgba(255,208,137,0) 70%),
+    radial-gradient(34% 48% at 34% 84%, #c98a14 0%, rgba(201,138,20,0) 70%);
+  filter: blur(5px);
+  animation: sis-goldmist 5.5s ease-in-out infinite alternate;
 }
 @keyframes sis-goldmist {
-  0%   { transform: translate3d(-8%, -6%, 0) rotate(-4deg) scale(1); }
-  50%  { transform: translate3d(6%, 5%, 0) rotate(5deg) scale(1.12); }
-  100% { transform: translate3d(-5%, 7%, 0) rotate(-3deg) scale(1.05); }
+  0%   { transform: translate3d(-12%, -9%, 0) rotate(-6deg) scale(1); }
+  50%  { transform: translate3d(10%, 8%, 0) rotate(7deg) scale(1.18); }
+  100% { transform: translate3d(-8%, 11%, 0) rotate(-5deg) scale(1.08); }
 }
 @media (prefers-reduced-motion: reduce) { .sis-nav__btn--gold::before { animation: none; } }
 .sis-nav__btn--gold:hover { filter: brightness(0.96); transform: translateY(-1px); }
