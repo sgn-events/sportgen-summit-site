@@ -49,19 +49,50 @@ const INV_PARTICIPANTS = [
    (sis.html et #/investment-summit) sans rien supprimer. Repasser a false pour reafficher. */
 const INV_TICKETS_HIDDEN = true;
 
-/* Motion design du hero : 8 traits qui convergent vers le centre, du rayon 190
-   au rayon 56 (angles repartis tous les 42 degres). [x1,y1] = point exterieur,
-   [x2,y2] = point interieur ; le trait se dessine de l'exterieur vers le centre. */
-const INV_ART_FLOWS = (() => {
-  const cx = 240, cy = 240, rOut = 190, rIn = 56;
-  return [20, 62, 104, 146, 188, 230, 272, 314].map((deg) => {
-    const a = (deg * Math.PI) / 180, c = Math.cos(a), s = Math.sin(a);
-    return [
-      +(cx + rOut * c).toFixed(1), +(cy + rOut * s).toFixed(1),
-      +(cx + rIn * c).toFixed(1), +(cy + rIn * s).toFixed(1),
-    ];
-  });
-})();
+/* Motion design du hero : le motif des crochets du logo, avec un mot du
+   vocabulaire sport / investissement qui s'ecrit au milieu, puis s'efface.
+   Les crochets suivent la largeur du mot, donc ils bougent avec la frappe. */
+const INV_ART_WORDS = [
+  'CAPITAL', 'EQUITY', 'VENTURE', 'ALLOCATION', 'VALUATION',
+  'PORTFOLIO', 'DILIGENCE', 'MANDATE', 'RIGHTS', 'RETURNS',
+];
+
+function InvArtTyper() {
+  const reduced = typeof window.matchMedia === 'function'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const [word, setWord] = useInvState(0);
+  const [len, setLen] = useInvState(reduced ? INV_ART_WORDS[0].length : 0);
+  const [phase, setPhase] = useInvState('type'); // type -> hold -> erase
+
+  useInvEffect(() => {
+    if (reduced) return undefined;
+    const full = INV_ART_WORDS[word];
+    let t;
+    if (phase === 'type') {
+      t = len < full.length
+        ? setTimeout(() => setLen(len + 1), 90)
+        : setTimeout(() => setPhase('hold'), 0);
+    } else if (phase === 'hold') {
+      t = setTimeout(() => setPhase('erase'), 1700);
+    } else {
+      t = len > 0
+        ? setTimeout(() => setLen(len - 1), 42)
+        : setTimeout(() => { setWord((w) => (w + 1) % INV_ART_WORDS.length); setPhase('type'); }, 280);
+    }
+    return () => clearTimeout(t);
+  }, [word, len, phase, reduced]);
+
+  return (
+    <span className="inv-art__frame">
+      <span className="inv-art__bracket">[</span>
+      <span className="inv-art__word">
+        {INV_ART_WORDS[word].slice(0, len)}
+        <i className="inv-art__caret"></i>
+      </span>
+      <span className="inv-art__bracket">]</span>
+    </span>
+  );
+}
 
 /* Section Sponsorship opportunities de la home (feedback aout 2026, format Machina,
    texte propre a SGN Invest). */
@@ -209,43 +240,11 @@ function InvestmentSummitPage() {
             </div>
           </div>
 
-          {/* Motion design du hero (aout 2026) : le motif des crochets du logo,
-              des flux de capital qui convergent vers un point unique (la room).
-              Pur SVG + CSS, anime en continu, decoratif donc aria-hidden. */}
+          {/* Motion design du hero (aout 2026) : declinaison vivante du lockup,
+              les crochets du logo autour d'un mot du vocabulaire investissement
+              qui s'ecrit puis s'efface. Decoratif, donc aria-hidden. */}
           <div className="inv-hero__art" aria-hidden="true">
-            <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="invArtGold" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#FFC24D" />
-                  <stop offset="100%" stopColor="#E39C10" />
-                </linearGradient>
-              </defs>
-
-              {/* cercles de reperage, encre tres claire */}
-              <g className="inv-art__rings">
-                <circle cx="240" cy="240" r="195" />
-                <circle cx="240" cy="240" r="150" />
-                <circle cx="240" cy="240" r="95" />
-              </g>
-
-              {/* anneau pointille dore en rotation lente */}
-              <circle className="inv-art__orbit" cx="240" cy="240" r="150" />
-
-              {/* flux de capital : chaque trait se dessine vers le centre */}
-              <g className="inv-art__flows">
-                {INV_ART_FLOWS.map(([x1, y1, x2, y2], i) => (
-                  <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} style={{ animationDelay: (i * 0.45) + 's' }} />
-                ))}
-              </g>
-
-              {/* la room : noyau dore + onde */}
-              <circle className="inv-art__pulse" cx="240" cy="240" r="10" />
-              <circle className="inv-art__core" cx="240" cy="240" r="9" />
-
-              {/* crochets du logo, respiration lente */}
-              <path className="inv-art__bracket inv-art__bracket--l" d="M52 128 L20 128 L20 352 L52 352" />
-              <path className="inv-art__bracket inv-art__bracket--r" d="M428 128 L460 128 L460 352 L428 352" />
-            </svg>
+            <InvArtTyper />
           </div>
         </div>
 
