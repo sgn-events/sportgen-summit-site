@@ -49,6 +49,20 @@ const INV_PARTICIPANTS = [
    (sis.html et #/investment-summit) sans rien supprimer. Repasser a false pour reafficher. */
 const INV_TICKETS_HIDDEN = true;
 
+/* Motion design du hero : 8 traits qui convergent vers le centre, du rayon 190
+   au rayon 56 (angles repartis tous les 42 degres). [x1,y1] = point exterieur,
+   [x2,y2] = point interieur ; le trait se dessine de l'exterieur vers le centre. */
+const INV_ART_FLOWS = (() => {
+  const cx = 240, cy = 240, rOut = 190, rIn = 56;
+  return [20, 62, 104, 146, 188, 230, 272, 314].map((deg) => {
+    const a = (deg * Math.PI) / 180, c = Math.cos(a), s = Math.sin(a);
+    return [
+      +(cx + rOut * c).toFixed(1), +(cy + rOut * s).toFixed(1),
+      +(cx + rIn * c).toFixed(1), +(cy + rIn * s).toFixed(1),
+    ];
+  });
+})();
+
 /* Section Sponsorship opportunities de la home (feedback aout 2026, format Machina,
    texte propre a SGN Invest). */
 const INV_CALL_URL = 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b';
@@ -193,6 +207,45 @@ function InvestmentSummitPage() {
               <a className="inv-btn" href="#/register-interest" onClick={(e) => go(e, '#/register-interest')}>Register your Interest <span className="inv-btn__arrow">→</span></a>
               <a className="inv-btn inv-btn--ghost" href="#/sponsor" onClick={(e) => go(e, '#/sponsor')}>Sponsor SGN Invest</a>
             </div>
+          </div>
+
+          {/* Motion design du hero (aout 2026) : le motif des crochets du logo,
+              des flux de capital qui convergent vers un point unique (la room).
+              Pur SVG + CSS, anime en continu, decoratif donc aria-hidden. */}
+          <div className="inv-hero__art" aria-hidden="true">
+            <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="invArtGold" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#FFC24D" />
+                  <stop offset="100%" stopColor="#E39C10" />
+                </linearGradient>
+              </defs>
+
+              {/* cercles de reperage, encre tres claire */}
+              <g className="inv-art__rings">
+                <circle cx="240" cy="240" r="195" />
+                <circle cx="240" cy="240" r="150" />
+                <circle cx="240" cy="240" r="95" />
+              </g>
+
+              {/* anneau pointille dore en rotation lente */}
+              <circle className="inv-art__orbit" cx="240" cy="240" r="150" />
+
+              {/* flux de capital : chaque trait se dessine vers le centre */}
+              <g className="inv-art__flows">
+                {INV_ART_FLOWS.map(([x1, y1, x2, y2], i) => (
+                  <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} style={{ animationDelay: (i * 0.45) + 's' }} />
+                ))}
+              </g>
+
+              {/* la room : noyau dore + onde */}
+              <circle className="inv-art__pulse" cx="240" cy="240" r="10" />
+              <circle className="inv-art__core" cx="240" cy="240" r="9" />
+
+              {/* crochets du logo, respiration lente */}
+              <path className="inv-art__bracket inv-art__bracket--l" d="M52 128 L20 128 L20 352 L52 352" />
+              <path className="inv-art__bracket inv-art__bracket--r" d="M428 128 L460 128 L460 352 L428 352" />
+            </svg>
           </div>
         </div>
 
