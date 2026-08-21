@@ -108,8 +108,8 @@
   pointer-events: none; z-index: 0;
 }
 .inv-hero__brand { margin-bottom: 20px; }
-/* lockup horizontal (Invest a droite de SGN) ; +20% (feedback aout 2026) */
-.inv-hero__brand img { height: clamp(41px, 3.84vw, 55px); width: auto; display: block; }
+/* lockup horizontal (Invest a droite de SGN) ; +20% puis +10% (feedback aout 2026) */
+.inv-hero__brand img { height: clamp(45px, 4.2vw, 60px); width: auto; display: block; }
 /* Le premier ecran remplit le viewport : la section Top voices reste sous la
    ligne de flottaison a l'arrivee (feedback aout 2026). Le padding-top du hero
    est retranche, le contenu se centre dans l'espace restant. */

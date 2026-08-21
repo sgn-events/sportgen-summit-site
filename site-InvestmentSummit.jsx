@@ -174,7 +174,7 @@ function InvestmentSummitPage() {
           </div>
           <div className="inv-hero__meta inv-rv">
             <span>Automobile Club de France, Paris</span>
-            <span>May 2027</span>
+            <span>25 May 2027</span>
           </div>
 
           <div className="inv-hero__head">
