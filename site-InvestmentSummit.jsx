@@ -49,12 +49,13 @@ const INV_PARTICIPANTS = [
    (sis.html et #/investment-summit) sans rien supprimer. Repasser a false pour reafficher. */
 const INV_TICKETS_HIDDEN = true;
 
-/* Section Sponsorship opportunities de la home (feedback aout 2026, calque Machina). */
+/* Section Sponsorship opportunities de la home (feedback aout 2026, format Machina,
+   texte propre a SGN Invest). */
 const INV_CALL_URL = 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b';
 const INV_SPON_POINTS = [
-  ['Your brand where the decisions are made', 'Put your brand in front of the most influential funds, family offices and banks deploying capital across sport.'],
-  ['Turn presence into strategic outcomes', 'Meet allocators, fund managers and the operators they back with clear intent, and convert conversations into deals and long-term collaboration.'],
-  ['Become central to the SGN Invest experience', 'Own high-signal touchpoints across the floor, from the stage to the lounges where partnerships are initiated.'],
+  ['Be seen by the people who sign', '200 vetted investors and 80+ limited partners in one room: visibility measured in decision-makers, not badge counts.'],
+  ['Turn two days into a pipeline', 'Curated introductions, investor lounges and closed-door formats built to turn a first conversation into a working relationship.'],
+  ['Own a moment of the summit', 'From the stage to the investor dinners, sponsors carry the high-signal touchpoints of the programme, and the follow-ups that come after it.'],
 ];
 
 /* Investment Summit dedicated passes (prices to confirm). */
@@ -166,7 +167,7 @@ function InvestmentSummitPage() {
            Logo + lieu/date remplacent l'ancienne barre meta bordee.) ───────── */}
       <header className="inv-hero">
         <div className="inv-hero__glow" aria-hidden="true"></div>
-        <div className="inv-wrap">
+        <div className="inv-wrap inv-hero__main">
           <div className="inv-hero__brand inv-rv">
             <img src="assets/brand/sgn-invest-horizontal.png" alt="[SGN] Invest" />
           </div>
@@ -331,7 +332,7 @@ function InvestmentSummitPage() {
       <section className="inv-section inv-spon">
         <div className="inv-wrap">
           <h2 className="inv-h2 inv-spon__title inv-rv">Sponsorship opportunities</h2>
-          <p className="inv-spon__lead inv-rv">SGN Invest is where the capital of sport converges. Sponsor the summit to put your brand in front of the funds, family offices and decision-makers financing the next era of sport.</p>
+          <p className="inv-spon__lead inv-rv">SGN Invest gathers the people who decide how sport gets financed. Sponsoring the summit places your brand at the table where funds, family offices and banks put capital to work.</p>
           <div className="inv-spon__grid">
             {INV_SPON_POINTS.map(([t, b], i) => (
               <div className="inv-spon__cell inv-rv" key={t} style={{ animationDelay: (i * 70) + 'ms' }}>

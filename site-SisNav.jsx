@@ -58,9 +58,9 @@ function SisNav() {
             ))}
           </div>
 
-          {/* Lockup horizontal (Invest a droite de SGN), feedback aout 2026 */}
+          {/* Nav : logo empile (Invest en dessous) ; le lockup horizontal est reserve au hero. */}
           <a className="sis-nav__brand" href="#/" onClick={(e) => nav(e, '#/')}>
-            <img src="assets/brand/sgn-invest-horizontal.png" alt="[SGN] Invest" />
+            <img src="assets/brand/sgn-investment-summit.png" alt="[SGN] Invest" />
           </a>
 
           <div className="sis-nav__right">

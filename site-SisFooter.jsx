@@ -9,7 +9,7 @@ function SisFooter() {
       <div className="inv-wrap">
         <div className="sis-foot__top">
           <a className="sis-foot__brand" href="#/">
-            <img src="assets/brand/sgn-invest-horizontal.png" alt="[SGN] Invest" />
+            <img src="assets/brand/sgn-investment-summit.png" alt="[SGN] Invest" />
           </a>
           <div className="sis-foot__meta">
             <span>26 May 2027</span><span>Paris, France</span>
