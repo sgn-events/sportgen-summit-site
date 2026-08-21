@@ -169,8 +169,8 @@ function InvestmentSummitPage() {
         <div className="inv-hero__glow" aria-hidden="true"></div>
         <div className="inv-wrap inv-hero__main">
           <div className="inv-hero__brand inv-rv">
-            {/* ?v=4 : le png est servi en cache immuable (vercel.json), incrementer si le fichier change */}
-            <img src="assets/brand/sgn-invest-horizontal.png?v=4" alt="[SGN] Invest" />
+            {/* ?v=5 : le png est servi en cache immuable (vercel.json), incrementer si le fichier change */}
+            <img src="assets/brand/sgn-invest-horizontal.png?v=5" alt="[SGN] Invest" />
           </div>
           <div className="inv-hero__meta inv-rv">
             <span>Automobile Club de France</span>
