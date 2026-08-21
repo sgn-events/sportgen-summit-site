@@ -205,10 +205,11 @@ const SIS_EXPERIENCE = [
   ['future', 'Shape the future', 'Be part of the group defining how capital gets deployed across European sport.'],
 ];
 
+/* Texte propre a SGN Invest (feedback aout 2026), chiffres harmonises 200/80+/90%. */
 const SIS_WHY = [
-  ['room', 'Access the room', "Direct access to 1,500+ founders, investors and enterprise leaders. Over 70% hold director-level or investment authority, the most targeted sport-investment audience on a single floor in Europe."],
-  ['convert', 'Visibility that converts', 'Position your brand alongside the funds, banks and rights holders defining the next era of sport. Sponsoring SGN places you at the center of the most significant sport-investment conversation in Europe.'],
-  ['beyond', 'Outcomes beyond the event', 'SGN is where pilots get scoped, partnerships begin and capital meets conviction. Sponsors gain dedicated touchpoints on the floor, converting presence into relationships that extend well beyond the summit.'],
+  ['room', 'Access the room', 'Two days with the people who allocate capital to sport: 200 vetted investors and 80+ limited partners, 90% at director level or above. No crowd to filter, the room is the filter.'],
+  ['convert', 'Visibility that converts', 'Your brand sits next to the funds, family offices and banks pricing the next cycle of sport, on stage, in the investor lounges and across every touchpoint of the summit.'],
+  ['beyond', 'Outcomes beyond the event', 'SGN Invest is where allocations get discussed and mandates take shape. Sponsors leave with working relationships across the capital of sport, not a logo on a recap video.'],
 ];
 
 function SisCount({ value, suffix }) {
@@ -289,8 +290,8 @@ function SisSponsorPage() {
       {/* ── Build your presence ── */}
       <section className="sis-spon-build" style={{ borderTop: '1px solid var(--inv-line)' }}>
         <h2 className="sis-spon-build__title inv-rv">Build your presence at<br />SGN Invest 2027</h2>
-        <p className="sis-spon-build__lead inv-rv">SGN is where European sport makes its most consequential investment decisions. Position your brand alongside the funds, banks and family offices deploying capital across the game.</p>
-        <p className="sis-spon-build__lead inv-rv">Sponsoring SGN does not put your logo on a banner. It puts your brand inside that conversation, in front of the people actively building, buying and funding sport at scale.<br />The room is being filled. Make sure your brand is in it.</p>
+        <p className="sis-spon-build__lead inv-rv">SGN Invest is where European sport meets its capital: the funds, family offices and banks deciding what gets financed next, gathered in Paris during Roland-Garros week.</p>
+        <p className="sis-spon-build__lead inv-rv">A sponsorship here is not signage. It is a seat inside the conversation, alongside the people raising, allocating and deploying capital across sport.<br />The 2027 room is filling, investor by investor. Make sure your brand is in it.</p>
         <div className="sis-spon-cta sis-spon-cta--center inv-rv">
           <a className="inv-btn" href={SIS_SPON_DECK} onClick={(e) => sisGo(e, '#/get-in-touch')}>Get the Sponsorship Deck <span className="inv-btn__arrow">→</span></a>
           <a className="inv-btn inv-btn--ghost" href={SIS_SPON_CALL} target="_blank" rel="noopener">Book a Call</a>
