@@ -4,7 +4,9 @@ const { useState: useInvState, useEffect: useInvEffect, useRef: useInvRef } = Re
 
 const INV_CDN = 'https://framerusercontent.com/images/';
 
-/* The leading investment voices, pulled from the speakers already on the site. */
+/* The leading investment voices, pulled from the speakers already on the site.
+   Feedback aout 2026 : une ligne de moins sur la home, retrait de Mark Wyatt,
+   Andy Marston et Danny Menken (toujours presents sur la page Speakers SIS). */
 const INV_VOICES = [
   ['Marc Lasry', 'Co-Founder, Chairman & CEO', 'Avenue Capital', 'cYNJZ7PeuRme6ygWI2V7HJT3fU.png'],
   ['Adnan Khalef', 'Managing Director', 'The Carlyle Group', 'NNxaTxwoAuvSV6BqobSwCmgKae8.jpeg'],
@@ -12,12 +14,9 @@ const INV_VOICES = [
   ['Arnaud Caudoux', 'Deputy CEO', 'Bpifrance', '7X49U9IfeLJzZYasFXCHPvLZrE.png'],
   ['Mofses Kechichian', 'Managing Director', 'TRAIL Capital', 'SC5jKA69BcOxMSril0AxRPtLLqg.webp'],
   ['Kyang Yung', 'Chief Investment Officer', 'Gamma Waves Partners', 'NPxvIK1ahJtK6aTBHkdSslw.jpg'],
-  ['Danny Menken', 'Co-Founder & General Partner', 'Athvance Capital', 'm9f95fpcRMqDIYHr5nWy622oONE.png'],
-  ['Mark Wyatt', 'Managing Director', 'Alvarez & Marsal', 'v9vatvO0s2B6K43xRT7bxN1gXk.jpg'],
   ['Kushaan Ahuja', 'Partner', 'Will Ventures', 'ZIezVLEQ6WTmMov8zVurQ9bUI.webp'],
   ['Arjun Kapur', 'Vice President', 'Left Lane Capital', 'jW9ZIvK1FFDsYJ67Ep7xOzwD6k.jpg'],
   ['Charlie Stebbings', 'Head of Sport', '20VC', 'BuPSqhLT52NQIR9BN64DO9d3Ec.jpg'],
-  ['Andy Marston', 'Head of Corporate Ventures', 'The Players Fund', 'KkyQMkFZGwFse8tkTEFCbCjThXc.png'],
   ['Adriana Crovetto', 'Investor', 'Gamma Waves Partners', 'G8JCKXENjWIMdqZJ8T2iPOFgI8.jpg'],
   ['António Caçorino', 'CEO & Founder', 'APEX', 'OoVzkBGf4K24lUhuRZoKcvb4.jpg'],
   ['Bex Smith', 'CEO & Founder', 'Crux Football', 'cSUoLhNbaT5EgvvrrJdgyz5ss4.jpg'],
@@ -49,6 +48,14 @@ const INV_PARTICIPANTS = [
 /* Billetterie masquee (aout 2026) : cache la section Passes de la home Invest
    (sis.html et #/investment-summit) sans rien supprimer. Repasser a false pour reafficher. */
 const INV_TICKETS_HIDDEN = true;
+
+/* Section Sponsorship opportunities de la home (feedback aout 2026, calque Machina). */
+const INV_CALL_URL = 'https://meetings-eu1.hubspot.com/aurelien-linyer/discovery-call?uuid=b569f199-9acb-4240-9d21-5907804ca26b';
+const INV_SPON_POINTS = [
+  ['Your brand where the decisions are made', 'Put your brand in front of the most influential funds, family offices and banks deploying capital across sport.'],
+  ['Turn presence into strategic outcomes', 'Meet allocators, fund managers and the operators they back with clear intent, and convert conversations into deals and long-term collaboration.'],
+  ['Become central to the SGN Invest experience', 'Own high-signal touchpoints across the floor, from the stage to the lounges where partnerships are initiated.'],
+];
 
 /* Investment Summit dedicated passes (prices to confirm). */
 const INV_TICKETS = [
@@ -161,7 +168,7 @@ function InvestmentSummitPage() {
         <div className="inv-hero__glow" aria-hidden="true"></div>
         <div className="inv-wrap">
           <div className="inv-hero__brand inv-rv">
-            <img src="assets/brand/sgn-investment-summit.png" alt="[SGN] Invest" />
+            <img src="assets/brand/sgn-invest-horizontal.png" alt="[SGN] Invest" />
           </div>
           <div className="inv-hero__meta inv-rv">
             <span>Automobile Club de France</span>
@@ -319,6 +326,27 @@ function InvestmentSummitPage() {
         </div>
       </section>
       )}
+
+      {/* ───────── SPONSORSHIP OPPORTUNITIES (feedback aout 2026, calque Machina) ───────── */}
+      <section className="inv-section inv-spon">
+        <div className="inv-wrap">
+          <h2 className="inv-h2 inv-spon__title inv-rv">Sponsorship opportunities</h2>
+          <p className="inv-spon__lead inv-rv">SGN Invest is where the capital of sport converges. Sponsor the summit to put your brand in front of the funds, family offices and decision-makers financing the next era of sport.</p>
+          <div className="inv-spon__grid">
+            {INV_SPON_POINTS.map(([t, b], i) => (
+              <div className="inv-spon__cell inv-rv" key={t} style={{ animationDelay: (i * 70) + 'ms' }}>
+                <span className="inv-spon__idx">[ 0{i + 1} ]</span>
+                <h3>{t}</h3>
+                <p>{b}</p>
+              </div>
+            ))}
+          </div>
+          <div className="inv-spon__cta inv-rv">
+            <a className="inv-btn" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Download Sponsorship Deck <span className="inv-btn__arrow">→</span></a>
+            <a className="inv-btn inv-btn--ghost" href={INV_CALL_URL} target="_blank" rel="noopener">Book a Call</a>
+          </div>
+        </div>
+      </section>
 
       {/* ───────── FINAL CTA ───────── */}
       <section className="inv-cta">

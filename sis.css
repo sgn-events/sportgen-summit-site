@@ -144,9 +144,29 @@
    floating pill, gutter-aligned width capped at --container-max, identical
    size tokens — recoloured to the SIS white-glass/graphite DA (like .sg-nav--inv)
    instead of navy. */
-/* Match the width of the SPORT[GEN] Home nav bar exactly (same --gutter override
-   the SPA applies via <body class="route-home">). */
-.sis-body { --gutter: clamp(2rem, 0.5rem + 5.5vw, 5.375rem); }
+/* Gouttieres reduites (feedback aout 2026) : le contenu s'elargit sur tout le
+   site SIS, l'ecart a gauche etait trop grand (surtout visible sur les bandeaux).
+   Ancienne valeur, alignee sur la home SPORT[GEN] : clamp(2rem, 0.5rem + 5.5vw, 5.375rem). */
+.sis-body { --gutter: clamp(1.25rem, 0.5rem + 2.75vw, 3rem); }
+
+/* Titres en Space Grotesk (feedback aout 2026) : police plus epuree et plus fine
+   que l'Archivo 800, reference Machina. Scope a .sis-body, la version
+   index.html#/investment-summit garde l'Archivo. */
+.sis-body .inv-h1, .sis-body .inv-h2, .sis-body .inv-tvoices__title,
+.sis-body .inv-invhead, .sis-body .inv-cta h2, .sis-body .sis-phead h1,
+.sis-body .sis-spon-build__title, .sis-body .sis-spon-xp__title,
+.sis-body .sis-spon-why__title {
+  font-family: 'Space Grotesk', var(--inv-disp);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* index gold du bloc sponsorship de la home */
+.sis-body .inv-spon__idx {
+  background: var(--sis-grad-text);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
 
 /* tighten stacked-section rhythm (adjacent paddings were doubling up) */
 .sis-body .inv-section { padding: clamp(44px, 5vw, 82px) 0; }

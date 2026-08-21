@@ -249,35 +249,8 @@ function SisSponsorPage() {
         ))}
       </div>
 
-      {/* ── Build your presence ── */}
-      <section className="sis-spon-build">
-        <h2 className="sis-spon-build__title inv-rv">Build your presence at<br />SGN Invest 2027</h2>
-        <p className="sis-spon-build__lead inv-rv">SGN is where European sport makes its most consequential investment decisions. Position your brand alongside the funds, banks and family offices deploying capital across the game.</p>
-        <p className="sis-spon-build__lead inv-rv">Sponsoring SGN does not put your logo on a banner. It puts your brand inside that conversation, in front of the people actively building, buying and funding sport at scale.<br />The room is being filled. Make sure your brand is in it.</p>
-        <div className="sis-spon-cta sis-spon-cta--center inv-rv">
-          <a className="inv-btn" href={SIS_SPON_DECK} onClick={(e) => sisGo(e, '#/get-in-touch')}>Request the Sponsorship Deck <span className="inv-btn__arrow">→</span></a>
-          <a className="inv-btn inv-btn--ghost" href={SIS_SPON_CALL} target="_blank" rel="noopener">Book a Call</a>
-        </div>
-      </section>
-
-      {/* ── The SGN experience ── */}
-      <section className="sis-spon-xp">
-        <h2 className="sis-spon-xp__title inv-rv">The SGN Experience</h2>
-        <div className="sis-spon-xp__grid">
-          {SIS_EXPERIENCE.map((x) => (
-            <div className="sis-spon-xp__cell inv-rv" key={x[1]}>
-              <span className="sis-spon-xp__ico"><SisSponIcon name={x[0]} /></span>
-              <div>
-                <h3>{x[1]}</h3>
-                <p>{x[2]}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="sis-spon-cta sis-spon-cta--center inv-rv">
-          <a className="inv-btn" href={SIS_SPON_DECK} onClick={(e) => sisGo(e, '#/get-in-touch')}>Explore Sponsorship Opportunities <span className="inv-btn__arrow">→</span></a>
-        </div>
-      </section>
+      {/* Ordre des sections aligne sur la page sponsor de Machina (feedback aout 2026) :
+          Why sponsor -> CTAs deck/call -> Experience -> Build your presence. */}
 
       {/* ── Why sponsor ── */}
       <section className="sis-spon-why">
@@ -290,6 +263,37 @@ function SisSponsorPage() {
               <p>{w[2]}</p>
             </div>
           ))}
+        </div>
+        <div className="sis-spon-cta sis-spon-cta--center inv-rv">
+          <a className="inv-btn" href={SIS_SPON_DECK} onClick={(e) => sisGo(e, '#/get-in-touch')}>Download Sponsorship Deck <span className="inv-btn__arrow">→</span></a>
+          <a className="inv-btn inv-btn--ghost" href={SIS_SPON_CALL} target="_blank" rel="noopener">Book a Call</a>
+        </div>
+      </section>
+
+      {/* ── The SGN experience ── */}
+      <section className="sis-spon-xp">
+        <h2 className="sis-spon-xp__title inv-rv">The SGN Invest Experience</h2>
+        <div className="sis-spon-xp__grid">
+          {SIS_EXPERIENCE.map((x) => (
+            <div className="sis-spon-xp__cell inv-rv" key={x[1]}>
+              <span className="sis-spon-xp__ico"><SisSponIcon name={x[0]} /></span>
+              <div>
+                <h3>{x[1]}</h3>
+                <p>{x[2]}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Build your presence ── */}
+      <section className="sis-spon-build" style={{ borderTop: '1px solid var(--inv-line)' }}>
+        <h2 className="sis-spon-build__title inv-rv">Build your presence at<br />SGN Invest 2027</h2>
+        <p className="sis-spon-build__lead inv-rv">SGN is where European sport makes its most consequential investment decisions. Position your brand alongside the funds, banks and family offices deploying capital across the game.</p>
+        <p className="sis-spon-build__lead inv-rv">Sponsoring SGN does not put your logo on a banner. It puts your brand inside that conversation, in front of the people actively building, buying and funding sport at scale.<br />The room is being filled. Make sure your brand is in it.</p>
+        <div className="sis-spon-cta sis-spon-cta--center inv-rv">
+          <a className="inv-btn" href={SIS_SPON_DECK} onClick={(e) => sisGo(e, '#/get-in-touch')}>Get the Sponsorship Deck <span className="inv-btn__arrow">→</span></a>
+          <a className="inv-btn inv-btn--ghost" href={SIS_SPON_CALL} target="_blank" rel="noopener">Book a Call</a>
         </div>
       </section>
 
