@@ -472,6 +472,40 @@ function SisGetInTouchPage() {
   );
 }
 
+/* ─────────────────────────── REGISTER INTEREST ───────────────────────────
+   Formulaire distinct de Get in Touch (feedback aout 2026) : Get in Touch sert
+   les sponsors et delivre le deck, celui-ci enregistre les interesses 2027 dans
+   sa propre liste Brevo ('register-invest'), sans PDF. */
+const SIS_REG_POINTS = [
+  'Priority access when 2027 registrations open',
+  'LP passes reviewed individually, complimentary for verified Limited Partners',
+  'Programme, speakers and side events announced first',
+  'A direct line to the SGN Invest team',
+];
+
+function SisRegisterPage() {
+  const { BrevoForm } = window;
+  return (
+    <SisShell idx="[07]" kicker="Join the 2027 room"
+      title={<>Register your<br />interest</>}
+      sub="Tell us who you are and we come back to you with the access that fits: LP pass, investor pass or partnership. Applications are reviewed individually.">
+      <div className="sis-git">
+        <div className="sis-git__side inv-rv">
+          <ul className="sis-lp-break__list">
+            {SIS_REG_POINTS.map((p) => <li key={p}>{p}</li>)}
+          </ul>
+          <a className="inv-btn inv-btn--ghost sis-git__call" href={SIS_BOOK_CALL} target="_blank" rel="noopener">
+            Book a call instead
+          </a>
+        </div>
+        <div className="sis-git__form inv-rv">
+          <BrevoForm form="register-invest" />
+        </div>
+      </div>
+    </SisShell>
+  );
+}
+
 /* ─────────────────────────── MEDIA PASS ─────────────────────────── */
 /* Formulaire Brevo 'media-invest' (liste "Media Pass SGN Invest - Website"), pas de PDF :
    Brevo affiche son message de succès, la relance se fait par email. */
@@ -502,4 +536,4 @@ function SisMediaPassPage() {
   );
 }
 
-Object.assign(window, { SisSpeakersPage, SisMediaPage, SisSponsorPage, SisAgendaPage, SisLpPage, SisGetInTouchPage, SisMediaPassPage });
+Object.assign(window, { SisSpeakersPage, SisMediaPage, SisSponsorPage, SisAgendaPage, SisLpPage, SisGetInTouchPage, SisMediaPassPage, SisRegisterPage });

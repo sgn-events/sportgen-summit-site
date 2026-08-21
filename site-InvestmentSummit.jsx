@@ -179,7 +179,8 @@ function InvestmentSummitPage() {
 
           <div className="inv-hero__head">
             <h1 className="inv-h1">
-              <span className="inv-mask"><span>Where sport meets</span></span>
+              <span className="inv-mask"><span>Where sport</span></span>
+              <span className="inv-mask"><span>meets</span></span>
               <span className="inv-mask"><span className="inv-silver">institutional capital</span></span>
             </h1>
           </div>
@@ -189,7 +190,7 @@ function InvestmentSummitPage() {
               Two days in Paris where the people allocating capital to sport meet the people deploying it. <b>200 investors. 80+ Limited Partners.</b> The funds, family offices, banks and rights holders that decide how the industry gets financed in one room, during Roland-Garros week.
             </p>
             <div className="inv-hero__cta inv-rv">
-              <a className="inv-btn" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register your Interest <span className="inv-btn__arrow">→</span></a>
+              <a className="inv-btn" href="#/register-interest" onClick={(e) => go(e, '#/register-interest')}>Register your Interest <span className="inv-btn__arrow">→</span></a>
               <a className="inv-btn inv-btn--ghost" href="#/sponsor" onClick={(e) => go(e, '#/sponsor')}>Sponsor SGN Invest</a>
             </div>
           </div>
@@ -356,7 +357,7 @@ function InvestmentSummitPage() {
           <h2 className="inv-rv">Applications for the<br />2027 room <span className="inv-silver">are open.</span></h2>
           <p className="inv-cta__sub inv-rv">LP passes are complimentary and reviewed individually. Investor and sponsor places are limited by design.</p>
           <div className="inv-cta__btns inv-rv">
-            <a className="inv-btn" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Register interest <span className="inv-btn__arrow">→</span></a>
+            <a className="inv-btn" href="#/register-interest" onClick={(e) => go(e, '#/register-interest')}>Register your Interest <span className="inv-btn__arrow">→</span></a>
             <a className="inv-btn inv-btn--ghost" href="#/get-in-touch" onClick={(e) => go(e, '#/get-in-touch')}>Talk to the team</a>
           </div>
         </div>

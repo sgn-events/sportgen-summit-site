@@ -17,9 +17,10 @@ const SIS_LINKS = [
 ];
 
 /* Billetterie masquee (aout 2026) : le bouton "Tickets" devient "Register Interest"
-   vers le formulaire Get in Touch de SGN Invest. Retablir pour rouvrir :
+   vers la page Register Interest (formulaire Brevo dedie, distinct de Get in Touch
+   qui sert les sponsors). Retablir pour rouvrir :
    const SIS_TICKETS_HREF = '#/tickets'; */
-const SIS_CTA_HREF = '#/get-in-touch';
+const SIS_CTA_HREF = '#/register-interest';
 
 function SisNav() {
   const [route, setRoute] = useSisNavState(window.location.hash.replace('#', '') || '/');

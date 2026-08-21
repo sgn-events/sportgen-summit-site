@@ -10,6 +10,7 @@ const SIS_ROUTES = {
   '/agenda': 'SisAgendaPage',
   '/why-lp': 'SisLpPage',
   '/get-in-touch': 'SisGetInTouchPage',
+  '/register-interest': 'SisRegisterPage',
   '/tickets': 'InvestTicketsPage',
 };
 

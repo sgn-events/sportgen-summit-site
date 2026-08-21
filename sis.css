@@ -259,32 +259,47 @@
 .sis-nav__btn--outline:hover {
   background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.45); transform: translateY(-1px);
 }
+/* CTA gold de la nav. Aucun box-shadow : le halo orange debordait sur les cotes
+   et se lisait comme une barre collee a gauche du bouton (feedback aout 2026). */
 .sis-nav__btn--gold {
   position: relative; overflow: hidden; z-index: 0;
   color: var(--sis-gold-ink); background: var(--sis-grad); border: 1px solid transparent;
-  /* anneau 1px supprime (feedback aout 2026), on garde juste le halo doux */
-  box-shadow: 0 8px 26px -10px rgba(255,176,73,0.55);
+  box-shadow: none;
 }
-/* Buees dorees animees a l'interieur du bouton (feedback aout 2026) : nappes
-   radiales floutees dans les golds de marque, qui derivent et se melangent.
-   Contraste volontairement marque (creme clair vs ambre profond #E39C10 /
-   #c98a14, deja dans la palette) sinon l'effet est invisible sur le degrade. */
+/* Buees dorees animees a l'interieur du bouton. Deux couches en z-index -1 :
+   elles passent au-dessus du fond mais restent SOUS le libelle (ordre de peinture
+   CSS : fond -> z-index negatifs -> contenu inline). ::before = nappes qui derivent
+   et se melangent, ::after = voile clair qui balaie le bouton. */
 .sis-nav__btn--gold::before {
-  content: ""; position: absolute; inset: -70% -35%; z-index: -1; pointer-events: none;
+  content: ""; position: absolute; inset: -60% -30%; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(34% 48% at 20% 30%, #FFEBAF 0%, rgba(255,235,175,0) 70%),
-    radial-gradient(40% 55% at 80% 68%, #E39C10 0%, rgba(227,156,16,0) 72%),
-    radial-gradient(28% 42% at 62% 16%, #FFD089 0%, rgba(255,208,137,0) 70%),
-    radial-gradient(34% 48% at 34% 84%, #c98a14 0%, rgba(201,138,20,0) 70%);
+    radial-gradient(45% 65% at 22% 32%, #FFF3CE 0%, rgba(255,243,206,0) 66%),
+    radial-gradient(50% 70% at 78% 65%, #D98F04 0%, rgba(217,143,4,0) 68%),
+    radial-gradient(40% 60% at 58% 12%, #FFD089 0%, rgba(255,208,137,0) 66%),
+    radial-gradient(44% 64% at 36% 88%, #B87C08 0%, rgba(184,124,8,0) 68%);
+  filter: blur(7px);
+  animation: sis-goldmist 4.5s ease-in-out infinite alternate;
+}
+.sis-nav__btn--gold::after {
+  content: ""; position: absolute; top: -50%; bottom: -50%; width: 55%; left: -60%;
+  z-index: -1; pointer-events: none;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,252,240,0.75) 50%, rgba(255,255,255,0) 100%);
   filter: blur(5px);
-  animation: sis-goldmist 5.5s ease-in-out infinite alternate;
+  animation: sis-goldsheen 4.5s ease-in-out infinite;
 }
 @keyframes sis-goldmist {
-  0%   { transform: translate3d(-12%, -9%, 0) rotate(-6deg) scale(1); }
-  50%  { transform: translate3d(10%, 8%, 0) rotate(7deg) scale(1.18); }
-  100% { transform: translate3d(-8%, 11%, 0) rotate(-5deg) scale(1.08); }
+  0%   { transform: translate3d(-16%, -12%, 0) rotate(-8deg) scale(1); }
+  50%  { transform: translate3d(14%, 10%, 0) rotate(9deg) scale(1.25); }
+  100% { transform: translate3d(-10%, 14%, 0) rotate(-6deg) scale(1.1); }
 }
-@media (prefers-reduced-motion: reduce) { .sis-nav__btn--gold::before { animation: none; } }
+@keyframes sis-goldsheen {
+  0%, 15%  { transform: translateX(0); }
+  70%, 100% { transform: translateX(320%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sis-nav__btn--gold::before, .sis-nav__btn--gold::after { animation: none; }
+  .sis-nav__btn--gold::after { opacity: 0; }
+}
 .sis-nav__btn--gold:hover { filter: brightness(0.96); transform: translateY(-1px); }
 .sis-nav__btn-icon { color: rgba(0,0,0,0.7); flex-shrink: 0; }
 

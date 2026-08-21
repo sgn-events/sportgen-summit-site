@@ -84,6 +84,17 @@ const BREVO_FORMS = {
     mediaFields: true,
     action: 'https://a3e44c04.sibforms.com/serve/MUIFAC9qtW1XEhQLLP6dX7dLsGwf2esJbhjZa5smb80yf-iG7ot0l1W9ZTTSXSb1ygnhiZJb6R6Odf0fR_-3xW0M6dwCNK4nY2Ztw8XmYXHqeysAH_BQ0EvpzQcfgC69F33Db0IfXCKTYMC5fQvjf_IsEGwmLdvmqawFfFDyxgcAs34fvx-N8E0djPj-5T6dn0Dgi8Z3fCSpJDv4zQ==',
   },
+  /* sis.html #/register-interest — liste "Register Interest SGN Invest - Website".
+     ATTENTION : `action` pointe encore sur le formulaire "Deck SGN Invest" ci-dessus
+     (comportement identique a avant, aucune regression) parce que le formulaire Brevo
+     dedie n'existe pas encore. Des qu'il est cree dans Brevo (Contacts > Formulaires),
+     coller ici son URL d'action : les inscriptions Register Interest arriveront alors
+     dans leur propre liste, separee de celle des sponsors. Pas de `pdf` : ce formulaire
+     ne delivre rien, Brevo affiche son message de succes. */
+  'register-invest': {
+    theme: 'invest',
+    action: 'https://a3e44c04.sibforms.com/serve/MUIFAMCpQown3MmzAelTKXyWGpuLk8t0BgflILobhF-GnbNkWfs_8OXeWfpB4IMdyvQ0Oh9WLxkH8Gm8q0L7lN48-HdkWsgXQj1WNcwwl_m7-Zzlr1butZ_PLmatv9JRItc5ZcYIJiRfHSXuV00KJlNNT0LNE_gMqsAXEJ0zMg4AQ9jA4THKSlBhQ7ZUrXZyPobVVFEekZmO_ARf4w==',
+  },
   /* sis.html #/media-pass — liste "Media Pass SGN Invest - Website". Mêmes champs que media-sgn. */
   'media-invest': {
     theme: 'invest',
