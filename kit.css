@@ -353,8 +353,13 @@ main { display: block; overflow-x: clip; }
 
 /* ---------- Footer ------------------------------------------ */
 .footer { position: relative; overflow: hidden; padding-block: clamp(3rem, 2rem + 4vw, 5rem) 2rem; margin-top: 2rem; }
-.footer__bg { position: absolute; inset: 0; z-index: 0; background-color: #04081A; background-image: url('assets/backgrounds/bg-network-wide.png'); background-repeat: no-repeat; background-position: center bottom; background-size: cover; opacity: 0.85; }
-.footer__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #000519, rgba(0,5,25,0.25) 45%, rgba(0,5,25,0.45) 100%); }
+/* Fond du footer retire (aout 2026, comme cote SGN Invest) : le footer prend
+   simplement le fond de la page (--navy-darkest pose sur body), donc plus aucune
+   demarcation avec la section au-dessus. Ancien fond, a remettre ici pour le
+   retablir : background-color #04081A + assets/backgrounds/bg-network-wide.png
+   (no-repeat, center bottom, cover, opacity .85) + un voile en ::after. */
+.footer__bg { position: absolute; inset: 0; z-index: 0; background: none; }
+.footer__bg::after { content: none; }
 .footer__inner { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 2rem; }
 .footer__top { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
 .footer__logo { height: 32px; width: auto; }

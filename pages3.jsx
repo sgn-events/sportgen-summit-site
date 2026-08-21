@@ -229,7 +229,7 @@ function StartupPage() {
       <section className="section">
         <div className="sg-container sg-container--wide">
           <div className="opps-head opps-head--center reveal">
-            <span className="ptn-eyebrow win__eyebrow"><span className="win__dot" aria-hidden="true"></span>2026 success story</span>
+            {/* pastille "2026 success story" retiree (aout 2026) */}
             <h2 className="opps-head__line">Our <span className="opps-head__gold">2026</span> winners</h2>
             <h4 className="ptn-sub win__sub">Out of 200+ applicants, only a select few pitch live on the Main Stage. These three startups stood out from the 2026 cohort as the top tier of innovation.</h4>
           </div>
@@ -255,7 +255,7 @@ function StartupPage() {
       <section className="section">
         <div className="sg-container sg-container--wide jury">
           <div className="jury__text reveal">
-            <span className="ptn-eyebrow win__eyebrow"><span className="win__dot" aria-hidden="true"></span>The final jury</span>
+            {/* pastille "The final jury" retiree (aout 2026) */}
             <h2 className="jury__title">Judged by the investors <span className="opps-head__gold">shaping sport</span></h2>
             <p className="jury__desc">The Draft jury brings the decision-makers of the sports economy into one room — the funds, operators and founders who write the cheques and open the doors across SportGen&rsquo;s global network.</p>
             <p className="jury__desc">Pitch on the SportGen Main Stage and your startup lands in front of a panel that has scaled category-defining companies. One pitch is all it takes to turn a demo into partnerships, capital and industry-wide visibility.</p>
