@@ -415,7 +415,7 @@ function InvestmentSummitPage() {
         </div>
       </section>
 
-      <a className="inv-lpbar" href="#/why-lp" onClick={(e) => go(e, '#/why-lp')}>
+      <a className="inv-lpbar" href="#/lp-pass" onClick={(e) => go(e, '#/lp-pass')}>
         <div className="inv-lpbar__track">
           {Array.from({ length: 12 }).map((_, i) => (
             <span className="inv-lpbar__item" key={i}>Complimentary for verified LPs · Apply for an LP Pass <span className="inv-lpbar__sep">✦</span></span>
@@ -445,7 +445,7 @@ const INV_TIX_PASSES = [
       'Full access to both summit days + SGN Invest programme',
       'Access to the LP & investor networking lounge',
       'Curated introductions to GPs and funds raising',
-      'Invitation to the LP-only investor breakfast',
+      'Curated introductions to GPs and funds raising',
     ],
   },
   {

@@ -448,6 +448,15 @@
 .sis-git__side .sis-lp-break__list li:first-child { border-top: 0; padding-top: 0; }
 .sis-git__call { margin-top: clamp(22px, 3vw, 30px); }
 .sis-git__note { margin: 14px 0 0; font-family: var(--inv-mono); font-size: 13px; line-height: 1.6; color: var(--inv-dim); }
+/* Pages Register Interest et LP Pass : on masque le bandeau de succes de Brevo
+   (son texte est configure cote Brevo, formulaire par formulaire) et on affiche
+   le notre, adapte a la page. !important car Brevo pose un display inline. */
+.sis-git__form--own .sib-form-message-panel { display: none !important; }
+.sis-git__done {
+  margin: 0 0 18px; padding: 14px 16px;
+  border: 1px solid rgba(255,176,73,0.45); background: rgba(255,176,73,0.10);
+  font-family: var(--inv-mono); font-size: 13px; line-height: 1.6; color: var(--inv-fg);
+}
 .sis-git__form { border: 1px solid var(--inv-line); background: var(--inv-bg-2); padding: clamp(18px, 2.4vw, 30px); }
 
 /* Brevo exports the form with its own inline colours; re-dress it in the Invest DA. */

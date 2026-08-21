@@ -11,6 +11,7 @@ const SIS_ROUTES = {
   '/why-lp': 'SisLpPage',
   '/get-in-touch': 'SisGetInTouchPage',
   '/register-interest': 'SisRegisterPage',
+  '/lp-pass': 'SisLpPassPage',
   '/tickets': 'InvestTicketsPage',
 };
 

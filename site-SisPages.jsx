@@ -67,7 +67,7 @@ function SisSpeakersPage() {
         <span className="inv-voices__note">+ 100 speakers across the full SPORT[GEN] programme. Updated continuously toward May 2027.</span>
         {/* Deux CTAs (feedback aout 2026) : LP vers la page LP, investisseur vers le formulaire. */}
         <span className="sis-foot-ctas">
-          <a className="inv-btn" href="#/why-lp" onClick={(e) => sisGo(e, '#/why-lp')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
+          <a className="inv-btn" href="#/lp-pass" onClick={(e) => sisGo(e, '#/lp-pass')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
           <a className="inv-btn inv-btn--ghost" href="#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')}>Request an Investor Pass</a>
         </span>
       </div>
@@ -383,7 +383,7 @@ function SisLpPage() {
       title={<>LPs at<br />SGN Invest</>}
       sub="The one room in Europe where the people allocating capital into sport meet the managers, operators and rights holders deploying it. Complimentary access for verified Limited Partners.">
       <div className="sis-spon-cta inv-rv">
-        <a className="inv-btn" href="#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
+        <a className="inv-btn" href="#/lp-pass" onClick={(e) => sisGo(e, '#/lp-pass')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
         <a className="inv-btn inv-btn--ghost" href="#/agenda" onClick={(e) => sisGo(e, '#/agenda')}>See the programme</a>
       </div>
 
@@ -401,33 +401,13 @@ function SisLpPage() {
         </div>
       </section>
 
-      {/* ── LP-only breakfast side event ── */}
-      <section className="sis-lp-break">
-        <div className="sis-lp-break__main">
-          <span className="inv-eyebrow inv-rv">Side event</span>
-          <h2 className="inv-h2 inv-rv" style={{ marginTop: '14px' }}>LP-Only Investor Breakfast</h2>
-          <p className="sis-phead__sub inv-rv" style={{ marginTop: '18px' }}>
-            A closed-door breakfast reserved for Limited Partners, held before the main programme opens. A smaller, senior room to compare notes on allocation, manager selection and where sport sits in the portfolio, before the floor fills up.
-          </p>
-          <a className="inv-btn inv-rv" href="#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')} style={{ marginTop: '28px' }}>
-            Request an invitation <span className="inv-btn__arrow">→</span>
-          </a>
-        </div>
-        <div className="sis-lp-break__side inv-rv">
-          <div className="sis-lp-break__meta">
-            <div><span>Day 1</span><b>28 May 2027</b></div>
-            <div><span>Time</span><b>08:00, 09:00</b></div>
-            <div><span>Location</span><b>Investor Lounge, Paris</b></div>
-          </div>
-          <ul className="sis-lp-break__list">
-            {SIS_LP_BREAKFAST.map((b) => <li key={b}>{b}</li>)}
-          </ul>
-        </div>
-      </section>
+      {/* Le LP-Only Investor Breakfast a ete retire (aout 2026) : il n'existe pas,
+          les LPs suivent le programme SGN Invest comme le reste de la room.
+          SIS_LP_BREAKFAST et les styles .sis-lp-break restent pour un eventuel retour. */}
 
       <div className="inv-voices__foot inv-rv" style={{ marginTop: 'clamp(36px,5vw,56px)' }}>
         <span className="inv-voices__note">LP passes are complimentary for verified Limited Partners.</span>
-        <a className="inv-btn" href="#/get-in-touch" onClick={(e) => sisGo(e, '#/get-in-touch')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
+        <a className="inv-btn" href="#/lp-pass" onClick={(e) => sisGo(e, '#/lp-pass')}>Apply for an LP Pass <span className="inv-btn__arrow">→</span></a>
       </div>
     </SisShell>
   );
@@ -485,6 +465,7 @@ const SIS_REG_POINTS = [
 
 function SisRegisterPage() {
   const { BrevoForm } = window;
+  const [sent, setSent] = React.useState(false);
   return (
     <SisShell idx="[07]" kicker="Join the 2027 room"
       title={<>Register your<br />interest</>}
@@ -498,8 +479,52 @@ function SisRegisterPage() {
             Book a call instead
           </a>
         </div>
-        <div className="sis-git__form inv-rv">
-          <BrevoForm form="register-invest" />
+        {/* sis-git__form--own : on masque le bandeau de succes de Brevo et on affiche
+            le notre, sinon Brevo sert le message du formulaire vise (aujourd'hui celui
+            du deck, "Opening the deck now", qui n'a rien a voir ici). */}
+        <div className="sis-git__form sis-git__form--own inv-rv">
+          {sent ? (
+            <p className="sis-git__done">Thank you. Your interest is registered, our team comes back to you shortly.</p>
+          ) : null}
+          <BrevoForm form="register-invest" onSuccess={() => setSent(true)} />
+        </div>
+      </div>
+    </SisShell>
+  );
+}
+
+/* ─────────────────────────── LP PASS ───────────────────────────
+   Candidature LP : formulaire Brevo propre ('lp-invest') avec Job Title et
+   Company en plus, les LPs etant qualifies sur la fonction et la structure. */
+const SIS_LP_PASS_POINTS = [
+  'Complimentary for verified Limited Partners',
+  'Both summit days plus the full SGN Invest programme',
+  'Access to the LP & investor networking lounge',
+  'Curated introductions to GPs and funds raising',
+  'Every application reviewed individually by our team',
+];
+
+function SisLpPassPage() {
+  const { BrevoForm } = window;
+  const [sent, setSent] = React.useState(false);
+  return (
+    <SisShell idx="[08]" kicker="For Limited Partners"
+      title={<>Apply for an<br />LP pass</>}
+      sub="LP passes are complimentary and issued after review. Tell us your role and your organisation, our team confirms your place in the room.">
+      <div className="sis-git">
+        <div className="sis-git__side inv-rv">
+          <ul className="sis-lp-break__list">
+            {SIS_LP_PASS_POINTS.map((p) => <li key={p}>{p}</li>)}
+          </ul>
+          <a className="inv-btn inv-btn--ghost sis-git__call" href="#/why-lp" onClick={(e) => sisGo(e, '#/why-lp')}>
+            Why attend as an LP
+          </a>
+        </div>
+        <div className="sis-git__form sis-git__form--own inv-rv">
+          {sent ? (
+            <p className="sis-git__done">Thank you. Your LP application is in, our team reviews it and comes back to you shortly.</p>
+          ) : null}
+          <BrevoForm form="lp-invest" onSuccess={() => setSent(true)} />
         </div>
       </div>
     </SisShell>
@@ -536,4 +561,4 @@ function SisMediaPassPage() {
   );
 }
 
-Object.assign(window, { SisSpeakersPage, SisMediaPage, SisSponsorPage, SisAgendaPage, SisLpPage, SisGetInTouchPage, SisMediaPassPage, SisRegisterPage });
+Object.assign(window, { SisSpeakersPage, SisMediaPage, SisSponsorPage, SisAgendaPage, SisLpPage, SisGetInTouchPage, SisMediaPassPage, SisRegisterPage, SisLpPassPage });

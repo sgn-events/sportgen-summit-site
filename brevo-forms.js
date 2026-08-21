@@ -81,7 +81,7 @@ const BREVO_FORMS = {
      le miroir exact du formulaire Brevo, champ pour champ. */
   'media-sgn': {
     theme: 'navy',
-    mediaFields: true,
+    jobFields: true, companyLabel: 'Media Outlet',
     action: 'https://a3e44c04.sibforms.com/serve/MUIFAC9qtW1XEhQLLP6dX7dLsGwf2esJbhjZa5smb80yf-iG7ot0l1W9ZTTSXSb1ygnhiZJb6R6Odf0fR_-3xW0M6dwCNK4nY2Ztw8XmYXHqeysAH_BQ0EvpzQcfgC69F33Db0IfXCKTYMC5fQvjf_IsEGwmLdvmqawFfFDyxgcAs34fvx-N8E0djPj-5T6dn0Dgi8Z3fCSpJDv4zQ==',
   },
   /* sis.html #/register-interest — liste "Register Interest SGN Invest - Website".
@@ -95,10 +95,21 @@ const BREVO_FORMS = {
     theme: 'invest',
     action: 'https://a3e44c04.sibforms.com/serve/MUIFAMCpQown3MmzAelTKXyWGpuLk8t0BgflILobhF-GnbNkWfs_8OXeWfpB4IMdyvQ0Oh9WLxkH8Gm8q0L7lN48-HdkWsgXQj1WNcwwl_m7-Zzlr1butZ_PLmatv9JRItc5ZcYIJiRfHSXuV00KJlNNT0LNE_gMqsAXEJ0zMg4AQ9jA4THKSlBhQ7ZUrXZyPobVVFEekZmO_ARf4w==',
   },
+  /* sis.html #/lp-pass — liste "LP Pass SGN Invest - Website". Champs : les 4 de base
+     + JOB_TITLE + COMPANY (les LPs sont qualifies sur la fonction et la structure).
+     MEME AVERTISSEMENT que 'register-invest' ci-dessus : `action` pointe encore sur le
+     formulaire "Deck SGN Invest" tant que le formulaire Brevo dedie n'existe pas. Le
+     formulaire Brevo a creer doit contenir EXACTEMENT ces champs, sinon Brevo renvoie
+     une erreur 400 generique. */
+  'lp-invest': {
+    theme: 'invest',
+    jobFields: true,
+    action: 'https://a3e44c04.sibforms.com/serve/MUIFAMCpQown3MmzAelTKXyWGpuLk8t0BgflILobhF-GnbNkWfs_8OXeWfpB4IMdyvQ0Oh9WLxkH8Gm8q0L7lN48-HdkWsgXQj1WNcwwl_m7-Zzlr1butZ_PLmatv9JRItc5ZcYIJiRfHSXuV00KJlNNT0LNE_gMqsAXEJ0zMg4AQ9jA4THKSlBhQ7ZUrXZyPobVVFEekZmO_ARf4w==',
+  },
   /* sis.html #/media-pass — liste "Media Pass SGN Invest - Website". Mêmes champs que media-sgn. */
   'media-invest': {
     theme: 'invest',
-    mediaFields: true,
+    jobFields: true, companyLabel: 'Media Outlet',
     action: 'https://a3e44c04.sibforms.com/serve/MUIFAEN5m6zwFd9_ycG3xNBIIEhDJGIIqIPi5YyyAk-r8S8VSwhZkKKUL4GIyVNo4D-42MHSDLxtIe6PEG_Kj-bcPQTP_-CDcAstCwDy3qdSw8dmXHZpxMrkIw4Ljejh4MX-2WfTegXPHjx6WLjPpI6bqipesYOoyi7kiIhuURfnv-lGVBGjV4dSubv58iO2SBgUkJ6FeWZHSRv1hA==',
   },
 };
@@ -339,11 +350,13 @@ function brevoFormHTML(formKey) {
     + brevoInput('LASTNAME', 'Last Name', v.labelColor, 'maxlength="200" type="text"')
     + brevoInput('EMAIL', 'Email', v.labelColor, 'type="text" value=""')
     + brevoPhoneField(v)
-    /* Champs propres aux formulaires Media Pass — présents dans le formulaire Brevo
-       correspondant, donc obligatoires ici aussi (un champ manquant => 400 générique). */
-    + (v.mediaFields
+    /* Champs JOB_TITLE + COMPANY (Media Pass, LP Pass) — présents dans le formulaire
+       Brevo correspondant, donc obligatoires ici aussi (un champ manquant => 400
+       générique). `companyLabel` n'change que le libellé affiché : côté Brevo
+       l'attribut reste COMPANY. */
+    + (v.jobFields
       ? brevoInput('JOB_TITLE', 'Job Title', v.labelColor, 'maxlength="200" type="text"')
-        + brevoInput('COMPANY', 'Media Outlet', v.labelColor, 'maxlength="200" type="text"')
+        + brevoInput('COMPANY', v.companyLabel || 'Company', v.labelColor, 'maxlength="200" type="text"')
       : '')
     + brevoText(BREVO_COPY.consentIntro, v.textColor)
     + brevoOptIn('OPT_IN', BREVO_COPY.optInLabel, v.optInColor)
