@@ -173,8 +173,7 @@ function InvestmentSummitPage() {
             <img src="assets/brand/sgn-invest-horizontal.png?v=7" alt="[SGN] Invest" />
           </div>
           <div className="inv-hero__meta inv-rv">
-            <span>Automobile Club de France</span>
-            <span>Paris</span>
+            <span>Automobile Club de France, Paris</span>
             <span>May 2027</span>
           </div>
 
